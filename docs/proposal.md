@@ -2,7 +2,7 @@
 
 **Tên dự án:** Quản lý lịch trình đi du lịch
 
-**Thành viên:** Nguyễn Tiến Luật – 23127221; Đăng Nghi Văn – 23127281; Phạm Chí Bảo Ninh – 23127445.
+**Thành viên:** Nguyễn Tiến Luật – 23127221; Đăng Nghi Văn – 23127281; Phạm Chí Bảo Ninh – 23127446.
 
 **Repository:** https://github.com/Tienluat123/WebNC_Proposal
 
