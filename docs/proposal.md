@@ -16,20 +16,18 @@
 
 ## 2. Tính năng LLM và hậu quả khi sai
 
-**Tính năng LLM:** Trích xuất địa điểm, chi phí, ngày đăng từ chữ/ảnh/link công khai; phân bổ điểm theo ngày và đề xuất/chỉnh lịch JSON theo sở thích. API cung cấp tọa độ, giờ mở cửa, thời gian di chuyển; code tính tổng chi phí (lưu trú, ăn, vé, xe), giờ đến/rời và kiểm tra trước khi hiển thị. Loại dữ liệu cá nhân/bí mật trước khi gửi LLM.
+**Tính năng:** LLM đọc chữ, ảnh hoặc nội dung truy cập được từ link để lấy danh sách địa điểm (có thể tìm thêm). API xác minh và bổ sung quãng đường, thời gian, giờ mở cửa, giá, giao thông/thời tiết. Từ dữ liệu này và các bộ lọc đã chọn, LLM tạo/chỉnh lịch JSON gồm thứ tự, giờ đến/rời và chi phí; đồng thời có thể đề xuất thêm nơi đã được API xác minh. LLM chỉ dùng, không tự tính dữ liệu API; hệ thống hỏi lại khi mơ hồ và loại dữ liệu cá nhân/bí mật.
 
-**Thiệt hại giả định:**
+| Lỗi và thiệt hại giả định với nhóm 4 người                                       | Xử lý                                                                                              |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| AI dùng giá cũ, nhầm đơn vị người/nhóm/phòng/đêm hoặc bỏ phí; nhóm vượt ngân sách và phải chi thêm khi đến nơi. | Giá cần nguồn/ngày/đơn vị; quá 6 tháng hoặc thiếu phải hỏi. Cộng đủ phí đã nhập, không tự điền 0. |
+| AI dùng sai giờ mở cửa hoặc bỏ thời gian đi xe/tham quan; nhóm đến khi điểm đã đóng cửa hoặc trễ lịch, mất thời gian và tiền xe. | Tính giờ đến/rời từ bản đồ và thời lượng tham quan; sai thì xếp lại. |
+| AI đoán từ ảnh thiếu ngữ cảnh hoặc nhầm chi nhánh/tỉnh của quán trùng tên; nhóm đi nhầm, mất thời gian và tốn thêm tiền xe. | Đối chiếu địa chỉ/tỉnh; mơ hồ thì hỏi người dùng chọn. |
+| AI gợi ý quán không có thật; đến nơi không thấy quán, nhóm mất thời gian, tiền xe và phải đổi điểm. | Xác minh qua bản đồ/nguồn của quán; chưa rõ thì hỏi thêm nguồn hoặc gợi ý khác, chưa đưa vào lịch. |
 
-- **Sửa được trước khi đi:** Lỗi bị code chặn trên giao diện (khuyết giá/giờ, nguồn giá quá hạn, trùng tên quán, lố giờ/tiền) chỉ tốn **2–5 phút** xác nhận lại, không mất tiền thật.
-- **Thiệt hại khi đi thật:** Lỗi lọt qua kiểm duyệt (giá thực tế đã tăng, quán đóng cửa khác API, nhầm chi nhánh) làm cả nhóm mất tiền xe, tiền ăn và thời gian tại hiện trường.
+**Khắc phục:** Sửa được lịch trước khi đi; tiền/thời gian đã mất khó thu hồi.
 
-| Tình huống               | Nguyên nhân cụ thể                                                                         | Thiệt hại giả định                                                                | Xử lý dự kiến và ca đánh giá                                                                                                                                                                                                                                                                                               |
-| ------------------------ | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Vượt ngân sách           | AI lấy giá cũ, nhầm giá/người với giá/nhóm (hoặc phòng/đêm) hoặc bỏ sót phí lưu trú/ăn/xe. | Chi 1.850.000 thay vì 1.500.000 đồng/người: nhóm 4 người vượt **1.400.000 đồng**. | Lưu nguồn/ngày/đơn vị giá. Nguồn thiếu đơn vị, mâu thuẫn, không rõ ngày hoặc **quá 6 tháng** (dù đủ đơn vị) đều gắn nhãn "chưa xác nhận" và bắt duyệt lại. Tách riêng phí đã xác nhận với bản nháp AI; code cộng đủ lưu trú/vé/ăn/xe, khoản chưa biết không tính là 0. Ca dùng giá cũ hoặc bỏ phí phải bị chặn và hỏi lại. |
-| Ngoài giờ/không kịp lịch | AI dùng sai giờ mở cửa, xếp điểm quá xa nơi ở hoặc tính thiếu giờ đi xe/tham quan.         | Đến 17:30 khi nơi đóng 17:00; hoặc kết thúc lúc 18:30, trễ **90 phút**.           | Lấy giờ mở cửa theo ngày đi và thời gian di chuyển từ Google Maps API; ghép với điểm lưu trú và thời lượng tham quan người dùng chọn (thiếu thì hỏi). Code tính giờ đến/rời/kết thúc mỗi ngày để sửa ngay trước khi đi. Ca rời sau giờ đóng cửa hoặc lố giờ kết thúc ngày phải bị chặn.                                    |
-| Nhầm địa điểm            | AI đoán từ ảnh thiếu biển hiệu hoặc chọn nhầm quán trùng tên khác chi nhánh/tỉnh thành.    | Đi nhầm khu vực, mất **45 phút** và tốn thêm tiền xe.                             | Khóa vùng tìm kiếm Google Places API theo tỉnh/thành đến; đối chiếu tên, địa chỉ với bản đồ. Nếu mơ hồ hoặc có từ 2 ứng viên trở lên thì chặn tự chốt, hiện danh sách kèm ảnh/link bản đồ để người dùng chọn trước khi đi. Ca rõ địa chỉ phải chọn đúng; ca trùng tên/mơ hồ phải hỏi lại.                                  |
-
-**Kiểm tra ở PA#4:** Ít nhất 10 ca gồm các lỗi trên (có ca giá đủ đơn vị nhưng quá 6 tháng/thiếu ngày, lịch 1 và nhiều ngày) và lịch hợp lệ có đáp án chuẩn. Đo lỗi LLM, lịch sai lọt kiểm tra, hỏi lại đúng lúc và nhận lịch hợp lệ. Mục tiêu: **0 lịch vi phạm dữ liệu đã xác nhận được duyệt**. Code tính/kiểm sai tính riêng là lỗi hệ thống.
+**PA#4:** Ít nhất 10 ca có đáp án chuẩn, gồm cả lịch hợp lệ; đếm đề xuất sai, hỏi lại đúng và lỗi lọt. Mục tiêu: **không duyệt quán chưa xác minh hoặc lịch vi phạm ràng buộc đã biết trong bộ ca**.
 
 <!-- PAGE_BREAK -->
 
@@ -37,7 +35,7 @@
 
 **Sẽ làm trong học kỳ:**
 
-- LLM trích xuất/đề xuất địa điểm, giá, ngày đăng và tạo/chỉnh bản nháp lịch (1 ngày hoặc nhiều ngày tại một tỉnh/thành phố ở Việt Nam) theo sở thích.
+- LLM trích xuất địa điểm, giá, ngày đăng; tìm thêm điểm theo sở thích và tạo/chỉnh lịch 1 hoặc nhiều ngày tại một tỉnh/thành phố ở Việt Nam.
 - Google Maps API tra cứu vị trí (giới hạn theo tỉnh/thành phố điểm đến), tuyến đường, thời gian di chuyển và giờ mở cửa.
 - Code tính và kiểm tra ngân sách toàn chuyến (lưu trú, vé, ăn uống, di chuyển nội bộ), độ mới của nguồn giá, giờ mở cửa và khung giờ từng ngày; yêu cầu bổ sung dữ liệu thiếu.
 - Giao diện cho 1 người điều phối: hiển thị danh sách lịch theo ngày đồng bộ với bản đồ và tính lại lịch khi đầu vào hoặc điểm lưu trú đổi.
