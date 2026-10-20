@@ -17,5 +17,6 @@
 - Qua các lần góp ý tiếp theo, giữ ba ca đặc trưng: vượt ngân sách, ngoài giờ/không đi kịp và nhầm địa điểm; làm rõ nguồn giá, danh mục phí độc lập với bản nháp AI và hành vi mong đợi của từng ca.
 - Sau rà rubric, bổ sung xác nhận giá cũ cho ngày đi, khả năng khắc phục thiệt hại và hạn nội bộ; đề xuất Google Maps JS + Places (New) + Routes theo tài liệu chính thức, kèm kế hoạch thử dữ liệu tại PA#2. Đồng bộ tên/MSSV theo proposal và cập nhật tự chấm 98/100; chưa gọi thử API hoặc chạy eval.
 - Bổ sung LLM tìm thêm điểm đến; theo ảnh hướng dẫn và góp ý mới, rút mục 2 thành luồng ngắn và bảng bốn ví dụ, thay ca gợi ý trái sở thích bằng quán không tồn tại. Bỏ số tiền/phút minh họa chưa có căn cứ, nêu rõ khoản chi/cơ hội bị mất, người chịu thiệt, khả năng khắc phục và bước xác minh/hỏi thêm nguồn hoặc gợi ý khác.
+- Theo yêu cầu tiếp theo, giữ bốn dòng riêng và cụ thể hóa mỗi lỗi bằng một ví dụ có số tiền, ghi rõ giá/cước giả định và cách tính; ca đầu dùng giá TikTok cũ và giữ cách xử lý giá đã thống nhất, ca hai bổ sung thời gian trễ và cách tính lại lịch khi được báo trễ.
 
 **Kiểm tra đã làm:** Đối chiếu tài liệu, phép tính, phân công, liên kết và ước tính bố cục hai trang. Chưa triển khai sản phẩm hoặc chạy bộ kiểm thử dự kiến.
