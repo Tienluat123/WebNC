@@ -18,14 +18,14 @@
 
 **Tính năng:** LLM đọc chữ, ảnh hoặc nội dung truy cập được từ link để lấy danh sách địa điểm (có thể tìm thêm). API xác minh và bổ sung quãng đường, thời gian, giờ mở cửa, giá, giao thông/thời tiết. Từ dữ liệu này và các bộ lọc đã chọn, LLM tạo/chỉnh lịch JSON gồm thứ tự, giờ đến/rời và chi phí; đồng thời có thể đề xuất thêm nơi đã được API xác minh. LLM chỉ dùng, không tự tính dữ liệu API; hệ thống hỏi lại khi mơ hồ và loại dữ liệu cá nhân/bí mật.
 
-| Lỗi và thiệt hại giả định với nhóm 4 người                                       | Xử lý                                                                                              |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| AI dùng giá cũ, nhầm đơn vị người/nhóm/phòng/đêm hoặc bỏ phí; nhóm vượt ngân sách và phải chi thêm khi đến nơi. | Giá cần nguồn/ngày/đơn vị; quá 6 tháng hoặc thiếu phải hỏi. Cộng đủ phí đã nhập, không tự điền 0. |
-| AI dùng sai giờ mở cửa hoặc bỏ thời gian đi xe/tham quan; nhóm đến khi điểm đã đóng cửa hoặc trễ lịch, mất thời gian và tiền xe. | Tính giờ đến/rời từ bản đồ và thời lượng tham quan; sai thì xếp lại. |
-| AI đoán từ ảnh thiếu ngữ cảnh hoặc nhầm chi nhánh/tỉnh của quán trùng tên; nhóm đi nhầm, mất thời gian và tốn thêm tiền xe. | Đối chiếu địa chỉ/tỉnh; mơ hồ thì hỏi người dùng chọn. |
-| AI gợi ý quán không có thật; đến nơi không thấy quán, nhóm mất thời gian, tiền xe và phải đổi điểm. | Xác minh qua bản đồ/nguồn của quán; chưa rõ thì hỏi thêm nguồn hoặc gợi ý khác, chưa đưa vào lịch. |
+| Lỗi và thiệt hại giả định với nhóm 4 người                                                                                            | Xử lý                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| AI dùng giá cũ, nhầm đơn vị người/nhóm/phòng/đêm hoặc bỏ qua chi phí cung cấp; nhóm vượt ngân sách và phải chi thêm khi đến nơi.      | Giá cần nguồn/ngày/đơn vị; quá 6 tháng hoặc thiếu phải hỏi. Cộng đủ phí đã nhập, không tự điền 0.  |
+| AI dùng sai giờ mở/đóng cửa hoặc bỏ thời gian đi xe/tham quan; nhóm đến khi điểm đã đóng cửa hoặc trễ lịch, mất thời gian và tiền xe. | Tính giờ đến/rời từ bản đồ và thời lượng tham quan; sai thì xếp lại.                               |
+| AI đoán từ ảnh thiếu ngữ cảnh hoặc nhầm chi nhánh/tỉnh của quán trùng tên; nhóm đi nhầm, mất thời gian và tốn thêm tiền xe.           | Đối chiếu địa chỉ/tỉnh; mơ hồ thì hỏi người dùng chọn.                                             |
+| AI gợi ý quán không có thật; đến nơi không thấy quán, nhóm mất thời gian, tiền xe và phải đổi điểm.                                   | Xác minh qua bản đồ/nguồn của quán; chưa rõ thì hỏi thêm nguồn hoặc gợi ý khác, chưa đưa vào lịch. |
 
-**Khắc phục:** Sửa được lịch trước khi đi; tiền/thời gian đã mất khó thu hồi.
+**Khắc phục:** Mục tiêu là phải đề xuất xác nhận với người dùng để sửa/hoàn thiện được lịch trước khi đi; tiền/thời gian đã mất khó thu hồi.
 
 **PA#4:** Ít nhất 10 ca có đáp án chuẩn, gồm cả lịch hợp lệ; đếm đề xuất sai, hỏi lại đúng và lỗi lọt. Mục tiêu: **không duyệt quán chưa xác minh hoặc lịch vi phạm ràng buộc đã biết trong bộ ca**.
 
