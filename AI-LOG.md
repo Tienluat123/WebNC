@@ -20,5 +20,7 @@
 - Theo yêu cầu tiếp theo, giữ bốn dòng riêng và cụ thể hóa mỗi lỗi bằng một ví dụ có số tiền, ghi rõ giá/cước giả định và cách tính; ca đầu dùng giá TikTok cũ và giữ cách xử lý giá đã thống nhất, ca hai bổ sung thời gian trễ và cách tính lại lịch khi được báo trễ.
 - Theo yêu cầu mới, rút còn một ca giá TikTok cũ, làm rõ người chịu thiệt, số tiền, khả năng khắc phục, ảnh hưởng tới hệ thống, cách phát hiện và xác nhận giá có nguồn trước khi chốt lịch; điều chỉnh kế hoạch PA#4 theo ca này.
 - Làm rõ lỗi ở mức tính năng tạo lịch: vi phạm yêu cầu đã chốt, làm lệch kế hoạch; giữ ca giá cũ để lượng hóa hậu quả, bổ sung đối chiếu từng bản lịch với yêu cầu và lưu phần vi phạm/lần sửa để theo dõi.
+- Đổi kế hoạch sang sáu checkpoint CP1-CP6 với các cột Target Date, Key Deliverables và Owner. Điều chỉnh task để CP4 chỉ cam kết itinerary MVP theo ràng buộc, không mâu thuẫn với phần ngoài phạm vi là tối ưu tuyến đường toàn cục; phân công cân bằng hai checkpoint cho mỗi thành viên.
+- Tách "Người dùng mục tiêu" khỏi "Tình huống đại diện" để phân biệt tệp người dùng với câu chuyện của An. Viết lại tính năng cốt lõi thành luồng năm bước có thể theo dõi từ input đến human confirmation. Sửa chi phí: Gemini dùng paid tier 3,10 USD cho 1.000 lượt, còn Google Maps Platform được giới hạn trong hạn mức miễn phí.
 
 **Kiểm tra đã làm:** Đối chiếu tài liệu, phép tính, phân công, liên kết và ước tính bố cục hai trang. Chưa triển khai sản phẩm hoặc chạy bộ kiểm thử dự kiến.

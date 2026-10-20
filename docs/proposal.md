@@ -1,84 +1,77 @@
-# Proposal and Planning — PA#1
+# Proposal and Planning - PA#1
 
-**Tên dự án:** Quản lý lịch trình đi du lịch
-
-**Thành viên:** Nguyễn Tiến Luật – 23127221; Đặng Nghi Văn – 23127281; Phạm Chí Bảo Ninh – 23127446.
-
+**Tên dự án:** Trợ lý lập lịch trình du lịch nhóm <br>
+**Thành viên:** Nguyễn Tiến Luật - 23127221; Đặng Nghi Văn - 23127281; Phạm Chí Bảo Ninh - 23127446 <br>
 **Repository:** https://github.com/Tienluat123/WebNC_Proposal
 
 ## 1. Người dùng và vấn đề
 
-**Người dùng:** Một người điều phối phụ trách lập lịch đi du lịch (trong ngày hoặc nhiều ngày tại một thành phố/tỉnh ở Việt Nam) cho nhóm bạn, có danh sách nơi muốn đi nhưng khó phân bổ theo ngày, thống nhất ưu tiên và cân đối thời gian, chi phí.
+**Người dùng mục tiêu:** Sinh viên chịu trách nhiệm lập kế hoạch cho chuyến đi nhóm trong một hoặc nhiều ngày.
 
-**Tình huống minh họa (giả định):** Sinh viên A lập lịch đi Đà Lạt 2 ngày 1 đêm (từ 08:00 ngày 1 đến 17:00 ngày 2) cho nhóm 4 người, ngân sách tại điểm đến là 1.500.000 đồng/người (gồm lưu trú, ăn uống, vé và di chuyển nội bộ). Mọi người gửi tên quán, ảnh chụp màn hình review/menu, link công khai và sở thích khác nhau. Hiện A phải gom thông tin, tra bản đồ để xếp các điểm gần nhau vào cùng ngày quanh khách sạn, kiểm tra giờ mở cửa và cộng chi phí bằng bảng tính; khi nhóm yêu cầu đổi điểm hoặc đổi nơi ở, A phải tính lại toàn bộ lịch các ngày.
+**Tình huống:** An lập lịch chuyến đi Đà Lạt hai ngày một đêm cho nhóm bốn người, với ngân sách 1.500.000 đồng mỗi người. Các thành viên gửi tên quán, ảnh menu hoặc review, link công khai và sở thích khác nhau. An phải tự tổng hợp thông tin, tra bản đồ, kiểm tra giờ mở cửa và cộng chi phí bằng bảng tính; mỗi thay đổi về địa điểm hoặc nơi lưu trú khiến An phải sắp xếp lại phần lớn lịch trình.
 
-**Vấn đề chính:** Người điều phối thiếu công cụ tổng hợp địa điểm phi cấu trúc, dữ liệu di chuyển, điểm lưu trú và ưu tiên thành lịch trình nhiều ngày khả thi về tuyến đường, giờ mở cửa, ngân sách và dễ điều chỉnh.
+**Vấn đề chính:** Khi lập chuyến đi nhóm nhiều ngày, người điều phối phải tự biến thông tin rời rạc thành một lịch trình khả thi về tuyến đường, thời gian và ngân sách, rồi tính lại gần như toàn bộ khi đầu vào thay đổi.
 
 ## 2. Tính năng LLM và hậu quả khi sai
 
-**Tính năng:** LLM đọc chữ, ảnh hoặc nội dung truy cập được từ link để lấy danh sách địa điểm (có thể tìm thêm). API xác minh và bổ sung quãng đường, thời gian, giờ mở cửa, giá, giao thông/thời tiết. Từ dữ liệu này và các bộ lọc đã chọn, LLM tạo/chỉnh lịch JSON gồm thứ tự, giờ đến/rời và chi phí; đồng thời có thể đề xuất thêm nơi đã được API xác minh. LLM chỉ dùng, không tự tính dữ liệu API; hệ thống hỏi lại khi mơ hồ và loại dữ liệu cá nhân/bí mật.
+**Tính năng cốt lõi - Tạo và chỉnh lịch từ thông tin rời rạc:** Từ thời gian, ngân sách, nơi lưu trú và các địa điểm người dùng cung cấp qua văn bản, ảnh hoặc link công khai, LLM trích xuất thông tin và đề xuất lịch trình theo ngày. API bản đồ bổ sung địa chỉ, giờ mở cửa và thời gian di chuyển; logic nghiệp vụ tính giờ đến/rời, tổng chi phí và kiểm tra các ràng buộc về thời gian, ngân sách. Nếu lịch không hợp lệ, hệ thống yêu cầu LLM điều chỉnh; nếu địa điểm hoặc giá còn mơ hồ, người dùng phải xác nhận trước khi chốt. Khi đầu vào thay đổi, hệ thống chạy lại quy trình để cập nhật lịch trình.
 
-**Khi LLM sai:** Lịch đề xuất vi phạm ngân sách, khung giờ hoặc điểm đến đã chốt, khiến nhóm phải chi thêm, trễ lịch hoặc bỏ hoạt động dự kiến. LLM đối chiếu giá, giờ mở cửa với nguồn của quán, địa chỉ và thời gian đi với dữ liệu bản đồ; chỉ ra lỗi kèm minh chứng và sửa lịch theo yêu cầu đã chốt. LLM rà lại bản sửa, trình bày nguồn và chênh lệch tiền/giờ để người dùng xác nhận; thiếu dữ kiện thì hỏi thêm, chưa chốt.
+Dữ liệu cá nhân hoặc bí mật không được gửi cho LLM.
 
-**Ví dụ giả định về ngân sách:** AI coi giá 100.000 đồng/người trong video TikTok cũ là giá hiện tại mà chưa kiểm tra lại, rồi đề xuất lịch vừa đủ ngân sách. Nếu lỗi lọt qua kiểm tra, đến quán nhóm mới biết giá đã tăng lên 140.000 đồng/người.
+**Nếu LLM sai:** Lịch trình sai có thể vi phạm ngân sách, khung giờ hoặc địa điểm đã chốt, khiến cả nhóm phải chi thêm, trễ lịch hoặc bỏ một hoạt động dự kiến.
 
-| Cần làm rõ                      | Nội dung                                                                                                                                                                                      |
-| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Ai chịu hậu quả?                | Cả nhóm 4 người phải chi thêm; người điều phối phải điều chỉnh lịch để cân đối ngân sách.                                                                                                     |
-| Thiệt hại và khả năng khắc phục | Nhóm vượt **160.000 đồng** ((140.000 − 100.000) × 4). Sửa được lịch trước khi đi; tiền đã chi khó thu hồi.                                                                                    |
-| Ảnh hưởng tới hệ thống          | Ứng dụng vẫn hoạt động, nhưng lịch này không đáp ứng ngân sách; cần tính lại, tốn thêm thời gian và chi phí xử lý. |
-| Phát hiện và xử lý              | Giá cần nguồn/ngày/đơn vị; quá 6 tháng hoặc thiếu phải hỏi. Đối chiếu giá với menu/nguồn của quán cho ngày đi. Cộng đủ phí đã nhập, không tự điền 0.                                          |
-| Xác nhận của người dùng         | Trước khi chốt lịch, người điều phối kiểm tra nguồn giá mới và xác nhận tổng chi. Chưa xác minh được thì giữ bản nháp hoặc đề xuất đổi quán; giá thay đổi sau xác nhận cần được cập nhật lại. |
+**Ví dụ khi LLM sai:** Người dùng cung cấp ảnh menu tám tháng trước với giá 100.000 đồng/người. Nếu LLM dùng giá này như giá hiện tại, lịch có thể được báo vừa ngân sách dù giá thực tế đã tăng lên 140.000 đồng/người.
 
-**PA#4:** Ít nhất 10 ca có yêu cầu và đáp án chuẩn, gồm lịch hợp lệ, vượt ngân sách, quá khung giờ và giá chưa xác minh. Đo tỷ lệ lịch vi phạm yêu cầu, hỏi lại đúng và lỗi lọt. Mục tiêu: **0 lịch vi phạm yêu cầu đã chốt hoặc dùng giá chưa xác minh được duyệt trong bộ ca**.
+| Câu hỏi                    | Trả lời                                                                                                                                        |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ai chịu hậu quả?           | Cả nhóm phải chi thêm; An phải điều chỉnh các khoản còn lại.                                                                                   |
+| Thiệt hại bao nhiêu?       | Nhóm vượt 160.000 đồng: `(140.000 - 100.000) x 4`.                                                                                             |
+| Có khắc phục được không?   | Có thể đổi quán trước chuyến đi; tiền đã thanh toán hoặc chi phí di chuyển phát sinh thì khó thu hồi.                                          |
+| Phát hiện và ngăn thế nào? | Giá thiếu nguồn, ngày, đơn vị hoặc cũ quá sáu tháng phải được đánh dấu chưa xác minh. Người dùng xác nhận giá và tổng chi trước khi chốt lịch. |
 
-<!-- PAGE_BREAK -->
+**Đánh giá ở PA#4:** Bộ eval tối thiểu 20 ca có đáp án chuẩn; không lịch nào vi phạm yêu cầu đã chốt hoặc dùng giá chưa xác minh được phê duyệt.
 
 ## 3. Phạm vi
 
-**Sẽ làm trong học kỳ:**
+**Trong phạm vi học kỳ:**
 
-- LLM trích xuất địa điểm, giá, ngày đăng; tìm thêm điểm theo sở thích và tạo/chỉnh lịch 1 hoặc nhiều ngày tại một tỉnh/thành phố ở Việt Nam.
-- Google Maps API tra cứu vị trí (giới hạn theo tỉnh/thành phố điểm đến), tuyến đường, thời gian di chuyển và giờ mở cửa.
-- Code tính và kiểm tra ngân sách toàn chuyến (lưu trú, vé, ăn uống, di chuyển nội bộ), độ mới của nguồn giá, giờ mở cửa và khung giờ từng ngày; yêu cầu bổ sung dữ liệu thiếu.
-- Giao diện cho 1 người điều phối: hiển thị danh sách lịch theo ngày đồng bộ với bản đồ và tính lại lịch khi đầu vào hoặc điểm lưu trú đổi.
+- Một người điều phối lập và chỉnh lịch một hoặc nhiều ngày trong một tỉnh/thành phố tại Việt Nam.
+- LLM trích xuất địa điểm từ văn bản, ảnh hoặc link công khai và tạo/chỉnh bản nháp lịch trình.
+- API bản đồ xác định địa điểm, giờ mở cửa, tuyến đường và thời gian di chuyển ước tính.
+- Logic nghiệp vụ tính ngân sách, giờ đến/rời và kiểm tra dữ liệu bắt buộc; giao diện đồng bộ lịch theo ngày với bản đồ.
 
-**Không làm:** Đặt vé/phòng hoặc tính vé di chuyển liên tỉnh (máy bay, tàu xe); cộng tác nhiều người dùng thời gian thực; đăng/lưu/tìm lịch cộng đồng; bình luận, đánh giá; đọc link bị giới hạn (mạng xã hội chặn bot); cập nhật giao thông/thời tiết thời gian thực. Nếu còn thời gian, nhóm sẽ cải thiện đọc ảnh/link và tối ưu gom nhóm địa điểm gần nhau theo ngày.
+**Ngoài phạm vi:** Đặt vé/phòng; tính chi phí máy bay, tàu hoặc xe liên tỉnh; cộng tác nhiều người dùng theo thời gian thực; lịch trình cộng đồng; link yêu cầu đăng nhập hoặc chặn bot; cập nhật giao thông/thời tiết thời gian thực; tối ưu tuyến đường toàn cục.
+
+<div class="page-break"></div>
 
 ## 4. Kế hoạch và phân công
 
-_(Lưu ý: Hạn PA#1 là hạn chính thức của môn học; các mốc từ PA#2 đến PA#6 là **hạn nội bộ của nhóm** — hoàn thành sớm trước hạn môn 1–2 ngày để kiểm tra chéo)._
+Sáu checkpoint bao phủ năm PA chính thức; owner chịu trách nhiệm chính, các thành viên còn lại hỗ trợ và review.
 
-| PA  | Đầu ra                                        | Phụ trách         | Hạn (Môn / Nội bộ)         |
-| --- | --------------------------------------------- | ----------------- | -------------------------- |
-| 1   | Proposal, repo, tự chấm, AI-LOG               | Đặng Nghi Văn     | 22:00 22/10/2026 (Hạn môn) |
-| 2   | Quy ước, lint, tests, CI chặn lỗi             | Phạm Chí Bảo Ninh | 05/11/2026 (Hạn nội bộ)    |
-| 3   | Prototype LLM, eval cơ bản, hạn mức, xác nhận | Nguyễn Tiến Luật  | 19/11/2026 (Hạn nội bộ)    |
-| 4   | Eval, guardrails, kiểm thử đối kháng          | Đặng Nghi Văn     | 03/12/2026 (Hạn nội bộ)    |
-| 5   | Bản cuối, logs/metrics/traces, báo cáo sự cố  | Nguyễn Tiến Luật  | 17/12/2026 (Hạn nội bộ)    |
-| 6   | Chuẩn bị và tham gia vấn đáp cá nhân          | Phạm Chí Bảo Ninh | 31/12/2026 (Hạn nội bộ)    |
+| Checkpoint                           | Target Date  | Key Deliverables                                                                                       | Owner             |
+| ------------------------------------ | ------------ | ------------------------------------------------------------------------------------------------------ | ----------------- |
+| **CP1 - Proposal & Planning**        | W3 (Oct 23)  | Chốt người dùng, vấn đề, LLM feature, hậu quả khi sai, scope, risks, công nghệ và ownership (PA#1).    | Đặng Nghi Văn     |
+| **CP2 - System Design**              | W5 (Nov 6)   | Data schema, API contracts, mock itinerary và proof of concept cho API bản đồ.                         | Phạm Chí Bảo Ninh |
+| **CP3 - Harness & Core Web**         | W7 (Nov 20)  | Conventions, lint, type checks, automated tests, CI quality gates và tích hợp frontend/backend (PA#2). | Phạm Chí Bảo Ninh |
+| **CP4 - Itinerary MVP**              | W8 (Nov 27)  | Tạo/chỉnh lịch với dữ liệu giả lập, kiểm tra thời gian/ngân sách và deploy MVP không phụ thuộc LLM.    | Nguyễn Tiến Luật  |
+| **CP5 - LLM Integration**            | W9 (Dec 4)   | Trích xuất địa điểm và tạo/chỉnh lịch bằng LLM, có schema validation và human confirmation (PA#3).     | Nguyễn Tiến Luật  |
+| **CP6 - Evaluation & Final Release** | W11 (Dec 18) | Evals, guardrails, red-team (PA#4), observability, final deployment và post-mortem (PA#5).             | Đặng Nghi Văn     |
 
 ## 5. Hai rủi ro lớn nhất
 
-**Rủi ro 1 – Lịch không khả thi:** LLM phân bổ các ngày quá tải, dùng giá cũ hoặc vi phạm ngân sách, giờ mở cửa, thời gian di chuyển. **Giảm thiểu:** Chuẩn hóa JSON theo ngày; code tính lại toàn bộ thời gian/chi phí, kiểm tra hạn 6 tháng của nguồn giá và từ chối/tạo lại lịch sai, yêu cầu bổ sung dữ liệu thiếu. **Làm ngay:** Xây ít nhất 10 ca kiểm thử theo mục 2.
+**Rủi ro 1 - Lịch không đủ tin cậy:** Nếu LLM thường xuyên tạo lịch vượt ngân sách hoặc khung giờ, tính năng cốt lõi không còn giá trị. **Giảm thiểu:** Logic nghiệp vụ kiểm tra độc lập và trả vi phạm để LLM tạo lại; người dùng xác nhận giá chưa chắc chắn. **Làm ngay:** Xây 20 ca eval theo Mục 2 và đo baseline trong tuần này.
 
-**Rủi ro 2 – Sai địa điểm:** API tìm thấy một nơi có thật nhưng khác tỉnh/thành phố du lịch hoặc nhầm chi nhánh người dùng muốn đến. **Giảm thiểu:** Giới hạn vùng tìm kiếm (location bias) theo điểm đến trên Google Places API, đối chiếu ngữ cảnh và hỏi người dùng khi mơ hồ; loại nơi không tra cứu được. **Làm ngay:** Gán nhãn địa điểm đúng cho các ca rõ ràng, trùng tên khác tỉnh/chi nhánh, thiếu ngữ cảnh và lệch sở thích để đo lỗi trích xuất/đề xuất.
+**Rủi ro 2 - Gắn sai địa điểm:** Tên quán trùng nhau có thể làm hệ thống chọn sai chi nhánh, khiến tuyến đường và giờ mở cửa đều sai. **Giảm thiểu:** Giới hạn tìm kiếm theo tỉnh/thành, lưu place ID và yêu cầu người dùng chọn khi có nhiều kết quả phù hợp. **Làm ngay:** Tạo bộ ca gồm địa điểm rõ ràng, trùng tên khác tỉnh, khác chi nhánh và thiếu địa chỉ.
 
 ## 6. Lựa chọn công nghệ và chi phí
 
-| Công nghệ                                                          | Lý do chọn                                                                                         |
-| ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| React + JavaScript                                                 | Giao diện chat, bộ lọc, danh sách lịch theo ngày và bản đồ.                                        |
-| Node.js + Express + Zod                                            | Điều phối LLM/API, giữ khóa, kiểm tra JSON và lịch nhiều ngày.                                     |
-| **Google Maps Platform** (Places API New, Routes API, Maps JS API) | Tra cứu vị trí theo tỉnh/thành, giờ mở cửa và thời gian di chuyển tại Việt Nam chính xác nhất [2]. |
-| Gemini 3.5 Flash-Lite                                              | Đọc chữ/ảnh, hiểu yêu cầu, xuất JSON có cấu trúc [1].                                              |
+| Công nghệ               | Lý do chọn                                                                                      |
+| ----------------------- | ----------------------------------------------------------------------------------------------- |
+| React + JavaScript      | Đồng bộ trạng thái giữa bản đồ, danh sách địa điểm và lịch theo ngày.                           |
+| Node.js + Express + Zod | Giữ khóa API ở backend, điều phối LLM/API và kiểm tra schema JSON trước khi xử lý.              |
+| Google Maps Platform    | Cung cấp các API bản đồ cần thiết để định danh địa điểm, tính thời gian và hiển thị bản đồ.     |
+| Gemini 3.5 Flash-Lite   | Nhận đầu vào đa phương thức, hỗ trợ structured output và có chi phí thấp cho tác vụ trích xuất. |
 
-**Chi phí dự kiến (cho 1.000 lượt lập lịch):**
+**Chi phí dự kiến cho 1.000 lượt lập lịch: 3,10 USD.** Gemini dùng trung bình 2.000 input token và 1.000 output token mỗi lượt; theo paid tier, 2 triệu input token tốn 0,60 USD và 1 triệu output token tốn 2,50 USD. Google Maps Platform dự kiến **0 USD** vì nhóm đặt quota không vượt hạn mức miễn phí. Chi phí máy chủ chưa được tính.
 
-- **LLM (Gemini 3.5 Flash-Lite Standard [1]):** Giá 0,30 USD/triệu token vào và 2,50 USD/triệu token ra. Với 1.000 lượt × (2.000 vào + 1.000 ra), chi phí là **3,10 USD**.
-- **Bản đồ (Google Maps Platform [2]):** Ước tính 6.000 lượt gọi Places API (Text Search/Details) và 6.000 lượt gọi Routes API (Compute Routes) thuộc ngưỡng miễn phí **10.000 lượt gọi/tháng cho mỗi SKU** (hoặc gói tín dụng 200 USD/tháng) của Google, nên chi phí thực trả là **0 USD** (chưa gồm hạ tầng máy chủ).
-
-**Nguồn kiểm tra ngày 20/10/2026:**
-
-- [1] [Gemini: model](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite), [bảng giá](https://ai.google.dev/gemini-api/docs/pricing).
-- [2] [Google Maps Platform: Places & Routes API](https://developers.google.com/maps/documentation), [bảng giá và hạn mức miễn phí](https://developers.google.com/maps/billing-and-pricing/pricing).
+**Nguồn giá, kiểm tra ngày 20/10/2026:** [Gemini](https://ai.google.dev/gemini-api/docs/pricing); [Google Maps Platform](https://developers.google.com/maps/billing-and-pricing/pricing).
