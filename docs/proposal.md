@@ -18,17 +18,19 @@
 
 **Tính năng:** LLM đọc chữ, ảnh hoặc nội dung truy cập được từ link để lấy danh sách địa điểm (có thể tìm thêm). API xác minh và bổ sung quãng đường, thời gian, giờ mở cửa, giá, giao thông/thời tiết. Từ dữ liệu này và các bộ lọc đã chọn, LLM tạo/chỉnh lịch JSON gồm thứ tự, giờ đến/rời và chi phí; đồng thời có thể đề xuất thêm nơi đã được API xác minh. LLM chỉ dùng, không tự tính dữ liệu API; hệ thống hỏi lại khi mơ hồ và loại dữ liệu cá nhân/bí mật.
 
-**Ví dụ giả định:** AI coi giá 100.000 đồng/người trong video TikTok cũ là giá hiện tại mà chưa kiểm tra lại, rồi đề xuất lịch vừa đủ ngân sách. Đến quán, nhóm mới biết giá đã tăng lên 140.000 đồng/người.
+**Khi LLM sai:** Lịch đề xuất vi phạm ngân sách, khung giờ hoặc điểm đến đã chốt, khiến nhóm phải chi thêm, trễ lịch hoặc bỏ hoạt động dự kiến. LLM đối chiếu giá, giờ mở cửa với nguồn của quán, địa chỉ và thời gian đi với dữ liệu bản đồ; chỉ ra lỗi kèm minh chứng và sửa lịch theo yêu cầu đã chốt. LLM rà lại bản sửa, trình bày nguồn và chênh lệch tiền/giờ để người dùng xác nhận; thiếu dữ kiện thì hỏi thêm, chưa chốt.
+
+**Ví dụ giả định về ngân sách:** AI coi giá 100.000 đồng/người trong video TikTok cũ là giá hiện tại mà chưa kiểm tra lại, rồi đề xuất lịch vừa đủ ngân sách. Nếu lỗi lọt qua kiểm tra, đến quán nhóm mới biết giá đã tăng lên 140.000 đồng/người.
 
 | Cần làm rõ                      | Nội dung                                                                                                                                                                                      |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Ai chịu hậu quả?                | Cả nhóm 4 người phải chi thêm; người điều phối phải điều chỉnh lịch để cân đối ngân sách.                                                                                                     |
 | Thiệt hại và khả năng khắc phục | Nhóm vượt **160.000 đồng** ((140.000 − 100.000) × 4). Sửa được lịch trước khi đi; tiền đã chi khó thu hồi.                                                                                    |
-| Ảnh hưởng tới hệ thống          | Ứng dụng vẫn hoạt động, nhưng tính toán và kết luận ngân sách của lịch này bị sai, và sẽ tốn chi phí tình toán lại                                                                            |
+| Ảnh hưởng tới hệ thống          | Ứng dụng vẫn hoạt động, nhưng lịch này không đáp ứng ngân sách; cần tính lại, tốn thêm thời gian và chi phí xử lý. |
 | Phát hiện và xử lý              | Giá cần nguồn/ngày/đơn vị; quá 6 tháng hoặc thiếu phải hỏi. Đối chiếu giá với menu/nguồn của quán cho ngày đi. Cộng đủ phí đã nhập, không tự điền 0.                                          |
 | Xác nhận của người dùng         | Trước khi chốt lịch, người điều phối kiểm tra nguồn giá mới và xác nhận tổng chi. Chưa xác minh được thì giữ bản nháp hoặc đề xuất đổi quán; giá thay đổi sau xác nhận cần được cập nhật lại. |
 
-**PA#4:** Ít nhất 10 ca có giá chuẩn từ menu/nguồn của quán, gồm giá cũ, thiếu nguồn và giá đúng; đo phát hiện sai, hỏi lại và lỗi lọt. Mục tiêu: **0 lịch dùng giá chưa xác minh được chốt trong bộ ca**.
+**PA#4:** Ít nhất 10 ca có yêu cầu và đáp án chuẩn, gồm lịch hợp lệ, vượt ngân sách, quá khung giờ và giá chưa xác minh. Đo tỷ lệ lịch vi phạm yêu cầu, hỏi lại đúng và lỗi lọt. Mục tiêu: **0 lịch vi phạm yêu cầu đã chốt hoặc dùng giá chưa xác minh được duyệt trong bộ ca**.
 
 <!-- PAGE_BREAK -->
 

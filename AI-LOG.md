@@ -19,5 +19,6 @@
 - Bổ sung LLM tìm thêm điểm đến; theo ảnh hướng dẫn và góp ý mới, rút mục 2 thành luồng ngắn và bảng bốn ví dụ, thay ca gợi ý trái sở thích bằng quán không tồn tại. Bỏ số tiền/phút minh họa chưa có căn cứ, nêu rõ khoản chi/cơ hội bị mất, người chịu thiệt, khả năng khắc phục và bước xác minh/hỏi thêm nguồn hoặc gợi ý khác.
 - Theo yêu cầu tiếp theo, giữ bốn dòng riêng và cụ thể hóa mỗi lỗi bằng một ví dụ có số tiền, ghi rõ giá/cước giả định và cách tính; ca đầu dùng giá TikTok cũ và giữ cách xử lý giá đã thống nhất, ca hai bổ sung thời gian trễ và cách tính lại lịch khi được báo trễ.
 - Theo yêu cầu mới, rút còn một ca giá TikTok cũ, làm rõ người chịu thiệt, số tiền, khả năng khắc phục, ảnh hưởng tới hệ thống, cách phát hiện và xác nhận giá có nguồn trước khi chốt lịch; điều chỉnh kế hoạch PA#4 theo ca này.
+- Làm rõ lỗi ở mức tính năng tạo lịch: vi phạm yêu cầu đã chốt, làm lệch kế hoạch; giữ ca giá cũ để lượng hóa hậu quả, bổ sung đối chiếu từng bản lịch với yêu cầu và lưu phần vi phạm/lần sửa để theo dõi.
 
 **Kiểm tra đã làm:** Đối chiếu tài liệu, phép tính, phân công, liên kết và ước tính bố cục hai trang. Chưa triển khai sản phẩm hoặc chạy bộ kiểm thử dự kiến.
