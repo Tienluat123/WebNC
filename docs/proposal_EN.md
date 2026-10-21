@@ -1,6 +1,6 @@
 # Proposal and Planning - PA#1
 
-**Project name:** Group Travel Planner - Assistant Manager<br>
+**Project name:** Travel Planning Assistant<br>
 **Members:** Nguyễn Tiến Luật - 23127221; Đặng Nghi Văn - 23127281; Phạm Chí Bảo Ninh - 23127446 <br>
 **Repository link:** https://github.com/Tienluat123/WebNC_Proposal
 
@@ -8,7 +8,7 @@
 
 **Target user:** Students that are responsible for planning for a trip of a group within 1 or multiple days.
 
-**Scenario:** An planned a 2-day-1-night trip to Đà Lạt for a group of 4, with a budget of 1.500.000đ for each person. Every member send a name, images, reviews,... of some particular location that they like and their preferences. An now has to take all of that information, look at the map and see when the shop opens and how much money is expected to be spent at each shop. Additionally any changes or new additions forces An to reconsider and replan a large part of the trip.
+**Scenario:** Person X planned a 2-day-1-night trip to Đà Lạt for a group of 4, with a budget of 1.500.000đ for each person. Every member send a name, images, reviews,... of some particular location that they like and their preferences. Person X now has to take all of that information, look at the map and see when the shop opens and how much money is expected to be spent at each shop. Additionally any changes or new additions forces Person X to reconsider and replan a large part of the trip.
 
 **Main problem**: When planning a long trip, the person managing the trip has to combine and hold a lot of information and make it into a plausible plan, including the route, the time, and the budget. If there is any changes it mostly has to be done again.
 
@@ -24,7 +24,7 @@ Private information are not sent to the LLM
 
 | Question                      | Answer                                                                                                                                         |
 | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| Who faces the consequences?   | The whole group need to spend more money than expected and An need to reconsider the rest of the plan.                                         |
+| Who faces the consequences?   | The whole group need to spend more money than expected and Person X need to reconsider the rest of the plan.                                         |
 | What is the cost?             | Overbudget by 160.000đ : `(140.000 - 100.000) x 4`.                                                                                            |
 | Can this be fixed?            | They could adjust or choose another location if they have yet to leave. If the money has already been spent then it is harder or not possible. |
 | How to spot and prevent this? | Prices that lack a source, a date, among other things, will be marked Unverified. User must then confirm themselves                            |
