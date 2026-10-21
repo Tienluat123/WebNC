@@ -8,7 +8,7 @@
 
 **Target user:** Students that are responsible for planning for a trip of a group within 1 or multiple days.
 
-**Scenario:** An planned a 2-day-1-night trip to Đà Lạt for a group of 4, with a budget of 1.500.000đ for each person. Every member send a name, images, reviews,... of some partcular location that they like and their preferences. An now has to take all of that information, look at the map and see when the shop opens and how much money is expected to be spent at each shop. Additionally any changes or new additions forces An to reconsider and replan a large part of the trip.
+**Scenario:** An planned a 2-day-1-night trip to Đà Lạt for a group of 4, with a budget of 1.500.000đ for each person. Every member send a name, images, reviews,... of some particular location that they like and their preferences. An now has to take all of that information, look at the map and see when the shop opens and how much money is expected to be spent at each shop. Additionally any changes or new additions forces An to reconsider and replan a large part of the trip.
 
 **Main problem**: When planning a long trip, the person managing the trip has to combine and hold a lot of information and make it into a plausible plan, including the route, the time, and the budget. If there is any changes it mostly has to be done again.
 
@@ -29,7 +29,7 @@ Private information are not sent to the LLM
 | Can this be fixed?            | They could adjust or choose another location if they have yet to leave. If the money has already been spent then it is harder or not possible. |
 | How to spot and prevent this? | Prices that lack a source, a date, among other things, will be marked Unverified. User must then confirm themselves                            |
 
-**Assessmenet in PA#4:** The evaluation set has 20 cases with approval; No schedules could be confirm if it violate the budget or contains unverified prices.
+**Assessment in PA#4:** The evaluation set has 20 cases with approval; No schedules could be confirm if it violate the budget or contains unverified prices.
 
 ## 3. Scope
 
@@ -38,7 +38,7 @@ Private information are not sent to the LLM
 - 1 person manage and adjust a multi-day plan for a city in Viet Nam
 - LLM can extract locations from text, images, or online links and create the schedule.
 - Map API can identify the location, opening hours, routes, and time to travel.
-- Business rules calcuate the prices and budgets, arrival/departure time, check constraits. The screen must show the map route according to the date of the schedule.
+- Business rules calculate the prices and budgets, arrival/departure time, check constraints. The screen must show the map route according to the date of the schedule.
 
 **Outside of scope**:
 
@@ -66,7 +66,7 @@ Private information are not sent to the LLM
 
 ## 5. Two biggest risks.
 
-**Risk 1 - Schedule is unreliable:** If the LLM regularly create schedules that exceeds budgets or time windows, the core functionality loses its value. **Risk management:** Business rules verify indepedently and return any violations for the LLM to adjust; User needs to confirm prices when uncertain. **Immediate tasks:** Create 20 evaluation cases following section 2 and measure the baseline.
+**Risk 1 - Schedule is unreliable:** If the LLM regularly create schedules that exceeds budgets or time windows, the core functionality loses its value. **Risk management:** Business rules verify independently and return any violations for the LLM to adjust; User needs to confirm prices when uncertain. **Immediate tasks:** Create 20 evaluation cases following section 2 and measure the baseline.
 
 **Risk 2: - Wrong location attachments:** Identical location name can cause the system to pick the wrong branch, causing the route and timing to all be wrong. **Risk management:** Limit search space to within a city, save the location ID and request the user to verify when there are multiple similar results. **Immediate tasks:** Create test cases with clear locations, identical names but different cities/provinces, different branches, and missing address.
 
