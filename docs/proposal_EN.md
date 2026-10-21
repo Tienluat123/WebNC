@@ -1,6 +1,6 @@
 # Proposal and Planning - PA#1
 
-**Project name:** Trợ lý lập lịch trình du lịch nhóm <br>
+**Project name:** Group Travel Planner - Assistant Manager<br>
 **Members:** Nguyễn Tiến Luật - 23127221; Đặng Nghi Văn - 23127281; Phạm Chí Bảo Ninh - 23127446 <br>
 **Repository link:** https://github.com/Tienluat123/WebNC_Proposal
 
@@ -14,7 +14,7 @@
 
 ## 2. LLM features and the consequences of it making a mistake.
 
-**Core functionality - Create and adjust the plan from random information**: From the time to budget to where to stay, all gathered from the user through multiple different input type like images, links, or videos. The LLM can give the user a detailed schedule. The map API can provide the address, availability, route time; Business rules will calculate the time of arrival/departure as well as the total cost and check for constraints relating to budgeting and such. If the schedule is invalid, the system will request the LLM to adjust. If any information is vague, the user must confirm it themselves to make sure.
+**Core functionality - Create and adjust the plan from random information**: From the time to budget to where to stay, all gathered from the user through multiple different input type like images, links, or videos, the LLM can give the user a detailed schedule. The map API can provide the address, availability, route time; Business rules will calculate the time of arrival/departure as well as the total cost and check for constraints relating to budgeting and such. If the schedule is invalid, the system will request the LLM to adjust. If any information is vague, the user must confirm it themselves to make sure.
 
 Private information are not sent to the LLM
 
