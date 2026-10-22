@@ -2,7 +2,7 @@
 
 **Project name:** Travel Planning Assistant<br>
 **Members:** Nguyễn Tiến Luật - 23127221; Đặng Nghi Văn - 23127281; Phạm Chí Bảo Ninh - 23127446 <br>
-**Repository link:** https://github.com/Tienluat123/WebNC_Proposal
+**Repository link:** <https://github.com/Tienluat123/WebNC>
 
 ## 1. Target user group and problem statement
 

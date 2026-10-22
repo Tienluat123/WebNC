@@ -16,12 +16,24 @@ Trong học kỳ, nhóm tập trung vào lập và điều chỉnh lịch; đặ
 
 ## Repository
 
-[Tienluat123/WebNC_Proposal](https://github.com/Tienluat123/WebNC_Proposal)
+[Tienluat123/WebNC](https://github.com/Tienluat123/WebNC)
 
 ## Tài liệu
 
-- [Proposal](docs/proposal.md)
+- [Proposal tiếng Anh — PDF nộp bài](docs/proposal_EN.pdf)
+- [Nguồn proposal tiếng Anh](docs/proposal_EN.md)
+- [Proposal tiếng Việt](docs/proposal.md)
+- [PDF tiếng Việt — tham khảo](docs/proposal.pdf)
 - [Báo cáo tự chấm](SELF_ASSESSMENT_REPORT.md)
 - [Rubric PA#1](<docs/PA1 Rubric Proposal and Planning.pdf>)
 - [Đề cương môn](<docs/CSC13114 Advanced Web Application Development.pdf>)
 - [Nhật ký sử dụng AI](AI-LOG.md)
+
+## Nộp PA#1
+
+- Một file ZIP, MSSV tăng dần và điểm tự chấm trong tên: `23127221-23127281-23127446_98.zip`.
+- Proposal **bằng tiếng Anh, tối đa 2 trang**, có link repository; gồm đủ sáu mục trong [rubric](<docs/PA1 Rubric Proposal and Planning.pdf>).
+- ZIP gồm ba file ở cấp ngoài cùng: `proposal.pdf`, `SELF_ASSESSMENT_REPORT.md` và `AI-LOG.md`.
+- Báo cáo tự chấm cần điểm từng tiêu chí, bằng chứng, tổng đúng với tên ZIP và phần chưa hoàn thành.
+- Nộp trên Google Classroom. Theo thông báo giảng viên đã cung cấp, hạn là **22:00 ngày 22/10/2026**; mốc CP1 trong proposal hiện ghi ngày 23/10.
+- File ZIP nộp bài được lưu trong thư mục `dist/` của repository.

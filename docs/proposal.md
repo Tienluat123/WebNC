@@ -2,7 +2,7 @@
 
 **Tên dự án:** Trợ lý lập lịch trình du lịch nhóm <br>
 **Thành viên:** Nguyễn Tiến Luật - 23127221; Đặng Nghi Văn - 23127281; Phạm Chí Bảo Ninh - 23127446 <br>
-**Repository:** https://github.com/Tienluat123/WebNC_Proposal
+**Repository:** <https://github.com/Tienluat123/WebNC>
 
 ## 1. Người dùng và vấn đề
 
