@@ -1,39 +1,67 @@
-# Repository dự án
+# AI Travel Planner
 
-## Giới thiệu
+Repository: <https://github.com/Tienluat123/WebNC>.
 
-Ứng dụng hỗ trợ một sinh viên lập lịch chuyến đi nhóm trong một tỉnh/thành phố tại Việt Nam. LLM đọc văn bản, ảnh hoặc nội dung từ link công khai để trích xuất địa điểm và đề xuất bản nháp lịch. Google Maps cung cấp dữ liệu địa điểm và di chuyển; logic nghiệp vụ tính chi phí, giờ đến/rời và kiểm tra ràng buộc trước khi người dùng xác nhận.
+Thành viên: Nguyễn Tiến Luật — 23127221; Đặng Nghi Văn — 23127281; Phạm Chí Bảo Ninh — 23127446.
 
-Trong học kỳ, nhóm tập trung vào lập và điều chỉnh lịch; đặt vé/phòng, lịch cộng đồng, liên kết bị giới hạn và cập nhật giao thông/thời tiết thời gian thực nằm ngoài phạm vi. PA#4 dự kiến dùng ít nhất 20 ca có đáp án chuẩn để đo lỗi LLM, khả năng chặn lịch sai và chấp nhận lịch hợp lệ.
+Repo hiện chỉ có khung file và ghi chú yêu cầu PA#2. Chưa có checks, CI hoặc tính năng ứng dụng chạy được.
 
-## Thành viên
+## Bố trí thư mục
 
-| Họ tên | MSSV |
-| --- | --- |
-| Nguyễn Tiến Luật | 23127221 |
-| Đặng Nghi Văn | 23127281 |
-| Phạm Chí Bảo Ninh | 23127446 |
+```text
+WebNC/
+├── README.md                       # Điểm bắt đầu đọc repo
+├── AGENTS.md                       # Khung quy tắc cho assistant
+├── PA2.md                          # Khung hồ sơ nộp PA#2
+├── AI-LOG.md                       # Khung nhật ký AI PA#2
+├── SELF_ASSESSMENT_REPORT.md        # Khung tự chấm PA#2
+├── package.json                    # Khung package và lệnh chạy
+├── eslint.config.js                # Khung lint
+├── jsconfig.json                   # Khung kiểm tra kiểu JavaScript
+├── .prettierrc.json                 # Khung format
+├── .prettierignore
+├── .env.example
+├── .gitignore
+├── .github/workflows/
+│   └── ci.yml.example              # Khung CI chưa hoạt động
+├── backend/
+│   ├── src/
+│   └── test/
+│       ├── contract/               # Khung tests nhóm sẽ viết
+│       └── fixtures/               # Chỗ thêm dữ liệu test
+├── frontend/src/
+└── docs/
+    ├── reference/                  # Tất cả tài liệu gốc của thầy
+    │   ├── Contract.md
+    │   ├── PA2 Rubric Harness Quality Gate.pdf
+    │   ├── PA1 Rubric Proposal and Planning.pdf
+    │   ├── AI Travel Planner Project Brief.pdf
+    │   └── CSC13114 Advanced Web Application Development.pdf
+    ├── contract/
+    │   └── endpoint.md             # Contract nhóm tự viết
+    ├── pa2/                        # Tài liệu nhóm chuẩn bị cho PA#2
+    │   ├── README.md               # Map yêu cầu → file
+    │   ├── PERMISSIONS.md          # Khung chính sách quyền
+    │   └── evidence/               # Chỗ lưu bằng chứng thực tế
+    ├── pa1/                        # Hồ sơ cũ, một bản proposal duy nhất
+    └── project-analysis.md         # Phân tích hướng đồ án đã có
+```
 
-## Repository
+Các file cấu hình ở root là khung cho công cụ dự kiến, không phải từng file thầy bắt buộc. Rubric chỉ rõ PA2.md ở root; repo cũng giữ AI-LOG.md và SELF_ASSESSMENT_REPORT.md tại đây để dễ tìm và đóng gói. Xem bảng map để biết từng file cần điền gì.
 
-[Tienluat123/WebNC](https://github.com/Tienluat123/WebNC)
+## Bắt đầu PA#2
 
-## Tài liệu
+- [Map yêu cầu của thầy → khung file](docs/pa2/README.md).
+- [Rubric PA#2](<docs/reference/PA2 Rubric Harness Quality Gate.pdf>).
+- [Contract mẫu của thầy](docs/reference/Contract.md).
+- [Contract của nhóm](docs/contract/endpoint.md).
+- [Khung hồ sơ nộp](PA2.md), [nhật ký AI](AI-LOG.md), [tự chấm](SELF_ASSESSMENT_REPORT.md).
 
-- [Proposal tiếng Anh — PDF nộp bài](docs/proposal_EN.pdf)
-- [Nguồn proposal tiếng Anh](docs/proposal_EN.md)
-- [Proposal tiếng Việt](docs/proposal.md)
-- [PDF tiếng Việt — tham khảo](docs/proposal.pdf)
-- [Báo cáo tự chấm](SELF_ASSESSMENT_REPORT.md)
-- [Rubric PA#1](<docs/PA1 Rubric Proposal and Planning.pdf>)
-- [Đề cương môn](<docs/CSC13114 Advanced Web Application Development.pdf>)
-- [Nhật ký sử dụng AI](AI-LOG.md)
+TODO: điền lệnh setup và checks, model, spending cap, chi phí một plan. Lệnh checks trong README phải giống CI.
 
-## Nộp PA#1
+## Tham khảo thêm
 
-- Một file ZIP, MSSV tăng dần và điểm tự chấm trong tên: `23127221-23127281-23127446_98.zip`.
-- Proposal **bằng tiếng Anh, tối đa 2 trang**, có link repository; gồm đủ sáu mục trong [rubric](<docs/PA1 Rubric Proposal and Planning.pdf>).
-- ZIP gồm ba file ở cấp ngoài cùng: `proposal.pdf`, `SELF_ASSESSMENT_REPORT.md` và `AI-LOG.md`.
-- Báo cáo tự chấm cần điểm từng tiêu chí, bằng chứng, tổng đúng với tên ZIP và phần chưa hoàn thành.
-- Nộp trên Google Classroom. Theo thông báo giảng viên đã cung cấp, hạn là **22:00 ngày 22/10/2026**; mốc CP1 trong proposal hiện ghi ngày 23/10.
-- File ZIP nộp bài được lưu trong thư mục `dist/` của repository.
+- [Brief AI Travel Planner](<docs/reference/AI Travel Planner Project Brief.pdf>).
+- [Đề cương môn](<docs/reference/CSC13114 Advanced Web Application Development.pdf>).
+- [Phân tích hướng đồ án](docs/project-analysis.md).
+- [Proposal PA#1](docs/pa1/proposal.pdf), [nhật ký PA#1](docs/pa1/AI-LOG.md), [tự chấm PA#1](docs/pa1/SELF_ASSESSMENT_REPORT.md).

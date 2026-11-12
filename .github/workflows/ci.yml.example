@@ -1,0 +1,10 @@
+# PA2 criterion 4 — workflow template, not an active GitHub workflow.
+# TODO: choose runtime/setup and add jobs for the documented local check commands.
+# Lecturer requires:
+# - CI on every pull request.
+# - Protected main with required checks; a red check must block merging.
+# - A blocked PR and the commit/PR that turns it green.
+# - No direct push to main after protection is enabled.
+# - Contract tests in required CI, including a deliberate implementation break.
+# - A CI run for the submitted pa2 tag.
+# Rename this file to ci.yml after implementing a valid workflow.
