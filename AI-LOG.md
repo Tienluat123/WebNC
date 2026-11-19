@@ -1,19 +1,29 @@
-# AI-LOG — PA2 template
+# AI-LOG — PA2
 
-This is the AI-usage journal for criterion 7, not the Rules file. AGENTS.md holds current rules; an entry here may support a rule by recording a real incident.
+This journal records actual assistant use. Current entries do not claim an incident
+or a passing check unless the repository contains evidence for it.
 
-Lecturer's requirement: state which tool was used for which part, with real Changed / Rejected entries. Generic entries are insufficient. Tool: none is valid if no assistant was used.
+## 2026-11-19 — Drafting repository rules
 
-## Entry template
+Tool: Copilot SDK in VS Code, using workspace file inspection and patch editing.
 
-Date: TODO — actual work date.
+Used for: Reviewing the PA2 guidance, project brief, README, package manifest,
+contract template, permissions template, and Git history; drafting
+[AGENTS.md](AGENTS.md) and this log.
 
-Tool: TODO — tool actually used.
+Changed: Replaced the AGENTS template TODOs with a provisional React/TypeScript +
+Express/Node stack, the checks named by the PA2 guidance, product safety
+invariants from the brief, and explicit skeleton-repository status. Added this
+entry so the work is traceable. The draft intentionally does not choose a model,
+database, Node version, or claim that checks pass because the repository does not
+yet contain those decisions or scripts.
 
-Used for: TODO — specific work performed with the assistant.
+Rejected: The assistant did not invent setup/check commands, model or database
+choices, incident evidence, or successful CI results. It also rejected treating
+the lecturer's example rules as evidence of incidents in this repository.
 
-Changed: TODO — what the assistant proposed, what the team changed, and why.
-
-Rejected: TODO — which suggestion was rejected and why.
-
-Evidence: TODO — relevant file, commit or CI run when available. If this incident leads to a rule in AGENTS.md, link that rule to this entry.
+Evidence: [AGENTS.md](AGENTS.md), [README.md](README.md),
+[docs/pa2/README.md](docs/pa2/README.md),
+[docs/AI-Travel-Planner-final-project-brief.md](docs/AI-Travel-Planner-final-project-brief.md),
+and `package.json` (scripts currently empty). No incident-backed rule is claimed
+yet; add real evidence here before linking one.
