@@ -1,67 +1,63 @@
 # AI Travel Planner
 
-Repository: <https://github.com/Tienluat123/WebNC>.
+Repository: <https://github.com/Tienluat123/WebNC_Proposal>.
 
-Thành viên: Nguyễn Tiến Luật — 23127221; Đặng Nghi Văn — 23127281; Phạm Chí Bảo Ninh — 23127446.
+## PA2 status - 2026-11-21
 
-Repo hiện chỉ có khung file và ghi chú yêu cầu PA#2. Chưa có checks, CI hoặc tính năng ứng dụng chạy được.
+GET /places is implemented with Express and explicitly synthetic fixtures.
+The adopted [contract](docs/contract/endpoint.md) defines public access, four
+AND-combined filters, signed cursor pagination and RFC 9457 errors.
+See the [P1 review](docs/pa2/evidence/p1-review.md) for evidence and remaining work.
 
-## Bố trí thư mục
+| Owner | Scope | Current state |
+| --- | --- | --- |
+| Nghi Van | #2 Permissions/secrets, #5 contract and endpoint | Implemented; actual model spending-cap evidence pending |
+| Luat | #3 commands, #4 required CI/protection | Pending; workflow is still a non-active example |
+| Ninh | #1 rules, #6 contract tests | Rules still contain TODOs; tests exist, full CI/red-green evidence pending |
+| All | #7 AI log and submission | Log updated; final score, evidence links and submission packaging pending |
 
-```text
-WebNC/
-├── README.md                       # Điểm bắt đầu đọc repo
-├── AGENTS.md                       # Khung quy tắc cho assistant
-├── PA2.md                          # Khung hồ sơ nộp PA#2
-├── AI-LOG.md                       # Khung nhật ký AI PA#2
-├── SELF_ASSESSMENT_REPORT.md        # Khung tự chấm PA#2
-├── package.json                    # Khung package và lệnh chạy
-├── eslint.config.js                # Khung lint
-├── jsconfig.json                   # Khung kiểm tra kiểu JavaScript
-├── .prettierrc.json                 # Khung format
-├── .prettierignore
-├── .env.example
-├── .gitignore
-├── .github/workflows/
-│   └── ci.yml.example              # Khung CI chưa hoạt động
-├── backend/
-│   ├── src/
-│   └── test/
-│       ├── contract/               # Khung tests nhóm sẽ viết
-│       └── fixtures/               # Chỗ thêm dữ liệu test
-├── frontend/src/
-└── docs/
-    ├── reference/                  # Tất cả tài liệu gốc của thầy
-    │   ├── Contract.md
-    │   ├── PA2 Rubric Harness Quality Gate.pdf
-    │   ├── PA1 Rubric Proposal and Planning.pdf
-    │   ├── AI Travel Planner Project Brief.pdf
-    │   └── CSC13114 Advanced Web Application Development.pdf
-    ├── contract/
-    │   └── endpoint.md             # Contract nhóm tự viết
-    ├── pa2/                        # Tài liệu nhóm chuẩn bị cho PA#2
-    │   ├── README.md               # Map yêu cầu → file
-    │   ├── PERMISSIONS.md          # Khung chính sách quyền
-    │   └── evidence/               # Chỗ lưu bằng chứng thực tế
-    ├── pa1/                        # Hồ sơ cũ, một bản proposal duy nhất
-    └── project-analysis.md         # Phân tích hướng đồ án đã có
+## Setup and verification
+
+Use Node.js 22.18.x and npm 10.9.3, as documented in
+[backend/README.md](backend/README.md). Run from the repository root:
+
+```sh
+npm ci
+npm run test:service
+npm test
 ```
 
-Các file cấu hình ở root là khung cho công cụ dự kiến, không phải từng file thầy bắt buộc. Rubric chỉ rõ PA2.md ở root; repo cũng giữ AI-LOG.md và SELF_ASSESSMENT_REPORT.md tại đây để dễ tìm và đóng gói. Xem bảng map để biết từng file cần điền gì.
+For server setup, copy .env.example to .env, set PORT and a private CURSOR_SECRET
+of at least 32 bytes, then run npm start. Follow the backend instructions to
+generate the secret locally; never commit or share its value.
 
-## Bắt đầu PA#2
+The 2026-11-21 service run passed 27 tests. The user's 2026-11-19 full run passed
+31 tests. The current assistant environment blocks localhost connections with
+EACCES, so its four HTTP tests could not be reverified. No current full-suite or
+CI pass is claimed. Lint, formatting and typecheck commands are not implemented.
 
-- [Map yêu cầu của thầy → khung file](docs/pa2/README.md).
-- [Rubric PA#2](<docs/reference/PA2 Rubric Harness Quality Gate.pdf>).
-- [Contract mẫu của thầy](docs/reference/Contract.md).
-- [Contract của nhóm](docs/contract/endpoint.md).
-- [Khung hồ sơ nộp](PA2.md), [nhật ký AI](AI-LOG.md), [tự chấm](SELF_ASSESSMENT_REPORT.md).
+## Permissions, secrets and model budget
 
-TODO: điền lệnh setup và checks, model, spending cap, chi phí một plan. Lệnh checks trong README phải giống CI.
+Assistant actions follow [PERMISSIONS.md](docs/pa2/PERMISSIONS.md).
+The backend currently reads only PORT and CURSOR_SECRET; both variable names
+have empty values in .env.example. GET /places makes no model calls.
 
-## Tham khảo thêm
+Run `python -X utf8 scripts/audit-secrets.py` for the local heuristic audit.
+See [audit results and limitations](docs/pa2/evidence/secrets-audit.md).
 
-- [Brief AI Travel Planner](<docs/reference/AI Travel Planner Project Brief.pdf>).
-- [Đề cương môn](<docs/reference/CSC13114 Advanced Web Application Development.pdf>).
-- [Phân tích hướng đồ án](docs/project-analysis.md).
-- [Proposal PA#1](docs/pa1/proposal.pdf), [nhật ký PA#1](docs/pa1/AI-LOG.md), [tự chấm PA#1](docs/pa1/SELF_ASSESSMENT_REPORT.md).
+**Model provider, model identifier and enforced spending cap: pending.**
+Criterion 2 is not complete without actual capped-key evidence. No model key has
+been created or added in this task. The account owner must supply the provider,
+model, cap amount/currency/period, enforcement behavior and redacted dated evidence.
+A notification budget alone must not be described as a hard cap.
+**Cost per plan: not measured.** Label any later estimate with its assumptions.
+
+## Project and submission references
+
+- [PA2 assignment map and ownership](docs/pa2/README.md).
+- [PA2 submission entry](PA2.md) and [self-assessment](SELF_ASSESSMENT_REPORT.md).
+- [AI usage log](AI-LOG.md).
+- [PA2 rubric](<docs/reference/PA2 Rubric Harness Quality Gate.pdf>).
+- [Lecturer's contract example](docs/reference/Contract.md).
+- [Project brief](<docs/reference/AI Travel Planner Project Brief.pdf>).
+- [PA1 proposal](docs/pa1/proposal.pdf).

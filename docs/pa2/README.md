@@ -2,7 +2,13 @@
 
 Đã rà với [rubric gốc](<../reference/PA2 Rubric Harness Quality Gate.pdf>), trang 1–4, và [contract mẫu](../reference/Contract.md). Hạn trong rubric: **22:00 ngày 26/11/2026**.
 
-Repo hiện chỉ là khung. Có file không đồng nghĩa đã đạt điểm. Ghi chú dưới đây phân biệt yêu cầu của thầy với cách nhóm chọn tổ chức repo; chưa chốt stack, endpoint hoặc công cụ thay nhóm.
+Current status (2026-11-21): the P1 permissions policy, adopted GET /places contract,
+Express implementation and 31 tests exist. The latest service run passed 27 tests;
+HTTP re-verification is blocked by the current environment. Provider/model and
+spending-cap evidence remain pending. The detailed guidance below includes the
+original scaffold inventory; use the [current P1 review](evidence/p1-review.md),
+[root README](../../README.md) and actual files for completion status.
+Checks/CI and final Rules/submission work remain with their assigned owners.
 
 ## Quyết định
 
@@ -114,7 +120,7 @@ Không chỉ viết “đã đăng nhập”; phải rõ quyền trên dữ li�
 
 | File / nơi code                                                                 | Vai trò                                                                 | Bạn cần viết                                                                                                                                                                                                               |
 | ------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [endpoint.test.js](../../backend/test/contract/endpoint.test.js)                | File tests của endpoint, tên/path do repo chọn.                         | Đổi tên theo endpoint; viết tests chạy request thật tới implementation: success, từng error type, ownership và paging/idempotency nếu áp dụng. Kiểm tra nội dung/schema chứ không chỉ status. Hiện toàn bộ chỉ là comment. |
+| [places.test.js](../../backend/test/contract/places.test.js)                | File tests của endpoint, tên/path do repo chọn.                         | Đổi tên theo endpoint; viết tests chạy request thật tới implementation: success, từng error type, ownership và paging/idempotency nếu áp dụng. Kiểm tra nội dung/schema chứ không chỉ status. Hiện toàn bộ chỉ là comment. |
 | [backend/test/fixtures/](../../backend/test/fixtures/README.md)                 | Dữ liệu đầu vào và kết quả tham chiếu cho tests; cách tổ chức tùy chọn. | Thêm fixtures khi biết schema. README chỉ hướng dẫn, không phải dataset hay test.                                                                                                                                          |
 | [backend/src/](../../backend/src/)                                              | Nơi sẽ chứa implementation endpoint theo bố trí repo.                   | Hiện chỉ có .gitkeep. Cần code endpoint và phần xử lý liên quan để tests thật sự kiểm tra hành vi; rubric không quy định bắt buộc tên file app.js/router.js.                                                               |
 | [CI template](../../.github/workflows/ci.yml.example) và [PA2.md](../../PA2.md) | Chạy tests và dẫn bằng chứng.                                           | Đưa tests vào required CI; tạo một commit/PR làm implementation sai contract khiến tests đỏ, rồi sửa code và dẫn link.                                                                                                     |

@@ -16,7 +16,8 @@ TODO: enter the real setup, lint, format check, type check (if applicable) and t
 
 TODO: state concrete team conventions for code layout, naming, errors, tests and contract changes.
 
-Permission-policy template: [docs/pa2/PERMISSIONS.md](docs/pa2/PERMISSIONS.md). Complete its Allowed / Ask first / Never tiers for criterion 2.
+Assistant permissions: follow the Allowed / Ask first / Never tiers in
+[docs/pa2/PERMISSIONS.md](docs/pa2/PERMISSIONS.md), within the user's authorized task.
 
 Lecturer's requirement: at least two rules must trace to something that actually went wrong through a commit or AI-LOG entry. TODO: add each rule with its real evidence reference when available.
 

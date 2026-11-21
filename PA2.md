@@ -1,8 +1,25 @@
 # PA2 — Harness and quality gate
 
-Repository: <https://github.com/Tienluat123/WebNC>
+Repository: <https://github.com/Tienluat123/WebNC_Proposal>
 
-Status: template only. [File map](docs/pa2/README.md).
+Status (2026-11-21): P1 permissions and GET /places contract/implementation are
+present. Provider/model and enforced spending-cap evidence remain pending.
+Checks/required CI, protected-branch evidence and final self-assessment are not
+complete. [File map](docs/pa2/README.md).
+
+## P1 evidence - criteria 2 and 5
+
+| Item | Evidence |
+| --- | --- |
+| Permission tiers and secret policy | [PERMISSIONS.md](docs/pa2/PERMISSIONS.md) |
+| Environment variable names | [.env.example](.env.example) |
+| Local history/working-file audit | [Audit evidence](docs/pa2/evidence/secrets-audit.md) |
+| Adopted endpoint contract | [GET /places](docs/contract/endpoint.md) |
+| Endpoint implementation and setup | [Backend README](backend/README.md) |
+| Rubric review, verification and handoff | [P1 review](docs/pa2/evidence/p1-review.md) |
+| Model spending cap | Pending actual provider/account evidence |
+
+These file links are local work evidence, not PR/CI or full-score claims.
 
 ## Required links
 
@@ -18,7 +35,7 @@ Status: template only. [File map](docs/pa2/README.md).
 ## Submission checklist
 
 - TODO: tag the submitted commit pa2 and push the tag.
-- TODO: write PA2.md, AI-LOG.md and SELF_ASSESSMENT_REPORT.md in English.
+- Finalize PA2.md, AI-LOG.md and SELF_ASSESSMENT_REPORT.md in English; the current score and remote evidence are incomplete.
 - TODO: include the repository and .git in one ZIP.
 - TODO: name it `23127221-23127281-23127446_<total>.zip`; total must match the self-assessment.
 - TODO: one member submits using their student Google account.
