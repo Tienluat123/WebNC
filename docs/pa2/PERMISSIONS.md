@@ -5,10 +5,10 @@ Source: rubric criterion 2. This filename/location is a repository choice, not a
 ## Permission tiers
 
 | Required tier | Team policy |
-| --- | --- |
-| Allowed | TODO |
-| Ask first | TODO |
-| Never | TODO |
+| ------------- | ----------- |
+| Allowed       | TODO        |
+| Ask first     | TODO        |
+| Never         | TODO        |
 
 ## Lecturer's requirements
 

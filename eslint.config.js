@@ -1,3 +1,24 @@
-// PA2 criterion 3: provide a documented lint command, identical locally and in CI.
-// TODO: configure lint rules after the team agrees on the stack and conventions.
-// Template only; no lint configuration is implemented.
+import js from '@eslint/js';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+
+export default tseslint.config(
+  { ignores: ['**/dist/**', '**/coverage/**'] },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  {
+    files: ['**/*.{js,mjs,cjs,ts,tsx}'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+    },
+  },
+  {
+    files: ['eslint.config.js', 'backend/**/*.{js,mjs,cjs,ts}'],
+    languageOptions: { globals: globals.node },
+  },
+  {
+    files: ['frontend/**/*.{js,ts,tsx}'],
+    languageOptions: { globals: globals.browser },
+  },
+);

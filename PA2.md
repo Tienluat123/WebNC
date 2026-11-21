@@ -6,14 +6,14 @@ Status: template only. [File map](docs/pa2/README.md).
 
 ## Required links
 
-| Lecturer's requirement | Evidence |
-| --- | --- |
-| Public repository | TODO: verify public access |
-| Protected-branch settings (screenshot accepted) | TODO |
-| PR blocked by a red required check | TODO |
-| PR / commit that turned the check green | TODO |
-| CI run for submitted pa2 tag | TODO |
-| Deliberate contract break caught by CI | TODO |
+| Lecturer's requirement                          | Evidence                   |
+| ----------------------------------------------- | -------------------------- |
+| Public repository                               | TODO: verify public access |
+| Protected-branch settings (screenshot accepted) | TODO                       |
+| PR blocked by a red required check              | TODO                       |
+| PR / commit that turned the check green         | TODO                       |
+| CI run for submitted pa2 tag                    | TODO                       |
+| Deliberate contract break caught by CI          | TODO                       |
 
 ## Submission checklist
 

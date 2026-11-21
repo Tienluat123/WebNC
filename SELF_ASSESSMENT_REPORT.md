@@ -4,16 +4,16 @@ Team: Nguyễn Tiến Luật — 23127221; Đặng Nghi Văn — 23127281; Phạ
 
 Total claimed: TODO / 100.
 
-| Criterion | Max | Claim | Evidence |
-| --- | ---: | --- | --- |
-| Rules file | 15 | TODO | TODO |
-| Permissions and secrets | 10 | TODO | TODO |
-| One command for every check | 10 | TODO | TODO |
-| CI that blocks a merge | 20 | TODO | TODO |
-| One endpoint contract | 25 | TODO | TODO |
-| Contract tests that bite | 15 | TODO | TODO |
-| AI-LOG.md | 5 | TODO | TODO |
-| **Total** | **100** | **TODO** | |
+| Criterion                   |     Max | Claim    | Evidence |
+| --------------------------- | ------: | -------- | -------- |
+| Rules file                  |      15 | TODO     | TODO     |
+| Permissions and secrets     |      10 | TODO     | TODO     |
+| One command for every check |      10 | TODO     | TODO     |
+| CI that blocks a merge      |      20 | TODO     | TODO     |
+| One endpoint contract       |      25 | TODO     | TODO     |
+| Contract tests that bite    |      15 | TODO     | TODO     |
+| AI-LOG.md                   |       5 | TODO     | TODO     |
+| **Total**                   | **100** | **TODO** |          |
 
 ## What we did not manage
 
