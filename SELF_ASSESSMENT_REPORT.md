@@ -1,26 +1,27 @@
-# Self-assessment — PA#1
+# Self-assessment — PA2 working draft
 
-Submitted by: 23127221 — Nguyễn Tiến Luật
+Team: Nguyễn Tiến Luật — 23127221; Đặng Nghi Văn — 23127281; Phạm Chí Bảo Ninh — 23127446.
 
-Submitted by: 23127281 — Đặng Nghi Văn
+Total claimed: pending assessment of the remaining criteria; not ready for submission.
 
-Submitted by: 23127446 — Phạm Chí Bảo Ninh
+Luật's assessed subtotal for criteria 3–4: **30 / 30**, provisional as of 2026-11-21. The claims below cover the observed commands and merge gate. The final team review must confirm integration with real contract tests, the final tagged run and all other criteria. This subtotal is not the final ZIP score.
 
-Total I claim: 98 / 100
+| Criterion                   |     Max | Claim    | Evidence                                                                                                                                                                                                                                                                                                                                                                               |
+| --------------------------- | ------: | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Rules file                  |      15 | TODO     | TODO                                                                                                                                                                                                                                                                                                                                                                                   |
+| Permissions and secrets     |      10 | TODO     | TODO                                                                                                                                                                                                                                                                                                                                                                                   |
+| One command for every check |      10 | 10       | [README commands](README.md#setup-và-checks--luật-rubric-3), [scripts](package.json), [workflow](.github/workflows/ci.yml), [successful PR run](https://github.com/Tienluat123/WebNC/actions/runs/44907080432), [fresh-clone verification](docs/pa2/evidence/README.md#fresh-clone-verification). Same commands locally and in CI.                                                     |
+| CI that blocks a merge      |      20 | 20       | [PA2 evidence](PA2.md), [required failure / disabled merge](docs/pa2/evidence/pr-1-required-check-red.png), [fix commit](https://github.com/Tienluat123/WebNC/commit/2b3c61ce7116cf8d88e892c0896cdc7f213947eb), [green run](https://github.com/Tienluat123/WebNC/actions/runs/44907080432), [protection screenshots](docs/pa2/evidence/README.md). Separate red/fix commits preserved. |
+| One endpoint contract       |      25 | TODO     | TODO                                                                                                                                                                                                                                                                                                                                                                                   |
+| Contract tests that bite    |      15 | TODO     | TODO                                                                                                                                                                                                                                                                                                                                                                                   |
+| AI-LOG.md                   |       5 | TODO     | TODO                                                                                                                                                                                                                                                                                                                                                                                   |
+| **Total**                   | **100** | **TODO** |                                                                                                                                                                                                                                                                                                                                                                                        |
 
-| Criterion | Max | I claim | Evidence |
-| --- | ---: | ---: | --- |
-| Users and problem | 20 | 20 | [Section 1](https://github.com/Tienluat123/WebNC/blob/dd10877/docs/proposal.md#1-người-dùng-và-vấn-đề): target users, scenario, problem and current workaround. |
-| Core LLM feature and cost of being wrong | 25 | 24 | [Section 2](https://github.com/Tienluat123/WebNC/blob/dd10877/docs/proposal.md#2-tính-năng-llm-và-hậu-quả-khi-sai): feature, price/fee sources, affected users, extent of harm, reversibility and planned evaluation cases. |
-| Scope | 15 | 15 | [Section 3](https://github.com/Tienluat123/WebNC/blob/dd10877/docs/proposal.md#3-phạm-vi): included and excluded features. |
-| Plan and responsibilities | 20 | 20 | [Section 4](https://github.com/Tienluat123/WebNC/blob/dd10877/docs/proposal.md#4-kế-hoạch-và-phân-công): six checkpoints covering PA#1-PA#5, each with a date, deliverables and a named owner. |
-| Risks | 10 | 10 | [Section 5](https://github.com/Tienluat123/WebNC/blob/dd10877/docs/proposal.md#5-hai-rủi-ro-lớn-nhất): two risks, mitigations and immediate next steps. |
-| Technology | 10 | 9 | [Section 6](https://github.com/Tienluat123/WebNC/blob/dd10877/docs/proposal.md#6-lựa-chọn-công-nghệ-và-chi-phí): technologies, API providers, model, costs and the plan to test map data. |
+## What remains incomplete
 
-## What I did not manage
+- The real contract tests and deliberate contract violation are not yet demonstrated. The existing comment-only test file passing is not evidence for criterion 6.
+- The final `pa2` tag and its CI run are pending the completed team submission.
+- Criteria 1, 2, 5, 6 and the team-wide AI-log assessment remain unscored in this draft; their owners must provide evidence and complete the total.
+- The final review, ZIP and student-account submission have not been performed.
 
-We have not surveyed users or tested the map API in Da Lat; the scenario and harm estimates are hypothetical. The evaluation suite has not been implemented or run. Map data coverage and API costs need to be verified in PA#2.
-
-## What I would do differently
-
-Review the course requirements and rubric from the start to build a more realistic plan.
+Lecturer's notes: each claimed criterion needs evidence pointing to a file, commit, PR or CI run. The total must match the ZIP filename. Review the honesty-adjustment table in the rubric before submitting.

@@ -1,0 +1,11 @@
+node_modules/
+dist/
+coverage/
+package-lock.json
+.env
+.env.*
+!.env.example
+
+# Supplied references and archived PA1 submission.
+docs/reference/
+docs/pa1/
