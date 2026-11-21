@@ -4,10 +4,10 @@ Command: `python -X utf8 scripts/audit-secrets.py` from the repository root.
 
 | Item | Observed result |
 | --- | --- |
-| HEAD | `b50355d883edac6c2e8bb46b59433b7208a88ba5` |
-| Locally reachable commits, all refs plus HEAD | 17 |
-| Unique history blobs inspected | 65 |
-| Existing tracked and non-ignored working files inspected | 40 |
+| HEAD | `1a413e658c6bca13571d82a13d69f7587082f644` |
+| Locally reachable commits, all refs plus HEAD | 18 |
+| Unique history blobs inspected | 96 |
+| Existing tracked and non-ignored working files inspected | 41 |
 | Credential-pattern findings | 0 |
 | Historical `.env` / `.env.*` paths other than `.env.example` | 0 |
 | `.env` ignored by Git | Yes |
@@ -15,11 +15,10 @@ Command: `python -X utf8 scripts/audit-secrets.py` from the repository root.
 | Explicit synthetic test-secret assignments | Allowlisted; not real credentials |
 | PDF extraction or archive inspection reported incomplete | No |
 
-The working-tree count includes the uncommitted implementation, policy, audit
-script, P1 review and evidence files. The rerun used the writable P1 copy with
-the source checkout's local refs and working files preserved; no remote refs
-were fetched. The HEAD and history counts refer to the existing
-Git history; they do not claim these new files have already been committed.
+The rerun used branch `pa2-permissions-places` directly in the repository on drive D. The implementation,
+policy, audit script and prior evidence are present in HEAD; the evidence updates are
+tracked working-tree changes. All current local refs, including local Codex turn-diff
+refs, are in scope. No remote refs were fetched.
 
 The script inspects raw bytes and extracts PDF text and selected textual ZIP
 members. Rules cover private-key headers, AWS access-key IDs, GitHub tokens,

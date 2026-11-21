@@ -3,9 +3,11 @@
 Đã rà với [rubric gốc](<../reference/PA2 Rubric Harness Quality Gate.pdf>), trang 1–4, và [contract mẫu](../reference/Contract.md). Hạn trong rubric: **22:00 ngày 26/11/2026**.
 
 Current status (2026-11-21): the P1 permissions policy, adopted GET /places contract,
-Express implementation and 31 tests exist. The latest service run passed 27 tests;
-HTTP re-verification is blocked by the current environment. Provider/model and
-spending-cap evidence remain pending. The detailed guidance below includes the
+Express implementation and 31 tests exist. The latest local `npm test` run passed
+all 31 tests, including the four HTTP tests. The team reports Google Gemini API
+and `gemini-3.5-flash-lite`; the Free-tier project has no billing account and
+therefore a USD 0 paid-spend boundary. Redacted account evidence is included.
+The detailed guidance below includes the
 original scaffold inventory; use the [current P1 review](evidence/p1-review.md),
 [root README](../../README.md) and actual files for completion status.
 Checks/CI and final Rules/submission work remain with their assigned owners.
@@ -26,7 +28,7 @@ Checks/CI and final Rules/submission work remain with their assigned owners.
 | Cả ba    | [#7 AI-LOG](#rubric-7), [hồ sơ nộp](#submission)              | Mỗi người ghi log, link bằng chứng và tự chấm các mục mình làm; review chung trước khi nộp.                  |
 
 Commit: gắn tag pa2.
-Mỗi task là mội nhánh: /p1
+Nhánh cho phần permissions/secrets và GET /places: `pa2-permissions-places`.
 
 <details>
 <summary>Chi tiết rubric và hướng dẫn điền từng file</summary>

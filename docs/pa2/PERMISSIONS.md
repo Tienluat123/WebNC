@@ -47,16 +47,21 @@ See [latest audit evidence](evidence/secrets-audit.md) for the actual scope,
 counts, findings and limitations. A heuristic scan cannot guarantee the absence
 of all credentials. Rerun after new commits or fetched refs before submission.
 
-## Model and spending cap - not yet configured
+## Model and spending control
 
 `GET /places` has no model integration or model API key. Provider, model, spending
-cap and measured cost per plan remain unselected/unverified. The spending-cap
-requirement is therefore still incomplete; no completed secret-management score
-is claimed solely because this endpoint does not call a model.
+cap and measured cost are independent of this endpoint. The team reports Google
+Gemini API project `travel-planner`, model `gemini-3.5-flash-lite`, Free tier with
+no billing account linked, and successful connectivity testing by a team member.
+No key or connectivity output is stored here. With no billing account, the
+account-side ceiling for paid usage is USD 0 and is enforced continuously; the
+paid-tier configurable spend-cap feature is not applicable on the Free tier.
+Full itinerary-generation cost has not been measured.
 
-Before submission, the account owner must choose the provider/model, configure an
-enforced spending limit appropriate to that provider, and record the exact amount,
-currency, billing period and enforcement behavior in the root README. A budget
-notification alone must not be described as a hard cap. Include redacted evidence
-with the configuration date; never include the API key. Record cost per plan only
-after measuring it, or label an estimate and its assumptions explicitly.
+Before submission, include redacted evidence of the Free-tier and no-billing state;
+never include the API key, email address or project identifier. Do not relabel this
+state as use of Google's configurable spend-cap feature. If the account owner later
+links billing, first configure an enforced project spend cap and record its amount,
+currency, monthly period and enforcement behavior. A budget notification alone
+must not be described as a hard cap. Record cost per plan only after measuring it,
+or label an estimate and its assumptions explicitly.

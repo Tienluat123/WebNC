@@ -31,10 +31,10 @@ For server setup, copy .env.example to .env, set PORT and a private CURSOR_SECRE
 of at least 32 bytes, then run npm start. Follow the backend instructions to
 generate the secret locally; never commit or share its value.
 
-The 2026-11-21 service run passed 27 tests. The user's 2026-11-19 full run passed
-31 tests. The current assistant environment blocks localhost connections with
-EACCES, so its four HTTP tests could not be reverified. No current full-suite or
-CI pass is claimed. Lint, formatting and typecheck commands are not implemented.
+The 2026-11-21 local rerun passed all 31 service and HTTP tests. This supersedes
+the earlier same-day run where the assistant environment blocked localhost with
+`EACCES`; the restriction did not reproduce in this checkout. This is local
+verification, not a CI pass. Lint, formatting and typecheck commands are not implemented.
 
 ## Permissions, secrets and model budget
 
@@ -45,12 +45,27 @@ have empty values in .env.example. GET /places makes no model calls.
 Run `python -X utf8 scripts/audit-secrets.py` for the local heuristic audit.
 See [audit results and limitations](docs/pa2/evidence/secrets-audit.md).
 
-**Model provider, model identifier and enforced spending cap: pending.**
-Criterion 2 is not complete without actual capped-key evidence. No model key has
-been created or added in this task. The account owner must supply the provider,
-model, cap amount/currency/period, enforcement behavior and redacted dated evidence.
-A notification budget alone must not be described as a hard cap.
-**Cost per plan: not measured.** Label any later estimate with its assumptions.
+The team reports the following model-account configuration:
+
+- Provider: Google Gemini API.
+- Project: `travel-planner`.
+- Model: `gemini-3.5-flash-lite`.
+- Billing: Free tier; no billing account is linked to the project.
+- API connectivity: successfully tested by a team member; no key or test output is stored here.
+- Paid-spend ceiling: USD 0, enforced continuously by the absence of a linked billing account.
+- Configurable project spend-cap feature: not applicable while the project remains on the Free tier.
+- Full itinerary-generation cost: not measured.
+
+This is an account-side zero paid-spend boundary, not a budget alert and not a
+claim that the configurable paid-tier spend-cap control was set. Google documents
+the Free-tier billing cap as N/A; API keys inherit the project's billing status.
+If a billing account is linked later, the USD 0 boundary no longer applies and
+the team must configure a project spend cap before using the key. See the
+[Gemini API billing documentation](https://ai.google.dev/gemini-api/docs/billing).
+No model key is committed or requested. A redacted account screenshot should
+retain the project name, Free-tier badge and no-billing message while hiding the
+email address and project identifier. The repository includes that
+[redacted account evidence](docs/pa2/evidence/gemini-free-tier-no-billing-2026-11-21.png).
 
 ## Project and submission references
 

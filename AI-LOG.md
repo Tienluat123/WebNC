@@ -139,6 +139,58 @@ No provider account, billable call, remote push, merge or tag change was made.
 Evidence: [P1 review](docs/pa2/evidence/p1-review.md),
 [audit](docs/pa2/evidence/secrets-audit.md), [PA2 entry](PA2.md).
 
+## 2026-11-21 - Direct checkout verification and evidence refresh
+
+Tool: ChatGPT / Codex.
+
+Used for: continuing Nghi Van's criteria 2 and 5 work directly on branch `p1`
+on drive D, verifying the committed state, rerunning the complete suite and
+refreshing local evidence against the rubric.
+
+Changed: replaced the stale localhost-restriction status with the observed local
+result: `npm test` passed all 31 tests, including four HTTP tests. Refreshed the
+secret-audit HEAD and final pre-commit local-ref scope after commit `1a413e6`:
+18 reachable commits and 96 unique history blobs, with no detected findings or
+incomplete extraction.
+
+Rejected: did not add a provider or model merely to make `GET /places` appear
+AI-backed; the endpoint does not need one. Did not label a budget alert as a hard
+cap or claim criterion 2 complete without account-side evidence. Did not change
+the public contract or add a fabricated 403 to imitate an owned-resource test.
+
+Evidence: [P1 review](docs/pa2/evidence/p1-review.md),
+[audit](docs/pa2/evidence/secrets-audit.md), [backend verification](backend/README.md).
+No push, merge, billing change or tag move was performed.
+
+## 2026-11-21 - Model account status recorded
+
+Tool: ChatGPT / Codex.
+
+Used for: documenting the model-account configuration supplied by the user for
+criterion 2 without requesting or storing an API key.
+
+Changed: recorded Google Gemini API project `travel-planner`, model
+`gemini-3.5-flash-lite`, Free tier with no billing account linked, and team-reported
+successful connectivity. The user supplied an AI Studio Spend screenshot showing
+that no billing is set up, then supplied a cropped copy that excludes the browser
+URL, email and API key. Stored that copy as account-side evidence. Kept full
+itinerary-generation cost as not measured.
+
+Rejected: did not enable paid billing merely to manufacture rubric evidence and
+did not describe the Free-tier state as use of Google's configurable spend-cap
+feature. Instead, documented the stronger account-side fact that no linked billing
+account enforces a continuous USD 0 ceiling on paid usage. If billing is linked
+later, this evidence must be replaced with a configured project spend cap.
+
+Evidence: [root README](README.md), [permissions and model status](docs/pa2/PERMISSIONS.md),
+[P1 review](docs/pa2/evidence/p1-review.md),
+[redacted account screenshot](docs/pa2/evidence/gemini-free-tier-no-billing-2026-11-21.png).
+No API key, account credential, connectivity output or payment detail was requested or recorded.
+
+The local task branch was subsequently renamed from `p1` to
+`pa2-permissions-places` before committing this evidence refresh. No remote branch,
+submission tag or shared history was changed by the rename.
+
 ## Entry template
 
 Date: TODO — actual work date.

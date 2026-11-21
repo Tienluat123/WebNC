@@ -39,14 +39,14 @@ before relying on seamless pagination across production restarts or multiple wor
 
 | Command | Scope | Latest verification |
 | --- | --- | --- |
-| `npm run test:service` | Query validation, eligibility, public projection, local opening hours, cursor integrity, revision stability and expiry | 27 tests passed |
-| `npm test` | Service tests plus real HTTP contract tests using Express and fetch | 31 tests passed in the user's local run on 2026-11-19 |
+| `npm run test:service` | Query validation, eligibility, public projection, local opening hours, cursor integrity, revision stability and expiry | Covered by the current full run |
+| `npm test` | Service tests plus real HTTP contract tests using Express and fetch | 31 tests passed locally on 2026-11-21 |
 
 The assistant's earlier dependency installation failed with
 `ENOTFOUND registry.npmjs.org`. The user subsequently ran `npm install` successfully
-(68 packages added, audit reported 0 vulnerabilities), followed by `npm test`:
-31 passed, 0 failed, 0 skipped. These results are from the terminal output supplied
-by the user; they are local verification, not required-CI or blocked-merge evidence.
+(68 packages added, audit reported 0 vulnerabilities). A direct rerun in this checkout
+on 2026-11-21 passed 31 tests, 0 failed and 0 skipped, including all four HTTP tests.
+This is local verification, not required-CI or blocked-merge evidence.
 
 Lint, format check, typecheck and CI are still template work owned by the checks/CI task.
 The user adopted the public-catalogue access policy. The contract still identifies

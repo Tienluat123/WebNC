@@ -3,7 +3,9 @@
 Repository: <https://github.com/Tienluat123/WebNC_Proposal>
 
 Status (2026-11-21): P1 permissions and GET /places contract/implementation are
-present. Provider/model and enforced spending-cap evidence remain pending.
+present. The team has selected Google Gemini API and `gemini-3.5-flash-lite`;
+the Free-tier project has no linked billing account, enforcing a USD 0 paid-spend
+boundary. Redacted account evidence is included.
 Checks/required CI, protected-branch evidence and final self-assessment are not
 complete. [File map](docs/pa2/README.md).
 
@@ -17,7 +19,7 @@ complete. [File map](docs/pa2/README.md).
 | Adopted endpoint contract | [GET /places](docs/contract/endpoint.md) |
 | Endpoint implementation and setup | [Backend README](backend/README.md) |
 | Rubric review, verification and handoff | [P1 review](docs/pa2/evidence/p1-review.md) |
-| Model spending cap | Pending actual provider/account evidence |
+| Model spending control | [README](README.md), [redacted account evidence](docs/pa2/evidence/gemini-free-tier-no-billing-2026-11-21.png): Free tier, no billing account, USD 0 paid-spend boundary |
 
 These file links are local work evidence, not PR/CI or full-score claims.
 

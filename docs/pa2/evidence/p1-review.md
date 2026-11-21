@@ -1,8 +1,8 @@
 # P1 review - permissions, secrets and endpoint contract
 
 Reviewed on 2026-11-21 against the local PA2 rubric, criteria 2 and 5.
-Owner: Nghi Van. Local task branch: `p1`, based on `b50355d` with the
-existing uncommitted 2026-11-19 implementation preserved.
+Owner: Nghi Van. Local task branch: `pa2-permissions-places`; reviewed from commit `1a413e6`, which
+contains the implementation previously prepared on 2026-11-19.
 
 ## Criterion 2 - permissions and secrets
 
@@ -12,19 +12,26 @@ existing uncommitted 2026-11-19 implementation preserved.
 | Environment variable names without values | [.env.example](../../../.env.example): PORT, CURSOR_SECRET | Matches current server configuration |
 | Ignore local secrets | [.gitignore](../../../.gitignore) | Audit confirmed .env is ignored |
 | No detected credentials in available history | [Audit](secrets-audit.md), [script](../../../scripts/audit-secrets.py) | Rechecked; see scope limitations |
-| Model API key spending cap documented in README | [README](../../../README.md) | Pending actual provider/account configuration |
+| Model API key spending control documented in README | [README](../../../README.md), [redacted account evidence](gemini-free-tier-no-billing-2026-11-21.png) | Free tier with no billing account: USD 0 paid-spend boundary |
 
 The endpoint does not use a model. PA2 introduces the harness before the PA3 LLM
-feature; a model integration is not needed to implement GET /places. However,
-criterion 2 explicitly asks for a capped model key. Do not claim full completion
-of this criterion until actual account-side evidence exists.
+feature; a model integration is not needed to implement GET /places. Criterion 2
+asks for a capped model key. For this Free-tier project, the account-side evidence
+shows that no billing account is linked, so paid spend cannot occur. This is recorded
+as a USD 0 paid-spend boundary, not as use of Google's configurable paid-tier cap.
 
-To finish that item, supply only the provider name, model identifier, actual limit
-amount/currency/period, enforcement behavior and a redacted settings screenshot
-or export with its date. Do not supply a key value, account credential or payment
-details. An alert threshold is not evidence of an enforced cap. The provider has
-not been chosen in this task, and no account or billing setting was changed.
-Cost per plan is a separate brief requirement; it has not been measured.
+The team reports Google Gemini API project `travel-planner`, model
+`gemini-3.5-flash-lite`, Free tier with no billing account linked, and successful API
+connectivity testing by a team member. No explicit spending cap is configured.
+The selected control is the absence of a billing account: paid spend is bounded at
+USD 0 continuously, rather than by the paid-tier configurable monthly cap. This is
+not described as a budget alert or as use of Google's configurable cap feature.
+The dated [redacted account screenshot](gemini-free-tier-no-billing-2026-11-21.png)
+retains the project name, Free-tier badge and no-billing message while excluding
+the browser URL, email and API key.
+Do not supply a key value, account credential or payment details. If billing is
+linked later, this evidence becomes invalid and a project spend cap must be configured.
+Full itinerary-generation cost has not been measured.
 
 ## Criterion 5 - one endpoint contract
 
@@ -44,16 +51,13 @@ No access policy, schema, filter or pagination behavior was changed.
 
 ## Verification and handoff
 
-- `npm run test:service`: 27 passed, 0 failed on 2026-11-21.
-- `python -X utf8 scripts/audit-secrets.py`: 17 reachable commits, 65 unique
-  history blobs; no findings or incomplete extraction reported before these
-  documentation updates. Final working-file counts are in the audit evidence.
-- The original checkout's `npm test` run on 2026-11-21 reached 31 tests:
-  27 passed and 4 HTTP tests failed to connect. An independent minimal local
-  HTTP server reproduced `connect EACCES 127.0.0.1`, establishing an environment
-  restriction. These four tests were not changed or disabled.
-- The user's 2026-11-19 run with all 31 tests passing remains historical evidence;
-  it is not a current full-suite pass or a CI run.
+- `npm test`: 31 passed, 0 failed and 0 skipped locally on 2026-11-21, including
+  all four HTTP contract tests. The earlier same-day `connect EACCES` restriction
+  did not reproduce in this checkout; no tests were changed or disabled to obtain the pass.
+- `python -X utf8 scripts/audit-secrets.py`: 18 reachable commits and 96 unique
+  history blobs; no findings or incomplete extraction. The final working-file
+  count and scope limitations are in the audit evidence.
+- These are local checks, not required-CI, blocked-merge or tag-run evidence.
 
 Handoff to Ninh (#6): strengthen HTTP assertions where needed for full field
 rules, all error shapes, complete pagination and public access. The public-catalogue
