@@ -191,6 +191,26 @@ The local task branch was subsequently renamed from `p1` to
 `pa2-permissions-places` before committing this evidence refresh. No remote branch,
 submission tag or shared history was changed by the rename.
 
+## 2026-11-21 - Synthetic itinerary cost benchmark
+
+Tool: ChatGPT / Codex for the measurement procedure and calculation; a team
+member ran the Gemini API request locally.
+
+Used for: replacing the unmeasured cost-per-itinerary placeholder with a
+reproducible, synthetic one-call benchmark without storing or sharing the API key.
+
+Changed: recorded model version `gemini-3.5-flash-lite`, 84 prompt tokens, 1,293
+candidate tokens and 1,377 total tokens. The current Free-tier billed cost is
+USD 0. At the official price recorded on 2026-11-21, the paid-tier equivalent is
+USD 0.00162885 for this call.
+
+Rejected: did not call the result a production average and did not infer missing
+agent loops, retries, grounding or caching costs. Did not add the API key, response
+body or personal travel data to the repository.
+
+Evidence: [cost benchmark](docs/pa2/evidence/model-cost-benchmark.md),
+[billing-state screenshot](docs/pa2/evidence/gemini-free-tier-no-billing-2026-11-21.png).
+
 ## Entry template
 
 Date: TODO — actual work date.

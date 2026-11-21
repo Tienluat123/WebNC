@@ -13,6 +13,7 @@ contains the implementation previously prepared on 2026-11-19.
 | Ignore local secrets | [.gitignore](../../../.gitignore) | Audit confirmed .env is ignored |
 | No detected credentials in available history | [Audit](secrets-audit.md), [script](../../../scripts/audit-secrets.py) | Rechecked; see scope limitations |
 | Model API key spending control documented in README | [README](../../../README.md), [redacted account evidence](gemini-free-tier-no-billing-2026-11-21.png) | Free tier with no billing account: USD 0 paid-spend boundary |
+| Cost per synthetic itinerary | [Benchmark](model-cost-benchmark.md) | Actual Free-tier USD 0; paid-tier equivalent USD 0.00162885 for one measured call |
 
 The endpoint does not use a model. PA2 introduces the harness before the PA3 LLM
 feature; a model integration is not needed to implement GET /places. Criterion 2
@@ -31,7 +32,9 @@ retains the project name, Free-tier badge and no-billing message while excluding
 the browser URL, email and API key.
 Do not supply a key value, account credential or payment details. If billing is
 linked later, this evidence becomes invalid and a project spend cap must be configured.
-Full itinerary-generation cost has not been measured.
+The single-call synthetic itinerary benchmark records 84 prompt tokens and 1,293
+candidate tokens. It is measured evidence for the current model, not a production
+average or evidence that `GET /places` makes model calls.
 
 ## Criterion 5 - one endpoint contract
 

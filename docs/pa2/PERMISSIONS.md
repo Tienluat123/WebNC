@@ -56,12 +56,15 @@ no billing account linked, and successful connectivity testing by a team member.
 No key or connectivity output is stored here. With no billing account, the
 account-side ceiling for paid usage is USD 0 and is enforced continuously; the
 paid-tier configurable spend-cap feature is not applicable on the Free tier.
-Full itinerary-generation cost has not been measured.
+A single synthetic full-itinerary call was measured at 84 prompt tokens and
+1,293 candidate tokens: actual Free-tier cost USD 0 and paid-tier equivalent
+USD 0.00162885 at the price recorded on 2026-11-21. See the
+[benchmark evidence](evidence/model-cost-benchmark.md); it is not a production average.
 
 Before submission, include redacted evidence of the Free-tier and no-billing state;
 never include the API key, email address or project identifier. Do not relabel this
 state as use of Google's configurable spend-cap feature. If the account owner later
 links billing, first configure an enforced project spend cap and record its amount,
 currency, monthly period and enforcement behavior. A budget notification alone
-must not be described as a hard cap. Record cost per plan only after measuring it,
-or label an estimate and its assumptions explicitly.
+must not be described as a hard cap. Re-measure cost per plan after the production
+prompt, tools and agent loop are implemented; label estimates and assumptions explicitly.

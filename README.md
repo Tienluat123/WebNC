@@ -54,7 +54,9 @@ The team reports the following model-account configuration:
 - API connectivity: successfully tested by a team member; no key or test output is stored here.
 - Paid-spend ceiling: USD 0, enforced continuously by the absence of a linked billing account.
 - Configurable project spend-cap feature: not applicable while the project remains on the Free tier.
-- Full itinerary-generation cost: not measured.
+- Synthetic full-itinerary benchmark: actual Free-tier cost USD 0; paid-tier
+  equivalent USD 0.00162885 for one 84-input/1,293-output-token call. See the
+  [measurement and limitations](docs/pa2/evidence/model-cost-benchmark.md).
 
 This is an account-side zero paid-spend boundary, not a budget alert and not a
 claim that the configurable paid-tier spend-cap control was set. Google documents
