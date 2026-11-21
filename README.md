@@ -4,7 +4,7 @@ Repository: <https://github.com/Tienluat123/WebNC>.
 
 Thành viên: Nguyễn Tiến Luật — 23127221; Đặng Nghi Văn — 23127281; Phạm Chí Bảo Ninh — 23127446.
 
-Repo đã có cấu hình checks và workflow CI cho PA#2. Ứng dụng và contract tests còn là khung; workflow chưa có bằng chứng chạy trên GitHub và `main` chưa bật branch protection.
+Repo đã có checks, CI chạy thật trên PR và protection cho `main`. Phần Luật đã có bằng chứng required check đỏ chặn merge rồi xanh sau khi sửa. Ứng dụng và contract tests còn là khung; bằng chứng phá contract và CI của tag nộp vẫn chờ nhóm hoàn thiện.
 
 ## Bố trí thư mục
 
@@ -12,9 +12,9 @@ Repo đã có cấu hình checks và workflow CI cho PA#2. Ứng dụng và cont
 WebNC/
 ├── README.md                       # Điểm bắt đầu đọc repo
 ├── AGENTS.md                       # Khung quy tắc cho assistant
-├── PA2.md                          # Khung hồ sơ nộp PA#2
-├── AI-LOG.md                       # Khung nhật ký AI PA#2
-├── SELF_ASSESSMENT_REPORT.md        # Khung tự chấm PA#2
+├── PA2.md                          # Hồ sơ bằng chứng PA#2, phần Luật đã điền
+├── AI-LOG.md                       # Nhật ký AI PA#2
+├── SELF_ASSESSMENT_REPORT.md        # Tự chấm phần Luật, chờ tổng của nhóm
 ├── package.json                    # Lệnh checks và dependencies công cụ
 ├── package-lock.json               # Phiên bản dependencies để npm ci tái lập
 ├── .nvmrc                          # Node.js 22.23.2
@@ -44,7 +44,7 @@ WebNC/
     ├── pa2/                        # Tài liệu nhóm chuẩn bị cho PA#2
     │   ├── README.md               # Map yêu cầu → file
     │   ├── PERMISSIONS.md          # Khung chính sách quyền
-    │   └── evidence/               # Chỗ lưu bằng chứng thực tế
+    │   └── evidence/               # Ảnh protection, PR đỏ / xanh và chỉ mục
     ├── pa1/                        # Hồ sơ cũ, một bản proposal duy nhất
     └── project-analysis.md         # Phân tích hướng đồ án đã có
 ```
@@ -80,13 +80,17 @@ ESLint dùng recommended rules cho JS/TS; warning làm check thất bại. Typec
 
 [Workflow CI](.github/workflows/ci.yml) có job `checks`: checkout source, chọn Node theo `.nvmrc`, chạy `npm ci` rồi chạy cùng bốn lệnh trong bảng trên. Workflow nhận mọi PR, push vào `main`, push tag `pa2`; có thể chạy thủ công khi workflow đã có trên default branch.
 
-Cấu hình local đã có; kiểm tra GitHub ngày 21/11/2026 chưa thấy PR/CI run của nhánh `luat/p1-checks-ci`, và API branch protection trả `Branch not protected` cho `main`. Để hoàn tất mục #4:
+Đã kiểm chứng ngày 21/11/2026 trên [PR #1](https://github.com/Tienluat123/WebNC/pull/1):
 
-- Push nhánh và mở PR để có CI run thật.
-- Bảo vệ `main`, yêu cầu job `checks` thành công trước khi merge, áp dụng cả với admin; từ lúc bật không push thẳng `main`.
-- Lưu link PR có check đỏ bị chặn merge, link commit sửa và CI run xanh, cùng ảnh/link cài đặt protection trong [PA2.md](PA2.md).
-- Giữ lịch sử đỏ → xanh; không tái dựng/rebase lịch sử bằng chứng sau khi hoàn thành.
-- Khi cả nhóm chốt bài, tạo/push tag `pa2` và ghi link CI run của tag vào `PA2.md`.
+| Bằng chứng                                                                                                                                                                            | Kết quả                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| [Protection](docs/pa2/evidence/README.md)                                                                                                                                             | `main` yêu cầu PR, bắt buộc `checks` từ GitHub Actions, up-to-date và áp dụng cả admin; tắt force push/xóa nhánh. |
+| [Commit đỏ 868f505](https://github.com/Tienluat123/WebNC/commit/868f505b763e424efeae7cc7cfb044e4fe47fcf8), [run đỏ](https://github.com/Tienluat123/WebNC/actions/runs/44906808477)    | Format `package.json` sai; required check thất bại và PR bị chặn merge.                                           |
+| [Commit sửa 2b3c61c](https://github.com/Tienluat123/WebNC/commit/2b3c61ce7116cf8d88e892c0896cdc7f213947eb), [run xanh](https://github.com/Tienluat123/WebNC/actions/runs/44907080432) | Khôi phục format; cả bốn checks xanh và PR hết bị chặn.                                                           |
+
+Một bản clone mới từ GitHub tại `2b3c61c` cũng đã chạy `npm ci` và `npm run check` thành công với Node/npm ở trên. Hồ sơ [PA2.md](PA2.md) tập hợp ảnh, link và giới hạn của bằng chứng.
+
+Tiếp tục giữ hai commit đỏ/sửa trong lịch sử; không tái dựng/rebase lịch sử bằng chứng và không push thẳng `main` sau khi bật protection. Khi cả nhóm chốt bài mới tạo/push tag `pa2` rồi bổ sung link CI run của tag vào `PA2.md`.
 
 Bằng chứng cố tình phá **contract** ở mục #6 cần phối hợp Văn/Ninh khi implementation và tests thật đã có; một lỗi lint/format chỉ chứng minh CI ở mục #4.
 

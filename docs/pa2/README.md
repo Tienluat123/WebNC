@@ -2,7 +2,7 @@
 
 Đã rà với [rubric gốc](<../reference/PA2 Rubric Harness Quality Gate.pdf>), trang 1–4, và [contract mẫu](../reference/Contract.md). Hạn trong rubric: **22:00 ngày 26/11/2026**.
 
-Repo đã có cấu hình checks và workflow CI cho phần Luật; ứng dụng và contract tests còn là khung. Có file không đồng nghĩa đã đạt điểm. Ghi chú dưới đây phân biệt yêu cầu của thầy với cách nhóm chọn tổ chức repo.
+Repo đã có checks, required CI và bằng chứng PR đỏ → xanh cho phần Luật; ứng dụng và contract tests còn là khung. Có file không đồng nghĩa đã đạt điểm. Ghi chú dưới đây phân biệt yêu cầu của thầy với cách nhóm chọn tổ chức repo.
 
 ## Quyết định
 
@@ -62,7 +62,7 @@ PERMISSIONS trả lời “assistant được tự làm gì / cần hỏi gì / 
 
 ## 3. Một lệnh cho mỗi check — 10 điểm, rubric trang 2
 
-**Luật phụ trách. Đã có cấu hình và lệnh local; cần kiểm chứng lại từ fresh clone của commit đã push và trên CI thật.** Hướng dẫn chạy nằm ở [README gốc](../../README.md#setup-và-checks--luật-rubric-3).
+**Luật phụ trách. Đã kiểm chứng trên local, bản clone mới từ GitHub tại `2b3c61c` và CI thật.** Hướng dẫn chạy nằm ở [README gốc](../../README.md#setup-và-checks--luật-rubric-3).
 
 Rubric mức 9–10 yêu cầu lint, format check, typecheck (nếu áp dụng), tests đều có một lệnh được ghi rõ; local và CI dùng cùng lệnh; fresh clone làm theo README phải xanh.
 
@@ -91,24 +91,20 @@ Không cần điền câu “đã pass” vào config. Kết quả và link bằ
 
 ## 4. CI thật sự chặn merge — 20 điểm, rubric trang 2
 
-**Luật phụ trách. Có workflow; chưa đủ bằng chứng hoàn thành tiêu chí.** Kiểm tra GitHub ngày 21/11/2026: chưa có PR/CI run cho nhánh `luat/p1-checks-ci`; API branch protection của `main` trả `404 Branch not protected`.
+**Luật phụ trách. Đã có bằng chứng protection và PR đỏ bị chặn → commit sửa xanh ngày 21/11/2026.** Hồ sơ ở [PA2.md](../../PA2.md), ảnh và kiểm chứng ở [evidence/README.md](evidence/README.md).
 
-| File / nơi thao tác                      | Trạng thái và việc còn làm                                                                                                                  |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| [ci.yml](../../.github/workflows/ci.yml) | Đã thay file `.example`; job `checks` chạy `npm ci` và cùng bốn lệnh mục #3 trên mọi PR, push main/tag pa2. Chưa có run remote để xác nhận. |
-| GitHub branch protection / ruleset       | Cần bảo vệ `main`, bắt buộc job `checks`, áp dụng cả admin và không push thẳng main sau khi bật. YAML tự nó không bật protection.           |
-| [evidence/](evidence/README.md)          | Khi thực hiện thật, có thể lưu ảnh protection và PR đỏ bị chặn ở đây; hiện chưa có ảnh bằng chứng.                                          |
-| [PA2.md](../../PA2.md)                   | Cần link thật đến cài đặt/ảnh protection, PR đỏ bị chặn, commit sửa/CI xanh và CI run của tag nộp. Hiện vẫn là TODO.                        |
+| File / nơi thao tác                                                                                                                                                 | Trạng thái                                                                                                                                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [ci.yml](../../.github/workflows/ci.yml)                                                                                                                            | Job `checks` chạy `npm ci` và đúng bốn lệnh mục #3. [Run xanh](https://github.com/Tienluat123/WebNC/actions/runs/44907080432) đã chạy đủ các bước.                                                                                                                        |
+| GitHub branch protection                                                                                                                                            | `main` yêu cầu PR và required check `checks` từ GitHub Actions, strict up-to-date, áp dụng admin; không cho force push/xóa nhánh. Đã đối chiếu rule lưu thật qua API.                                                                                                     |
+| [Ảnh protection](evidence/main-protection-01.png), [required checks/admin](evidence/main-protection-02.png), [force push/deletion](evidence/main-protection-03.png) | Ảnh người dùng cung cấp, lưu nguyên bản.                                                                                                                                                                                                                                  |
+| [PR #1](https://github.com/Tienluat123/WebNC/pull/1)                                                                                                                | [Commit đỏ 868f505](https://github.com/Tienluat123/WebNC/commit/868f505b763e424efeae7cc7cfb044e4fe47fcf8) làm format check lỗi và merge bị chặn; [ảnh đỏ](evidence/pr-1-required-check-red.png), [run đỏ](https://github.com/Tienluat123/WebNC/actions/runs/44906808477). |
+| Commit sửa / CI xanh                                                                                                                                                | [2b3c61c](https://github.com/Tienluat123/WebNC/commit/2b3c61ce7116cf8d88e892c0896cdc7f213947eb) khôi phục format; [run xanh](https://github.com/Tienluat123/WebNC/actions/runs/44907080432), [ảnh merge được bật lại](evidence/pr-1-required-check-green.png).            |
+| [PA2.md](../../PA2.md)                                                                                                                                              | Đã điền link bằng chứng phần Luật; CI run của tag nộp và deliberate contract break còn pending.                                                                                                                                                                           |
 
-Để hướng tới mức 17–20 điểm, cần chứng minh đủ:
+Hai commit demo chỉ thay đổi thụt dòng trong `package.json`, không sửa tests hay validator rules. Giữ lịch sử đỏ → xanh; không squash/rebase để dựng lại bằng chứng sau khi hoàn thành. Không push thẳng `main` kể từ lúc bật protection.
 
-1. Workflow chạy trên PR và job `checks` đã được đặt required cho `main`.
-2. Một commit khiến check đỏ; PR thực sự bị chặn merge vì required check đó. Lưu link PR, CI run đỏ và ảnh trạng thái bị chặn.
-3. Một commit mới sửa lỗi khiến CI xanh. Lưu link commit và run xanh; không sửa tests/validator chỉ để làm check pass.
-4. Không push thẳng main sau khi protection bật; không tái dựng/rebase lịch sử bằng chứng sau khi hoàn thành.
-5. Khi nhóm chốt commit nộp, push tag `pa2` để workflow chạy trên tag và dẫn link run trong PA2.md.
-
-Một lần lint/format đỏ → xanh chứng minh mục #4. **Deliberate contract break** là bằng chứng riêng của mục #6: phối hợp Văn/Ninh khi endpoint và test thật đã tồn tại. Không dùng thiếu setup hoặc file test khung làm lần phá contract.
+Khi cả nhóm chốt commit nộp, push tag `pa2` để workflow chạy trên tag và dẫn link run vào PA2.md. **Deliberate contract break** ở mục #6 vẫn cần phối hợp Văn/Ninh khi endpoint và test thật đã tồn tại; lỗi format của mục #4 không thay cho bằng chứng này.
 
 <a id="rubric-5"></a>
 
@@ -158,7 +154,7 @@ Mỗi entry điền vào mẫu có sẵn:
 | Rejected | Nhóm từ chối đề xuất nào, vì sao. Không ghi chung chung “không phù hợp”.                      |
 | Evidence | File/commit/CI run liên quan khi có, nhất là nếu entry được dùng để chứng minh quy tắc mục 1. |
 
-Thầy chấm tool/phần việc và Changed / Rejected có thật. Date và Evidence là cách khung này giúp truy vết; không phải tên trường bắt buộc của rubric. Không chép ví dụ thành sự cố của nhóm. Hiện root AI-LOG vẫn là mẫu; log trong docs/pa1/ là của lần nộp cũ.
+Thầy chấm tool/phần việc và Changed / Rejected có thật. Date và Evidence là cách khung này giúp truy vết; không phải tên trường bắt buộc của rubric. Không chép ví dụ thành sự cố của nhóm. Root AI-LOG đã có entry của Luật cho Commands/CI và bằng chứng; các thành viên còn lại cần bổ sung entry thật. Log trong docs/pa1/ là của lần nộp cũ.
 
 <a id="submission"></a>
 
