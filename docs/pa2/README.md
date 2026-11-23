@@ -12,9 +12,11 @@ original scaffold inventory; use the [current P1 review](evidence/p1-review.md),
 [root README](../../README.md) and actual files for completion status.
 Checks/CI and final Rules/submission work remain with their assigned owners.
 
+Repo đã có checks, required CI và bằng chứng PR đỏ → xanh cho phần Luật; ứng dụng và contract tests còn là khung. Có file không đồng nghĩa đã đạt điểm. Ghi chú dưới đây phân biệt yêu cầu của thầy với cách nhóm chọn tổ chức repo.
+
 ## Quyết định
 
-- **Stack:** frontend [React + TS](https://react.dev/learn) / backend [Express](https://expressjs.com/) / runtime (Node.js + phiên bản, dùng giống nhau ở local và CI).
+- **Stack:** frontend [React + TS](https://react.dev/learn) / backend [Express](https://expressjs.com/) / runtime Node.js 22.23.2 / npm 10.9.8 (local và CI dùng cùng phiên bản, xem `.nvmrc`).
 - **Checks:** lint (ESLint) / format Prettier / tests node:test / typecheck (tsc cho TypeScript).
 - **Endpoint (P1):** GET /places : a list, so it pages. Say what a filter it cannot read returns.
 
@@ -29,6 +31,8 @@ Checks/CI and final Rules/submission work remain with their assigned owners.
 
 Commit: gắn tag pa2.
 Nhánh cho phần permissions/secrets và GET /places: `pa2-permissions-places`.
+Commit nộp cuối của cả nhóm: gắn tag pa2; chưa gắn tag cho nhánh đang làm.
+Mỗi task là mội nhánh: /p1
 
 <details>
 <summary>Chi tiết rubric và hướng dẫn điền từng file</summary>
@@ -70,33 +74,49 @@ PERMISSIONS trả lời “assistant được tự làm gì / cần hỏi gì / 
 
 ## 3. Một lệnh cho mỗi check — 10 điểm, rubric trang 2
 
-Thầy yêu cầu hành vi chạy được, không bắt buộc ESLint, Prettier, npm hoặc TypeScript. Các file sau là khung theo hướng JavaScript của repo:
+**Luật phụ trách. Đã kiểm chứng trên local, bản clone mới từ GitHub tại `2b3c61c` và CI thật.** Hướng dẫn chạy nằm ở [README gốc](../../README.md#setup-và-checks--luật-rubric-3).
 
-| File                                       | Vai trò                                                               | Bạn điền ở đâu / có bắt buộc không?                                                                                                                                        |
-| ------------------------------------------ | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [package.json](../../package.json)         | Manifest và chỗ khai báo lệnh nếu dùng Node/npm.                      | Điền scripts cho từng check, dependencies/devDependencies phù hợp. scripts hiện rỗng. private: true chỉ ngăn publish package lên npm, không làm GitHub repo thành private. |
-| [eslint.config.js](../../eslint.config.js) | Cấu hình lint nếu chọn ESLint.                                        | Điền cấu hình thật và nối vào script lint. Hiện chỉ có comment. Không phải tên file thầy quy định.                                                                         |
-| [.prettierrc.json](../../.prettierrc.json) | Quy tắc format nếu chọn Prettier.                                     | Điền tùy chọn khi cần; {} không có tùy chỉnh. Cài formatter và thêm format-check script mới có check chạy được.                                                            |
-| [.prettierignore](../../.prettierignore)   | Các file formatter bỏ qua.                                            | Tùy chọn; chỉ cần nếu có file không muốn format. Đây không phải file bảo vệ secrets.                                                                                       |
-| [jsconfig.json](../../jsconfig.json)       | Cấu hình dự án JavaScript / kiểm tra kiểu khi chọn giải pháp phù hợp. | Tùy chọn. {} không bật typecheck. Nếu chọn TypeScript checkJs, phải thêm cấu hình và lệnh CLI thực sự kiểm tra code. Chỉ có file này không đạt tiêu chí type check.        |
-| [README.md](../../README.md)               | Hướng dẫn để người khác chạy từ fresh clone.                          | Điền phiên bản runtime, setup và từng lệnh check chính xác. AGENTS và CI dùng lại các lệnh đó.                                                                             |
+Rubric mức 9–10 yêu cầu lint, format check, typecheck (nếu áp dụng), tests đều có một lệnh được ghi rõ; local và CI dùng cùng lệnh; fresh clone làm theo README phải xanh.
 
-Không cần điền một câu “đã pass” vào config. Config là dữ liệu/code của công cụ; kết quả và bằng chứng ghi ở hồ sơ nộp. Nếu đổi stack/tool thì đổi hoặc bỏ config không còn dùng; không giữ chỉ để giống map.
+| File                                                                                 | Phần đã cấu hình                                                                                |
+| ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| [package.json](../../package.json)                                                   | `lint`, `format:check`, `typecheck`, `test`; `check` chạy tổng hợp và `format` sửa định dạng.   |
+| [package-lock.json](../../package-lock.json)                                         | Lockfile do npm sinh; setup local/CI dùng `npm ci`.                                             |
+| [.nvmrc](../../.nvmrc)                                                               | Node.js 22.23.2; package khai báo npm 10 và `packageManager` npm 10.9.8.                        |
+| [eslint.config.js](../../eslint.config.js)                                           | Recommended rules cho JS/TS, globals theo backend/frontend; warning làm lệnh lỗi.               |
+| [.prettierrc.json](../../.prettierrc.json), [.prettierignore](../../.prettierignore) | Single quotes/trailing commas; bỏ qua file sinh tự động, môi trường, tài liệu gốc và hồ sơ PA1. |
+| [tsconfig.json](../../tsconfig.json)                                                 | Thay `jsconfig.json` rỗng; bật `strict`, `allowJs`, `checkJs`, `noEmit` và JSX React.           |
+| [README.md](../../README.md)                                                         | Phiên bản runtime, setup và đúng bốn lệnh mà CI chạy.                                           |
 
-package-lock.json chưa có là phù hợp với trạng thái chưa cài dependencies. Nếu chọn npm, để npm sinh lockfile khi cài; không tự tạo một lockfile rỗng.
+```sh
+npm run lint
+npm run format:check
+npm run typecheck
+npm test
+```
+
+**Điểm cần phối hợp:** Node test runner hiện chỉ chạy file contract test chứa comment. Chưa có assertion kiểm tra endpoint; Ninh cần bổ sung tests thật theo contract/implementation của Văn. Kết quả runner xanh hiện chỉ xác nhận công cụ chạy được. Phần Commands trong AGENTS còn TODO, cần Ninh đồng bộ với các lệnh trên khi hoàn thiện Rules.
+
+Không cần điền câu “đã pass” vào config. Kết quả và link bằng chứng ghi trong hồ sơ nộp khi đã thực hiện thật.
 
 <a id="rubric-4"></a>
 
 ## 4. CI thật sự chặn merge — 20 điểm, rubric trang 2
 
-| File / nơi thao tác                                      | Vai trò                                                        | Bạn cần điền / cấu hình                                                                                                                  |
-| -------------------------------------------------------- | -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| [ci.yml.example](../../.github/workflows/ci.yml.example) | Ghi chú để xây GitHub Actions workflow; tên file do repo chọn. | Điền workflow hợp lệ, chạy các lệnh của mục 3 trên PR; sau đó đổi thành ci.yml hoặc tên .yml/.yaml phù hợp. .example hiện không chạy CI. |
-| GitHub branch protection / ruleset                       | Cài đặt remote, không nằm trong YAML.                          | Bảo vệ main, đặt checks là required; từ đó không push thẳng main.                                                                        |
-| [evidence/](evidence/README.md)                          | Chỗ lưu ảnh/tệp bằng chứng nếu cần; đường dẫn tùy chọn.        | Ảnh protection được chấp nhận. PR và CI run nên dẫn link thật. README trong thư mục này chỉ là ghi chú, không phải bằng chứng.           |
-| [PA2.md](../../PA2.md)                                   | Điểm tập hợp link để thầy kiểm tra.                            | Điền PR đỏ bị chặn, commit/PR sửa xanh và ảnh/link protection.                                                                           |
+**Luật phụ trách. Đã có bằng chứng protection và PR đỏ bị chặn → commit sửa xanh ngày 21/11/2026.** Hồ sơ ở [PA2.md](../../PA2.md), ảnh và kiểm chứng ở [evidence/README.md](evidence/README.md).
 
-Có workflow đỏ chưa đủ: phải chứng minh checks là required nên không merge được. Không tái dựng/rebase lịch sử sau khi hoàn thành để làm bằng chứng.
+| File / nơi thao tác                                                                                                                                                 | Trạng thái                                                                                                                                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [ci.yml](../../.github/workflows/ci.yml)                                                                                                                            | Job `checks` chạy `npm ci` và đúng bốn lệnh mục #3. [Run xanh](https://github.com/Tienluat123/WebNC/actions/runs/44907080432) đã chạy đủ các bước.                                                                                                                        |
+| GitHub branch protection                                                                                                                                            | `main` yêu cầu PR và required check `checks` từ GitHub Actions, strict up-to-date, áp dụng admin; không cho force push/xóa nhánh. Đã đối chiếu rule lưu thật qua API.                                                                                                     |
+| [Ảnh protection](evidence/main-protection-01.png), [required checks/admin](evidence/main-protection-02.png), [force push/deletion](evidence/main-protection-03.png) | Ảnh người dùng cung cấp, lưu nguyên bản.                                                                                                                                                                                                                                  |
+| [PR #1](https://github.com/Tienluat123/WebNC/pull/1)                                                                                                                | [Commit đỏ 868f505](https://github.com/Tienluat123/WebNC/commit/868f505b763e424efeae7cc7cfb044e4fe47fcf8) làm format check lỗi và merge bị chặn; [ảnh đỏ](evidence/pr-1-required-check-red.png), [run đỏ](https://github.com/Tienluat123/WebNC/actions/runs/44906808477). |
+| Commit sửa / CI xanh                                                                                                                                                | [2b3c61c](https://github.com/Tienluat123/WebNC/commit/2b3c61ce7116cf8d88e892c0896cdc7f213947eb) khôi phục format; [run xanh](https://github.com/Tienluat123/WebNC/actions/runs/44907080432), [ảnh merge được bật lại](evidence/pr-1-required-check-green.png).            |
+| [PA2.md](../../PA2.md)                                                                                                                                              | Đã điền link bằng chứng phần Luật; CI run của tag nộp và deliberate contract break còn pending.                                                                                                                                                                           |
+
+Hai commit demo chỉ thay đổi thụt dòng trong `package.json`, không sửa tests hay validator rules. Giữ lịch sử đỏ → xanh; không squash/rebase để dựng lại bằng chứng sau khi hoàn thành. Không push thẳng `main` kể từ lúc bật protection.
+
+Khi cả nhóm chốt commit nộp, push tag `pa2` để workflow chạy trên tag và dẫn link run vào PA2.md. **Deliberate contract break** ở mục #6 vẫn cần phối hợp Văn/Ninh khi endpoint và test thật đã tồn tại; lỗi format của mục #4 không thay cho bằng chứng này.
 
 <a id="rubric-5"></a>
 
@@ -125,7 +145,7 @@ Không chỉ viết “đã đăng nhập”; phải rõ quyền trên dữ li�
 | [places.test.js](../../backend/test/contract/places.test.js)                | File tests của endpoint, tên/path do repo chọn.                         | Đổi tên theo endpoint; viết tests chạy request thật tới implementation: success, từng error type, ownership và paging/idempotency nếu áp dụng. Kiểm tra nội dung/schema chứ không chỉ status. Hiện toàn bộ chỉ là comment. |
 | [backend/test/fixtures/](../../backend/test/fixtures/README.md)                 | Dữ liệu đầu vào và kết quả tham chiếu cho tests; cách tổ chức tùy chọn. | Thêm fixtures khi biết schema. README chỉ hướng dẫn, không phải dataset hay test.                                                                                                                                          |
 | [backend/src/](../../backend/src/)                                              | Nơi sẽ chứa implementation endpoint theo bố trí repo.                   | Hiện chỉ có .gitkeep. Cần code endpoint và phần xử lý liên quan để tests thật sự kiểm tra hành vi; rubric không quy định bắt buộc tên file app.js/router.js.                                                               |
-| [CI template](../../.github/workflows/ci.yml.example) và [PA2.md](../../PA2.md) | Chạy tests và dẫn bằng chứng.                                           | Đưa tests vào required CI; tạo một commit/PR làm implementation sai contract khiến tests đỏ, rồi sửa code và dẫn link.                                                                                                     |
+| [CI workflow](../../.github/workflows/ci.yml) và [PA2.md](../../PA2.md) | Chạy tests và dẫn bằng chứng.                                           | Đưa tests vào required CI; tạo một commit/PR làm implementation sai contract khiến tests đỏ, rồi sửa code và dẫn link.                                                                                                     |
 
 Chỉ có contract Markdown và comment tests là chưa đủ. Cần chọn test runner/dependencies và lệnh chạy. Không dùng việc file còn TODO hay thiếu setup làm bằng chứng “cố tình phá contract”.
 
@@ -146,7 +166,7 @@ Mỗi entry điền vào mẫu có sẵn:
 | Rejected | Nhóm từ chối đề xuất nào, vì sao. Không ghi chung chung “không phù hợp”.                      |
 | Evidence | File/commit/CI run liên quan khi có, nhất là nếu entry được dùng để chứng minh quy tắc mục 1. |
 
-Thầy chấm tool/phần việc và Changed / Rejected có thật. Date và Evidence là cách khung này giúp truy vết; không phải tên trường bắt buộc của rubric. Không chép ví dụ thành sự cố của nhóm. Hiện root AI-LOG vẫn là mẫu; log trong docs/pa1/ là của lần nộp cũ.
+Thầy chấm tool/phần việc và Changed / Rejected có thật. Date và Evidence là cách khung này giúp truy vết; không phải tên trường bắt buộc của rubric. Không chép ví dụ thành sự cố của nhóm. Root AI-LOG đã có entry của Luật cho Commands/CI và bằng chứng; các thành viên còn lại cần bổ sung entry thật. Log trong docs/pa1/ là của lần nộp cũ.
 
 <a id="submission"></a>
 

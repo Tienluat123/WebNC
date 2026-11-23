@@ -213,25 +213,18 @@ body or personal travel data to the repository.
 Evidence: [cost benchmark](docs/pa2/evidence/model-cost-benchmark.md),
 [billing-state screenshot](docs/pa2/evidence/gemini-free-tier-no-billing-2026-11-21.png).
 
-## Entry template
+## 2026-11-21 — Luật: commands, CI and evidence
 
-Used for: Reviewing the PA2 guidance, project brief, README, package manifest,
-contract template, permissions template, and Git history; drafting
-[AGENTS.md](AGENTS.md) and this log.
+Tool: Codex.
 
-Changed: Replaced the AGENTS template TODOs with a provisional React/TypeScript +
-Express/Node stack, the checks named by the PA2 guidance, product safety
-invariants from the brief, and explicit skeleton-repository status. Added this
-entry so the work is traceable. The draft intentionally does not choose a model,
-database, Node version, or claim that checks pass because the repository does not
-yet contain those decisions or scripts.
+Used for: Criteria 3–4: npm scripts, ESLint/Prettier/TypeScript configuration, Node test runner, GitHub Actions and evidence documentation.
 
-Rejected: The assistant did not invent setup/check commands, model or database
-choices, incident evidence, or successful CI results. It also rejected treating
-the lecturer's example rules as evidence of incidents in this repository.
+Changed: Codex configured the checks and lockfile, replaced the empty `jsconfig.json` with `tsconfig.json`, and aligned README/CI commands. Node.js 22.23.2 was selected after the local Node 24 binary failed to start. A deliberate format error in `package.json` made the required check fail and blocked PR #1; a separate fix commit restored green CI. A fresh remote clone passed `npm ci` and `npm run check`. Tests and validator rules were unchanged during the demonstration.
 
-Evidence: [AGENTS.md](AGENTS.md), [README.md](README.md),
-[docs/pa2/README.md](docs/pa2/README.md),
-[docs/AI-Travel-Planner-final-project-brief.md](docs/AI-Travel-Planner-final-project-brief.md),
-and `package.json` (scripts currently empty). No incident-backed rule is claimed
-yet; add real evidence here before linking one.
+Human work: Luật created the PR, configured `main` protection in GitHub and captured the protection/red/green screenshots.
+
+Rejected: Extra CI guide and proposed protection-payload files were dropped; the setup uses the workflow, GitHub's saved protection rule and the existing submission documents.
+
+Evidence: [PA2 dossier](PA2.md), [screenshots and CI runs](docs/pa2/evidence/README.md), [red commit 868f505](https://github.com/Tienluat123/WebNC/commit/868f505b763e424efeae7cc7cfb044e4fe47fcf8), [fix commit 2b3c61c](https://github.com/Tienluat123/WebNC/commit/2b3c61ce7116cf8d88e892c0896cdc7f213947eb).
+
+Pending: Real contract tests/contract-break evidence and the final submitted tag run.

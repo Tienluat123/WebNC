@@ -1,8 +1,8 @@
-# Self-assessment — PA2 template
+# Self-assessment — PA2 working draft
 
 Team: Nguyễn Tiến Luật — 23127221; Đặng Nghi Văn — 23127281; Phạm Chí Bảo Ninh — 23127446.
 
-Total claimed: TODO / 100.
+Total claimed: pending assessment of the remaining criteria; not ready for submission.
 
 | Criterion | Max | Claim | Evidence |
 | --- | ---: | --- | --- |
@@ -14,9 +14,24 @@ Total claimed: TODO / 100.
 | Contract tests that bite | 15 | TODO | TODO |
 | AI-LOG.md | 5 | TODO | TODO |
 | **Total** | **100** | **TODO** | |
+Luật's assessed subtotal for criteria 3–4: **30 / 30**, provisional as of 2026-11-21. The claims below cover the observed commands and merge gate. The final team review must confirm integration with real contract tests, the final tagged run and all other criteria. This subtotal is not the final ZIP score.
 
-## What we did not manage
+| Criterion                   |     Max | Claim    | Evidence                                                                                                                                                                                                                                                                                                                                                                               |
+| --------------------------- | ------: | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Rules file                  |      15 | TODO     | TODO                                                                                                                                                                                                                                                                                                                                                                                   |
+| Permissions and secrets     |      10 | TODO     | TODO                                                                                                                                                                                                                                                                                                                                                                                   |
+| One command for every check |      10 | 10       | [README commands](README.md#setup-và-checks--luật-rubric-3), [scripts](package.json), [workflow](.github/workflows/ci.yml), [successful PR run](https://github.com/Tienluat123/WebNC/actions/runs/44907080432), [fresh-clone verification](docs/pa2/evidence/README.md#fresh-clone-verification). Same commands locally and in CI.                                                     |
+| CI that blocks a merge      |      20 | 20       | [PA2 evidence](PA2.md), [required failure / disabled merge](docs/pa2/evidence/pr-1-required-check-red.png), [fix commit](https://github.com/Tienluat123/WebNC/commit/2b3c61ce7116cf8d88e892c0896cdc7f213947eb), [green run](https://github.com/Tienluat123/WebNC/actions/runs/44907080432), [protection screenshots](docs/pa2/evidence/README.md). Separate red/fix commits preserved. |
+| One endpoint contract       |      25 | TODO     | TODO                                                                                                                                                                                                                                                                                                                                                                                   |
+| Contract tests that bite    |      15 | TODO     | TODO                                                                                                                                                                                                                                                                                                                                                                                   |
+| AI-LOG.md                   |       5 | TODO     | TODO                                                                                                                                                                                                                                                                                                                                                                                   |
+| **Total**                   | **100** | **TODO** |                                                                                                                                                                                                                                                                                                                                                                                        |
 
-TODO.
+## What remains incomplete
+
+- The real contract tests and deliberate contract violation are not yet demonstrated. The existing comment-only test file passing is not evidence for criterion 6.
+- The final `pa2` tag and its CI run are pending the completed team submission.
+- Criteria 1, 2, 5, 6 and the team-wide AI-log assessment remain unscored in this draft; their owners must provide evidence and complete the total.
+- The final review, ZIP and student-account submission have not been performed.
 
 Lecturer's notes: each claimed criterion needs evidence pointing to a file, commit, PR or CI run. The total must match the ZIP filename. Review the honesty-adjustment table in the rubric before submitting.
