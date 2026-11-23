@@ -55,7 +55,7 @@ break is caught by CI. See the [evidence index](docs/pa2/evidence/README.md) and
 
 ## Submission checklist
 
-- TODO: tag the submitted commit pa2 and push the tag.
+- Local tag `pa2` points to evidence commit `96bdb81`; push the tag to trigger the submitted-tag CI run.
 - Finalize PA2.md, AI-LOG.md and SELF_ASSESSMENT_REPORT.md in English; the current score and remote evidence are incomplete.
 - These three root documents are written in English; remaining team entries and assessment still need completion and review.
 - TODO: include the repository and .git in one ZIP.
