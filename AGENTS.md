@@ -46,7 +46,8 @@ README and CI.
   [AI-LOG.md](AI-LOG.md) or a commit.
 
 Permission policy: [docs/pa2/PERMISSIONS.md](docs/pa2/PERMISSIONS.md). Complete
-its Allowed / Ask first / Never tiers before using this as final policy.
+its Allowed / Ask first / Never tiers before using this as final policy. Assistants
+must follow those tiers within the user's authorized task.
 
 The lecturer requires at least two rules to trace to something that actually went
 wrong through a commit or AI-LOG entry. No such incidents are recorded yet; add

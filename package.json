@@ -1,5 +1,12 @@
 {
   "name": "ai-travel-planner",
   "private": true,
-  "scripts": {}
+  "type": "module",
+  "engines": { "node": ">=22.18.0 <23" },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env backend/src/server.js",
+    "test": "node --test backend/test/places.test.js backend/test/contract/places.test.js",
+    "test:service": "node --test backend/test/places.test.js"
+  },
+  "dependencies": { "express": "5.1.0" }
 }

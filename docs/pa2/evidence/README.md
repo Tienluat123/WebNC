@@ -1,6 +1,14 @@
-# PA2 evidence — template
+# PA2 evidence
 
-TODO: store actual screenshots/files here and link them from root PA2.md.
+## Current evidence
+
+- [Gemini API Free-tier and no-billing state](gemini-free-tier-no-billing-2026-11-21.png),
+  captured 2026-11-21. The crop retains the project name, Free-tier badge and
+  no-billing message while excluding the browser URL, email and API key.
+- [Synthetic itinerary cost benchmark](model-cost-benchmark.md): one measured
+  Free-tier call with paid-tier equivalent calculation and limitations.
+
+## Remaining submission evidence
 
 Lecturer requires:
 

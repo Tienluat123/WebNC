@@ -7,10 +7,10 @@ Total claimed: TODO / 100.
 | Criterion | Max | Claim | Evidence |
 | --- | ---: | --- | --- |
 | Rules file | 15 | TODO | TODO |
-| Permissions and secrets | 10 | TODO | TODO |
+| Permissions and secrets | 10 | TODO | [Policy](docs/pa2/PERMISSIONS.md), [env example](.env.example), [audit](docs/pa2/evidence/secrets-audit.md), [Free-tier USD 0 paid-spend boundary](README.md), [redacted account evidence](docs/pa2/evidence/gemini-free-tier-no-billing-2026-11-21.png), [measured synthetic itinerary cost](docs/pa2/evidence/model-cost-benchmark.md) |
 | One command for every check | 10 | TODO | TODO |
 | CI that blocks a merge | 20 | TODO | TODO |
-| One endpoint contract | 25 | TODO | TODO |
+| One endpoint contract | 25 | TODO | [GET /places contract](docs/contract/endpoint.md), [implementation and review](docs/pa2/evidence/p1-review.md) |
 | Contract tests that bite | 15 | TODO | TODO |
 | AI-LOG.md | 5 | TODO | TODO |
 | **Total** | **100** | **TODO** | |
