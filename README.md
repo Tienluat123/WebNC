@@ -11,12 +11,12 @@ See the [P1 review](docs/pa2/evidence/p1-review.md) for evidence and remaining w
 
 Repo đã có checks, CI chạy thật trên PR và protection cho `main`. Phần Luật đã có bằng chứng required check đỏ chặn merge rồi xanh sau khi sửa. Ứng dụng và contract tests còn là khung; bằng chứng phá contract và CI của tag nộp vẫn chờ nhóm hoàn thiện.
 
-| Owner | Scope | Current state |
-| --- | --- | --- |
-| Nghi Van | #2 Permissions/secrets, #5 contract and endpoint | Implemented; actual model spending-cap evidence pending |
-| Luat | #3 commands, #4 required CI/protection | Pending; workflow is still a non-active example |
-| Ninh | #1 rules, #6 contract tests | Rules still contain TODOs; tests exist, full CI/red-green evidence pending |
-| All | #7 AI log and submission | Log updated; final score, evidence links and submission packaging pending |
+| Owner    | Scope                                            | Current state                                                              |
+| -------- | ------------------------------------------------ | -------------------------------------------------------------------------- |
+| Nghi Van | #2 Permissions/secrets, #5 contract and endpoint | Implemented; actual model spending-cap evidence pending                    |
+| Luat     | #3 commands, #4 required CI/protection           | Pending; workflow is still a non-active example                            |
+| Ninh     | #1 rules, #6 contract tests                      | Rules still contain TODOs; tests exist, full CI/red-green evidence pending |
+| All      | #7 AI log and submission                         | Log updated; final score, evidence links and submission packaging pending  |
 
 ## Setup and verification
 

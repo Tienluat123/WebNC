@@ -14,11 +14,20 @@ export function createApp(options) {
   });
   app.use((err, req, res, next) => {
     if (res.headersSent) return next(err);
-    const problem = err instanceof Problem ? err.body : {
-      type: '/problems/internal', title: 'Internal error', status: 500,
-      detail: 'The request could not be completed.',
-    };
-    res.set('Cache-Control', 'no-store').status(problem.status).type('application/problem+json').json(problem);
+    const problem =
+      err instanceof Problem
+        ? err.body
+        : {
+            type: '/problems/internal',
+            title: 'Internal error',
+            status: 500,
+            detail: 'The request could not be completed.',
+          };
+    res
+      .set('Cache-Control', 'no-store')
+      .status(problem.status)
+      .type('application/problem+json')
+      .json(problem);
   });
   return app;
 }

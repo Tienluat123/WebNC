@@ -6,6 +6,7 @@ or a passing check unless the repository contains evidence for it.
 ## 2026-11-19 — Drafting repository rules
 
 Tool: Copilot SDK in VS Code, using workspace file inspection and patch editing.
+
 ## 2026-11-19 - Places contract draft
 
 Date: 2026-11-19.

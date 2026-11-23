@@ -8,9 +8,20 @@ const secret = 'synthetic-test-secret-never-a-real-key';
 function setup() {
   let time = initialTime;
   let records = createFixtureCatalogue();
-  const list = createPlacesService({ cursorSecret: secret, now: () => time, loadCatalogue: () => records });
-  return { list: (query = '') => list(new URLSearchParams(query)),
-    setTime: (value) => { time = value; }, setRecords: (value) => { records = value; } };
+  const list = createPlacesService({
+    cursorSecret: secret,
+    now: () => time,
+    loadCatalogue: () => records,
+  });
+  return {
+    list: (query = '') => list(new URLSearchParams(query)),
+    setTime: (value) => {
+      time = value;
+    },
+    setRecords: (value) => {
+      records = value;
+    },
+  };
 }
 function isProblem(status, type, parameter) {
   return (error) => {
@@ -32,37 +43,73 @@ test('success projects public fields and sorts stable IDs', async () => {
   assert.equal(page.evaluatedAt, new Date(initialTime).toISOString());
   const ids = page.items.map((p) => p.id);
   assert.deepEqual(ids, [...ids].sort());
-  assert.deepEqual(Object.keys(page.items[0]).sort(),
-    ['id', 'name', 'type', 'district', 'priceLevel', 'indoor', 'ticketPriceVnd', 'openingHours'].sort());
+  assert.deepEqual(
+    Object.keys(page.items[0]).sort(),
+    [
+      'id',
+      'name',
+      'type',
+      'district',
+      'priceLevel',
+      'indoor',
+      'ticketPriceVnd',
+      'openingHours',
+    ].sort(),
+  );
 });
 
 test('all four filters combine with AND and unknown valid slugs return empty results', async () => {
   const api = setup();
-  const page = await api.list('type=cafe&district=district-1&priceLevel=1&openNow=true');
-  assert.deepEqual(page.items.map((p) => p.id), ['fixture-cafe-001']);
+  const page = await api.list(
+    'type=cafe&district=district-1&priceLevel=1&openNow=true',
+  );
+  assert.deepEqual(
+    page.items.map((p) => p.id),
+    ['fixture-cafe-001'],
+  );
   assert.deepEqual((await api.list('type=unknown-type')).items, []);
   assert.deepEqual((await api.list('district=unknown-district')).items, []);
   assert.equal((await api.list('openNow=false')).items.length, 6);
 });
 
 for (const [query, parameter] of [
-  ['limit=0', 'limit'], ['limit=101', 'limit'], ['limit=01', 'limit'], ['limit=1.0', 'limit'],
-  ['limit=1e1', 'limit'], ['limit=%202', 'limit'], ['limit=2&limit=2', 'limit'],
-  ['type=', 'type'], ['type=Cafe', 'type'], ['type[]=cafe', 'type[]'],
-  ['priceLevel=cheap', 'priceLevel'], ['openNow=1', 'openNow'],
-  ['userId=someone-else', 'userId'], ['ownerId=someone-else', 'ownerId'], ['groupId=other', 'groupId'],
-  ['cursor=', 'cursor'], ['cursor=broken', 'cursor'],
+  ['limit=0', 'limit'],
+  ['limit=101', 'limit'],
+  ['limit=01', 'limit'],
+  ['limit=1.0', 'limit'],
+  ['limit=1e1', 'limit'],
+  ['limit=%202', 'limit'],
+  ['limit=2&limit=2', 'limit'],
+  ['type=', 'type'],
+  ['type=Cafe', 'type'],
+  ['type[]=cafe', 'type[]'],
+  ['priceLevel=cheap', 'priceLevel'],
+  ['openNow=1', 'openNow'],
+  ['userId=someone-else', 'userId'],
+  ['ownerId=someone-else', 'ownerId'],
+  ['groupId=other', 'groupId'],
+  ['cursor=', 'cursor'],
+  ['cursor=broken', 'cursor'],
 ]) {
   test(`reject invalid query: ${query}`, async () => {
-    await assert.rejects(setup().list(query), isProblem(400, 'validation', parameter));
+    await assert.rejects(
+      setup().list(query),
+      isProblem(400, 'validation', parameter),
+    );
   });
 }
 
 test('validation aggregates ordinary errors before decoding cursor', async () => {
-  await assert.rejects(setup().list('type=Cafe&limit=0&cursor=broken'), (error) => {
-    assert.deepEqual(error.body.errors.map((v) => v.parameter), ['limit', 'type']);
-    return true;
-  });
+  await assert.rejects(
+    setup().list('type=Cafe&limit=0&cursor=broken'),
+    (error) => {
+      assert.deepEqual(
+        error.body.errors.map((v) => v.parameter),
+        ['limit', 'type'],
+      );
+      return true;
+    },
+  );
 });
 
 test('paging retains time and revision while later searches see changed data', async () => {
@@ -75,23 +122,36 @@ test('paging retains time and revision while later searches see changed data', a
   api.setRecords([]);
   assert.deepEqual((await api.list()).items, []);
   while (page.nextCursor) {
-    page = await api.list(`${query}&cursor=${encodeURIComponent(page.nextCursor)}`);
+    page = await api.list(
+      `${query}&cursor=${encodeURIComponent(page.nextCursor)}`,
+    );
     assert.ok(page.items.length > 0);
     assert.equal(page.evaluatedAt, new Date(initialTime).toISOString());
     ids.push(...page.items.map((p) => p.id));
   }
-  assert.deepEqual(ids, full.items.map((p) => p.id));
+  assert.deepEqual(
+    ids,
+    full.items.map((p) => p.id),
+  );
   assert.equal(new Set(ids).size, ids.length);
 });
 
 test('cursor rejects changed filters, changed limit and tampering', async () => {
   const api = setup();
   const { nextCursor } = await api.list('limit=1');
-  for (const query of [`limit=2&cursor=${nextCursor}`, `limit=1&type=cafe&cursor=${nextCursor}`,
-    `limit=1&cursor=${nextCursor.slice(0, -2)}xx`]) {
-    await assert.rejects(api.list(query), isProblem(400, 'validation', 'cursor'));
+  for (const query of [
+    `limit=2&cursor=${nextCursor}`,
+    `limit=1&type=cafe&cursor=${nextCursor}`,
+    `limit=1&cursor=${nextCursor.slice(0, -2)}xx`,
+  ]) {
+    await assert.rejects(
+      api.list(query),
+      isProblem(400, 'validation', 'cursor'),
+    );
   }
-  assert.ok((await api.list(`openNow=false&limit=1&cursor=${nextCursor}`)).items.length);
+  assert.ok(
+    (await api.list(`openNow=false&limit=1&cursor=${nextCursor}`)).items.length,
+  );
 });
 
 test('cursor is valid before 24h and expires exactly at 24h', async () => {
@@ -106,17 +166,29 @@ test('cursor is valid before 24h and expires exactly at 24h', async () => {
 
 test('restart with the same signing key reports lost snapshot as expired', async () => {
   const { nextCursor } = await setup().list('limit=1');
-  await assert.rejects(setup().list(`limit=1&cursor=${nextCursor}`), isProblem(410, 'cursor-expired'));
+  await assert.rejects(
+    setup().list(`limit=1&cursor=${nextCursor}`),
+    isProblem(410, 'cursor-expired'),
+  );
 });
 
 test('open-now honors inclusive start and exclusive end in local time', async () => {
   const api = setup();
   api.setTime(Date.parse('2026-11-19T00:59:59.000Z'));
-  assert.equal((await api.list('type=cafe&priceLevel=1&openNow=true')).items.length, 0);
+  assert.equal(
+    (await api.list('type=cafe&priceLevel=1&openNow=true')).items.length,
+    0,
+  );
   api.setTime(Date.parse('2026-11-19T01:00:00.000Z'));
-  assert.equal((await api.list('type=cafe&priceLevel=1&openNow=true')).items.length, 1);
+  assert.equal(
+    (await api.list('type=cafe&priceLevel=1&openNow=true')).items.length,
+    1,
+  );
   api.setTime(Date.parse('2026-11-19T05:00:00.000Z'));
-  assert.equal((await api.list('type=cafe&priceLevel=1&openNow=true')).items.length, 0);
+  assert.equal(
+    (await api.list('type=cafe&priceLevel=1&openNow=true')).items.length,
+    0,
+  );
 });
 
 test('unchecked, outside-city and incomplete entries never become candidates', async () => {
@@ -127,7 +199,10 @@ test('unchecked, outside-city and incomplete entries never become candidates', a
   records[2].menu = [];
   records[3].openingHours = [];
   api.setRecords(records);
-  assert.deepEqual((await api.list()).items.map((p) => p.id), ['fixture-park-001', 'fixture-restaurant-001']);
+  assert.deepEqual(
+    (await api.list()).items.map((p) => p.id),
+    ['fixture-park-001', 'fixture-restaurant-001'],
+  );
 });
 
 test('invalid supplied catalogue fails instead of inventing or coercing prices', async () => {

@@ -9,14 +9,14 @@ estimated costs, opening-hour checks and warnings. No personal data was used.
 
 Only response metadata was retained:
 
-| Field | Observed value |
-| --- | ---: |
-| Model version | `gemini-3.5-flash-lite` |
-| Service tier | `standard` |
-| Prompt tokens | 84 |
-| Candidate tokens | 1,293 |
-| Thinking tokens | 0 / not reported |
-| Total tokens | 1,377 |
+| Field            |          Observed value |
+| ---------------- | ----------------------: |
+| Model version    | `gemini-3.5-flash-lite` |
+| Service tier     |              `standard` |
+| Prompt tokens    |                      84 |
+| Candidate tokens |                   1,293 |
+| Thinking tokens  |        0 / not reported |
+| Total tokens     |                   1,377 |
 
 The total equals prompt plus candidate tokens, so no additional thinking-token
 count is inferred for this response. No grounding, caching or paid tools were

@@ -39,19 +39,19 @@ Sources: [PA2 rubric](<../reference/PA2 Rubric Harness Quality Gate.pdf>),
 
 Every application error from this operation has the following members:
 
-| Member | Rule |
-| --- | --- |
-| `type` | One of the exact URI references in the table below. Resolve against the API origin. |
-| `title` | The exact title in the table below. |
-| `status` | Integer equal to the HTTP response status. |
+| Member   | Rule                                                                                                                                                                |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`   | One of the exact URI references in the table below. Resolve against the API origin.                                                                                 |
+| `title`  | The exact title in the table below.                                                                                                                                 |
+| `status` | Integer equal to the HTTP response status.                                                                                                                          |
 | `detail` | Non-empty English description of this occurrence. Never include stack traces, secrets, database messages or local file paths. Clients must not branch on this text. |
-| `errors` | Required only for `validation`: a non-empty array of `{ "parameter": string, "detail": string }`. Omitted for other types. |
+| `errors` | Required only for `validation`: a non-empty array of `{ "parameter": string, "detail": string }`. Omitted for other types.                                          |
 
-| Type | Status | Title | Condition |
-| --- | ---: | --- | --- |
-| `/problems/validation` | 400 | Invalid request | Unknown or repeated query parameter; invalid query value; unreadable, tampered or structurally invalid cursor; cursor used with different filters or limit. |
-| `/problems/cursor-expired` | 410 | Cursor expired | An otherwise valid cursor is older than 24 hours, or its catalogue revision is no longer available. Restart from the first page. |
-| `/problems/internal` | 500 | Internal error | An unexpected application or data-source failure. `detail` is always `The request could not be completed.` |
+| Type                       | Status | Title           | Condition                                                                                                                                                   |
+| -------------------------- | -----: | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/problems/validation`     |    400 | Invalid request | Unknown or repeated query parameter; invalid query value; unreadable, tampered or structurally invalid cursor; cursor used with different filters or limit. |
+| `/problems/cursor-expired` |    410 | Cursor expired  | An otherwise valid cursor is older than 24 hours, or its catalogue revision is no longer available. Restart from the first page.                            |
+| `/problems/internal`       |    500 | Internal error  | An unexpected application or data-source failure. `detail` is always `The request could not be completed.`                                                  |
 
 Validation returns one entry per invalid parameter name, sorted by ASCII parameter name.
 For an unknown name, `parameter` contains that name. Repeated parameters are invalid
@@ -82,16 +82,16 @@ Content-Type: application/problem+json
 
 All fields below are required and non-null. Extra fields may be added compatibly.
 
-| Field | Type and rule |
-| --- | --- |
-| `id` | ID as defined in section 1. Unique in the catalogue. |
-| `name` | Non-empty Unicode string, at most 200 characters. |
-| `type` | Type slug, such as `cafe` or `museum`. |
-| `district` | District slug supplied by the catalogue, such as `district-1`. This API does not prescribe administrative boundaries. |
-| `priceLevel` | Integer 1-4: ascending catalogue price category. It is not a budget calculation or a promised VND range. |
-| `indoor` | Boolean: true for an indoor place, false for outdoor. |
-| `ticketPriceVnd` | Non-negative integer admission price; 0 for free admission. Excludes food, transport and optional purchases. |
-| `openingHours` | Seven `DayHours` objects, ordered Monday (1) through Sunday (7). |
+| Field            | Type and rule                                                                                                         |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `id`             | ID as defined in section 1. Unique in the catalogue.                                                                  |
+| `name`           | Non-empty Unicode string, at most 200 characters.                                                                     |
+| `type`           | Type slug, such as `cafe` or `museum`.                                                                                |
+| `district`       | District slug supplied by the catalogue, such as `district-1`. This API does not prescribe administrative boundaries. |
+| `priceLevel`     | Integer 1-4: ascending catalogue price category. It is not a budget calculation or a promised VND range.              |
+| `indoor`         | Boolean: true for an indoor place, false for outdoor.                                                                 |
+| `ticketPriceVnd` | Non-negative integer admission price; 0 for free admission. Excludes food, transport and optional purchases.          |
+| `openingHours`   | Seven `DayHours` objects, ordered Monday (1) through Sunday (7).                                                      |
 
 `DayHours` has exactly the required fields `weekday` (integer 1-7) and `intervals`
 (array of `OpeningInterval`). An empty array means closed that day.
@@ -103,11 +103,11 @@ unreported exceptional closure has been discovered.
 
 ### PlacePage
 
-| Field | Type and rule |
-| --- | --- |
-| `items` | Array of `PlaceSummary`, length 0 to `limit`, ordered by ASCII `id` ascending. |
-| `nextCursor` | Opaque non-empty string or `null`. Null exactly when no further matching items remain. |
-| `evaluatedAt` | Timestamp captured for the first page, reused throughout this pagination walk. |
+| Field         | Type and rule                                                                          |
+| ------------- | -------------------------------------------------------------------------------------- |
+| `items`       | Array of `PlaceSummary`, length 0 to `limit`, ordered by ASCII `id` ascending.         |
+| `nextCursor`  | Opaque non-empty string or `null`. Null exactly when no further matching items remain. |
+| `evaluatedAt` | Timestamp captured for the first page, reused throughout this pagination walk.         |
 
 Example resource (synthetic, not a claim about a real business):
 
@@ -123,12 +123,30 @@ Example resource (synthetic, not a claim about a real business):
       "indoor": true,
       "ticketPriceVnd": 0,
       "openingHours": [
-        { "weekday": 1, "intervals": [{ "startMinute": 480, "endMinute": 1320 }] },
-        { "weekday": 2, "intervals": [{ "startMinute": 480, "endMinute": 1320 }] },
-        { "weekday": 3, "intervals": [{ "startMinute": 480, "endMinute": 1320 }] },
-        { "weekday": 4, "intervals": [{ "startMinute": 480, "endMinute": 1320 }] },
-        { "weekday": 5, "intervals": [{ "startMinute": 480, "endMinute": 1320 }] },
-        { "weekday": 6, "intervals": [{ "startMinute": 480, "endMinute": 1320 }] },
+        {
+          "weekday": 1,
+          "intervals": [{ "startMinute": 480, "endMinute": 1320 }]
+        },
+        {
+          "weekday": 2,
+          "intervals": [{ "startMinute": 480, "endMinute": 1320 }]
+        },
+        {
+          "weekday": 3,
+          "intervals": [{ "startMinute": 480, "endMinute": 1320 }]
+        },
+        {
+          "weekday": 4,
+          "intervals": [{ "startMinute": 480, "endMinute": 1320 }]
+        },
+        {
+          "weekday": 5,
+          "intervals": [{ "startMinute": 480, "endMinute": 1320 }]
+        },
+        {
+          "weekday": 6,
+          "intervals": [{ "startMinute": 480, "endMinute": 1320 }]
+        },
         { "weekday": 7, "intervals": [] }
       ]
     }
@@ -165,14 +183,14 @@ do not invent a private-place feature merely to manufacture a 403 response.
 There is no request body. Clients must not send one; it does not supply search
 parameters and the handler must not parse it as JSON or use it for filtering.
 
-| Query parameter | Allowed value | Default |
-| --- | --- | --- |
-| `type` | One type slug. A well-formed slug absent from the catalogue produces zero matches. | All types |
-| `district` | One district slug. A well-formed slug absent from the catalogue produces zero matches. | All districts |
-| `priceLevel` | Exactly `1`, `2`, `3` or `4`; exact category match. | All levels |
-| `openNow` | Exactly `true` or `false`. True keeps places open at `evaluatedAt`; false disables this filter. | `false` |
-| `limit` | Canonical decimal integer 1-100; no sign, whitespace, leading zeros, fraction or exponent. | `20` |
-| `cursor` | An unchanged `nextCursor` previously returned by this endpoint, at most 4096 characters. | First page |
+| Query parameter | Allowed value                                                                                   | Default       |
+| --------------- | ----------------------------------------------------------------------------------------------- | ------------- |
+| `type`          | One type slug. A well-formed slug absent from the catalogue produces zero matches.              | All types     |
+| `district`      | One district slug. A well-formed slug absent from the catalogue produces zero matches.          | All districts |
+| `priceLevel`    | Exactly `1`, `2`, `3` or `4`; exact category match.                                             | All levels    |
+| `openNow`       | Exactly `true` or `false`. True keeps places open at `evaluatedAt`; false disables this filter. | `false`       |
+| `limit`         | Canonical decimal integer 1-100; no sign, whitespace, leading zeros, fraction or exponent.      | `20`          |
+| `cursor`        | An unchanged `nextCursor` previously returned by this endpoint, at most 4096 characters.        | First page    |
 
 Filters combine with AND. Empty strings and repeated parameters are invalid.
 Decoded values are not trimmed or case-folded. Unknown query names are errors,

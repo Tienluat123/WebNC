@@ -2,18 +2,18 @@
 
 Command: `python -X utf8 scripts/audit-secrets.py` from the repository root.
 
-| Item | Observed result |
-| --- | --- |
-| HEAD | `1a413e658c6bca13571d82a13d69f7587082f644` |
-| Locally reachable commits, all refs plus HEAD | 18 |
-| Unique history blobs inspected | 96 |
-| Existing tracked and non-ignored working files inspected | 41 |
-| Credential-pattern findings | 0 |
-| Historical `.env` / `.env.*` paths other than `.env.example` | 0 |
-| `.env` ignored by Git | Yes |
-| Current env-example variable names | `PORT`, `CURSOR_SECRET`, both empty |
-| Explicit synthetic test-secret assignments | Allowlisted; not real credentials |
-| PDF extraction or archive inspection reported incomplete | No |
+| Item                                                         | Observed result                            |
+| ------------------------------------------------------------ | ------------------------------------------ |
+| HEAD                                                         | `1a413e658c6bca13571d82a13d69f7587082f644` |
+| Locally reachable commits, all refs plus HEAD                | 18                                         |
+| Unique history blobs inspected                               | 96                                         |
+| Existing tracked and non-ignored working files inspected     | 41                                         |
+| Credential-pattern findings                                  | 0                                          |
+| Historical `.env` / `.env.*` paths other than `.env.example` | 0                                          |
+| `.env` ignored by Git                                        | Yes                                        |
+| Current env-example variable names                           | `PORT`, `CURSOR_SECRET`, both empty        |
+| Explicit synthetic test-secret assignments                   | Allowlisted; not real credentials          |
+| PDF extraction or archive inspection reported incomplete     | No                                         |
 
 The rerun used branch `pa2-permissions-places` directly in the repository on drive D. The implementation,
 policy, audit script and prior evidence are present in HEAD; the evidence updates are

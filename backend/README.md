@@ -37,10 +37,10 @@ before relying on seamless pagination across production restarts or multiple wor
 
 ## Verification
 
-| Command | Scope | Latest verification |
-| --- | --- | --- |
-| `npm run test:service` | Query validation, eligibility, public projection, local opening hours, cursor integrity, revision stability and expiry | Covered by the current full run |
-| `npm test` | Service tests plus real HTTP contract tests using Express and fetch | 31 tests passed locally on 2026-11-21 |
+| Command                | Scope                                                                                                                  | Latest verification                   |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| `npm run test:service` | Query validation, eligibility, public projection, local opening hours, cursor integrity, revision stability and expiry | Covered by the current full run       |
+| `npm test`             | Service tests plus real HTTP contract tests using Express and fetch                                                    | 31 tests passed locally on 2026-11-21 |
 
 The assistant's earlier dependency installation failed with
 `ENOTFOUND registry.npmjs.org`. The user subsequently ran `npm install` successfully

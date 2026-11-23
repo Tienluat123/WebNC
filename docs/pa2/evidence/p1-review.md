@@ -6,14 +6,14 @@ contains the implementation previously prepared on 2026-11-19.
 
 ## Criterion 2 - permissions and secrets
 
-| Requirement | Evidence | State |
-| --- | --- | --- |
-| Allowed / Ask first / Never | [PERMISSIONS.md](../PERMISSIONS.md), referenced from root AGENTS.md | Written |
-| Environment variable names without values | [.env.example](../../../.env.example): PORT, CURSOR_SECRET | Matches current server configuration |
-| Ignore local secrets | [.gitignore](../../../.gitignore) | Audit confirmed .env is ignored |
-| No detected credentials in available history | [Audit](secrets-audit.md), [script](../../../scripts/audit-secrets.py) | Rechecked; see scope limitations |
-| Model API key spending control documented in README | [README](../../../README.md), [redacted account evidence](gemini-free-tier-no-billing-2026-11-21.png) | Free tier with no billing account: USD 0 paid-spend boundary |
-| Cost per synthetic itinerary | [Benchmark](model-cost-benchmark.md) | Actual Free-tier USD 0; paid-tier equivalent USD 0.00162885 for one measured call |
+| Requirement                                         | Evidence                                                                                              | State                                                                             |
+| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Allowed / Ask first / Never                         | [PERMISSIONS.md](../PERMISSIONS.md), referenced from root AGENTS.md                                   | Written                                                                           |
+| Environment variable names without values           | [.env.example](../../../.env.example): PORT, CURSOR_SECRET                                            | Matches current server configuration                                              |
+| Ignore local secrets                                | [.gitignore](../../../.gitignore)                                                                     | Audit confirmed .env is ignored                                                   |
+| No detected credentials in available history        | [Audit](secrets-audit.md), [script](../../../scripts/audit-secrets.py)                                | Rechecked; see scope limitations                                                  |
+| Model API key spending control documented in README | [README](../../../README.md), [redacted account evidence](gemini-free-tier-no-billing-2026-11-21.png) | Free tier with no billing account: USD 0 paid-spend boundary                      |
+| Cost per synthetic itinerary                        | [Benchmark](model-cost-benchmark.md)                                                                  | Actual Free-tier USD 0; paid-tier equivalent USD 0.00162885 for one measured call |
 
 The endpoint does not use a model. PA2 introduces the harness before the PA3 LLM
 feature; a model integration is not needed to implement GET /places. Criterion 2
@@ -38,16 +38,16 @@ average or evidence that `GET /places` makes model calls.
 
 ## Criterion 5 - one endpoint contract
 
-| Requirement | Contract / implementation evidence |
-| --- | --- |
-| Same five sections as the lecturer's example | [endpoint.md](../../contract/endpoint.md): conventions, errors, resources, endpoints, versions |
-| Role and ownership | Section 4: same public catalogue for anonymous and signed-in callers; user selectors return 400 |
-| Request and response field rules | Sections 1, 3 and 4: bounds, types, required fields, defaults and examples |
-| Each error type and status | Section 2: validation 400, cursor-expired 410, internal 500; RFC 9457 bodies |
-| Paging | Section 4: default 20/max 100, stable order/time/revision, signed cursor, 24-hour expiry |
-| Idempotency applicability | Read-only GET with no model calls or writes; no idempotency key needed |
-| Changes and compatibility | Section 5: compatible additions, separate documented version for breaking changes |
-| Implemented behavior | [places.js](../../../backend/src/places.js), [app.js](../../../backend/src/app.js) |
+| Requirement                                  | Contract / implementation evidence                                                              |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Same five sections as the lecturer's example | [endpoint.md](../../contract/endpoint.md): conventions, errors, resources, endpoints, versions  |
+| Role and ownership                           | Section 4: same public catalogue for anonymous and signed-in callers; user selectors return 400 |
+| Request and response field rules             | Sections 1, 3 and 4: bounds, types, required fields, defaults and examples                      |
+| Each error type and status                   | Section 2: validation 400, cursor-expired 410, internal 500; RFC 9457 bodies                    |
+| Paging                                       | Section 4: default 20/max 100, stable order/time/revision, signed cursor, 24-hour expiry        |
+| Idempotency applicability                    | Read-only GET with no model calls or writes; no idempotency key needed                          |
+| Changes and compatibility                    | Section 5: compatible additions, separate documented version for breaking changes               |
+| Implemented behavior                         | [places.js](../../../backend/src/places.js), [app.js](../../../backend/src/app.js)              |
 
 The review did not identify a change needed to the adopted API semantics.
 No access policy, schema, filter or pagination behavior was changed.
