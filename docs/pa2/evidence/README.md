@@ -48,7 +48,7 @@ The green CI run above independently shows successful `npm ci`, lint, format che
 ## Still pending for the team submission
 
 - A PR/CI run that catches the contract-break commit (criterion 6). Local proof is complete: red commit `297d44d` failed 3/35 because `GET /places` returned 201 instead of 200; fix commit `531967f` passed 35/35.
-- The CI run for the final submitted `pa2` tag. The existing tag points to the earlier PA2 setup commit and must be replaced only when the team approves the final commit.
+- The CI run for the final submitted `pa2` tag. The local tag now points to evidence commit `d42da42`; the tag has not been pushed or used by GitHub Actions yet.
 - Review of the remaining criteria and the final team score/ZIP.
 
 The root [PA2.md](../../../PA2.md) is the submission link hub.

@@ -310,8 +310,9 @@ access test all expected contract status 200 but received 201.
 
 Restored status 200 in separate fix commit `531967f`, again without changing
 tests or validators. `npm.cmd test` at `531967f` passed 35 tests, 0 failed.
-The existing `pa2` annotated tag remains an earlier PA2 setup tag and has not
-been moved or rewritten.
+Evidence commit `d42da42` records the reconciliation and red/green proof.
+The local `pa2` annotated tag is being pointed to the evidence commit; it has
+not been pushed.
 
 Rejected: did not alter test assertions to accept 201, relax status checks or
 modify the implementation under test merely to obtain a green result.
