@@ -35,7 +35,7 @@ function isProblem(status, type, parameter) {
 test('success projects public fields and sorts stable IDs', async () => {
   const api = setup();
   const records = createFixtureCatalogue();
-  records[0].ownerEmail = 'private@example.invalid';
+  records[0]['ownerEmail'] = 'private@example.invalid';
   api.setRecords(records.reverse());
   const page = await api.list();
   assert.equal(page.items.length, 6);
@@ -103,8 +103,16 @@ test('validation aggregates ordinary errors before decoding cursor', async () =>
   await assert.rejects(
     setup().list('type=Cafe&limit=0&cursor=broken'),
     (error) => {
+      assert.ok(error && typeof error === 'object' && 'body' in error);
+      const problem = /** @type {{ body: unknown }} */ (error).body;
+      assert.ok(
+        problem &&
+          typeof problem === 'object' &&
+          'errors' in problem &&
+          Array.isArray(problem.errors),
+      );
       assert.deepEqual(
-        error.body.errors.map((v) => v.parameter),
+        problem.errors.map((v) => v.parameter),
         ['limit', 'type'],
       );
       return true;

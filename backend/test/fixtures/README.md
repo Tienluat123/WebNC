@@ -1,5 +1,9 @@
 # Contract-test fixtures
 
-TODO: add fixtures for the chosen endpoint and its agreed contract.
+The `GET /places` contract currently uses synthetic catalogue records from
+`backend/src/fixtures.js`. No separate JSON fixture files are required for the
+present HTTP tests.
 
-PA2 criterion 6: cover each error type, ownership and paging/idempotency where applicable. Use these cases in contract tests that run in required CI.
+Keep fixtures synthetic and public unless a future contract explicitly adds a
+private/owned resource. Any future fixture for a private resource must cover
+another user's denied access, paging or idempotency as required by its contract.

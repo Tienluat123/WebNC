@@ -83,15 +83,15 @@ PERMISSIONS trả lời “assistant được tự làm gì / cần hỏi gì / 
 
 Rubric mức 9–10 yêu cầu lint, format check, typecheck (nếu áp dụng), tests đều có một lệnh được ghi rõ; local và CI dùng cùng lệnh; fresh clone làm theo README phải xanh.
 
-| File                                                                                 | Phần đã cấu hình                                                                                |
-| ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
-| [package.json](../../package.json)                                                   | `lint`, `format:check`, `typecheck`, `test`; `check` chạy tổng hợp và `format` sửa định dạng.   |
-| [package-lock.json](../../package-lock.json)                                         | Lockfile do npm sinh; setup local/CI dùng `npm ci`.                                             |
-| [.nvmrc](../../.nvmrc)                                                               | Node.js 22.23.2; package khai báo npm 10 và `packageManager` npm 10.9.8.                        |
-| [eslint.config.js](../../eslint.config.js)                                           | Recommended rules cho JS/TS, globals theo backend/frontend; warning làm lệnh lỗi.               |
-| [.prettierrc.json](../../.prettierrc.json), [.prettierignore](../../.prettierignore) | Single quotes/trailing commas; bỏ qua file sinh tự động, môi trường, tài liệu gốc và hồ sơ PA1. |
-| [tsconfig.json](../../tsconfig.json)                                                 | Thay `jsconfig.json` rỗng; bật `strict`, `allowJs`, `checkJs`, `noEmit` và JSX React.           |
-| [README.md](../../README.md)                                                         | Phiên bản runtime, setup và đúng bốn lệnh mà CI chạy.                                           |
+| File                                                                                 | Phần đã cấu hình                                                                                                                          |
+| ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| [package.json](../../package.json)                                                   | `lint`, `format:check`, `typecheck`, `test`; `check` chạy tổng hợp và `format` sửa định dạng.                                             |
+| [package-lock.json](../../package-lock.json)                                         | Lockfile do npm sinh; setup local/CI dùng `npm ci`.                                                                                       |
+| [.nvmrc](../../.nvmrc)                                                               | Node.js 22.23.2; package khai báo npm 10 và `packageManager` npm 10.9.8.                                                                  |
+| [eslint.config.js](../../eslint.config.js)                                           | Recommended rules cho JS/TS, globals theo backend/frontend; warning làm lệnh lỗi.                                                         |
+| [.prettierrc.json](../../.prettierrc.json), [.prettierignore](../../.prettierignore) | Single quotes/trailing commas; bỏ qua file sinh tự động, môi trường, tài liệu gốc và hồ sơ PA1.                                           |
+| [tsconfig.json](../../tsconfig.json)                                                 | Thay `jsconfig.json` rỗng; bật `allowJs`, `checkJs`, `noEmit` và JSX React; không ép toàn bộ JavaScript sang strict TypeScript migration. |
+| [README.md](../../README.md)                                                         | Phiên bản runtime, setup và đúng bốn lệnh mà CI chạy.                                                                                     |
 
 ```sh
 npm run lint

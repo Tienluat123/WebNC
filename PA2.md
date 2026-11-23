@@ -7,8 +7,8 @@ present. The team has selected Google Gemini API and `gemini-3.5-flash-lite`;
 the Free-tier project has no linked billing account. No spending cap is configured
 because paid usage is not enabled and the tool is free in the current account state.
 Redacted account evidence is included.
-Checks/required CI, protected-branch evidence and final self-assessment are not
-complete. [File map](docs/pa2/README.md).
+Repository-local checks and evidence are complete. Remaining GitHub tag/PR CI
+and final self-assessment work is listed below. [File map](docs/pa2/README.md).
 
 ## P1 evidence - criteria 2 and 5
 
@@ -56,7 +56,7 @@ break is caught by CI. See the [evidence index](docs/pa2/evidence/README.md) and
 
 ## Submission checklist
 
-- Local tag `pa2` points to evidence commit `96bdb81`; push the tag to trigger the submitted-tag CI run.
+- Local tag `pa2` points to evidence commit `cf2a5d7`; push the tag to trigger the submitted-tag CI run.
 - Finalize PA2.md, AI-LOG.md and SELF_ASSESSMENT_REPORT.md in English; the current score and remote evidence are incomplete.
 - These three root documents are written in English; remaining team entries and assessment still need completion and review.
 - TODO: include the repository and .git in one ZIP.

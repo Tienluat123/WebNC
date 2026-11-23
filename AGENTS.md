@@ -69,8 +69,17 @@ its Allowed / Ask first / Never tiers before using this as final policy. Assista
 must follow those tiers within the user's authorized task.
 
 The lecturer requires at least two rules to trace to something that actually went
-wrong through a commit or AI-LOG entry. No such incidents are recorded yet; add
-the evidence and link the affected rules when they occur.
+wrong through a commit or AI-LOG entry:
+
+- Never edit tests or validators to make a check pass. The format red/green
+  evidence preserves the real test/validator state in commits
+  [`868f505`](https://github.com/Tienluat123/WebNC/commit/868f505) and
+  [`2b3c61c`](https://github.com/Tienluat123/WebNC/commit/2b3c61c).
+- Never change implementation behavior without preserving the contract. The
+  `/places` deliberate break and restoration are recorded in commits
+  [`297d44d`](https://github.com/Tienluat123/WebNC/commit/297d44d) and
+  [`531967f`](https://github.com/Tienluat123/WebNC/commit/531967f), with the
+  full evidence in [AI-LOG.md](AI-LOG.md).
 
 ## Never
 

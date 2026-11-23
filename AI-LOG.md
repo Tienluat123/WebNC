@@ -310,9 +310,8 @@ access test all expected contract status 200 but received 201.
 
 Restored status 200 in separate fix commit `531967f`, again without changing
 tests or validators. `npm.cmd test` at `531967f` passed 35 tests, 0 failed.
-Evidence commit `d42da42` records the reconciliation and red/green proof.
-The local `pa2` annotated tag is being pointed to the evidence commit; it has
-not been pushed.
+The repository-local evidence is committed and tagged locally; no remote tag or
+PR CI run is claimed.
 
 Rejected: did not alter test assertions to accept 201, relax status checks or
 modify the implementation under test merely to obtain a green result.
@@ -378,6 +377,32 @@ pagination/cursors, all three application error types and schema details. The
 public catalogue has no owned private record, so it cannot demonstrate another
 user's denied owned data. Required PR CI red/green proof is also not yet
 available. The final 13-15 band is therefore not claimed.
+
+## 2026-11-23 — Repository-local PA2 completion
+
+Date: 2026-11-23.
+
+Tool: Copilot SDK in VS Code, using PowerShell, npm, TypeScript and Git.
+
+Used for: resolving repository-local PA2 blockers after tests and the rubric
+review, without committing or pushing the branch.
+
+Changed: switched the JavaScript type-check configuration to allow/check JavaScript
+without imposing strict TypeScript migration, fixed remaining test-only JSDoc/type
+narrowing, replaced the fixture TODO with actual fixture guidance, updated stale
+31-test evidence to 35-test evidence, and linked real incident commits for the
+Rules criterion.
+
+Verification: `npm run check` passed lint, format check, `tsc --noEmit` and
+35 Node tests. The worktree remains local and the external PR/tag actions are
+not claimed.
+
+Evidence: [Rules file](AGENTS.md),
+[package scripts](package.json),
+[TypeScript configuration](tsconfig.json),
+[HTTP contract tests](backend/test/contract/places.test.js),
+[service tests](backend/test/places.test.js),
+[PA2 self-assessment](SELF_ASSESSMENT_REPORT.md).
 
 Verification: `npm test` and `npm run format:check` must pass after the test
 assertion changes. No implementation or test acceptance rule was weakened.

@@ -55,9 +55,10 @@ No access policy, schema, filter or pagination behavior was changed.
 
 ## Verification and handoff
 
-- `npm test`: 31 passed, 0 failed and 0 skipped locally on 2026-11-21, including
-  all four HTTP contract tests. The earlier same-day `connect EACCES` restriction
-  did not reproduce in this checkout; no tests were changed or disabled to obtain the pass.
+- `npm test`: 35 passed, 0 failed and 0 skipped locally on 2026-11-23,
+  including the HTTP contract tests for success, errors, paging, ownership-independent
+  public access and private-selector rejection. No tests were changed or disabled
+  to obtain the pass.
 - `python -X utf8 scripts/audit-secrets.py`: 18 reachable commits and 96 unique
   history blobs; no findings or incomplete extraction. The final working-file
   count and scope limitations are in the audit evidence.

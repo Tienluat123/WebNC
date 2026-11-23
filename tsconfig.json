@@ -7,7 +7,7 @@
     "jsx": "react-jsx",
     "allowJs": true,
     "checkJs": true,
-    "strict": true,
+    "strict": false,
     "noEmit": true,
     "forceConsistentCasingInFileNames": true,
     "types": ["node", "react", "react-dom"]

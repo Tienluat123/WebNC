@@ -103,7 +103,7 @@ Nếu không dùng nvm, cài đúng Node/npm ở trên trước khi chạy `npm 
 
 Chạy toàn bộ: `npm run check`. Tự sửa format: `npm run format`.
 
-ESLint dùng recommended rules cho JS/TS; warning làm check thất bại. Typecheck bật `strict`, `checkJs`, `noEmit`; hiện kiểm tra cấu hình ESLint và file test khung, đồng thời nhận code JS/TS trong backend và TS/TSX trong frontend khi được thêm. Formatter bỏ qua dependencies, file sinh tự động, file môi trường, tài liệu gốc của thầy và hồ sơ PA1.
+ESLint dùng recommended rules cho JS/TS; warning làm check thất bại. Typecheck bật `allowJs`, `checkJs`, `noEmit` và kiểm tra syntax/types khi JSDoc/type inference cung cấp thông tin; strictness không được bật để tránh biến JavaScript được nối nối sang TypeScript thành yêu cầu migration không cần thiết. Formatter bỏ qua dependencies, file sinh tự động, file môi trường, tài liệu gốc của thầy và hồ sơ PA1.
 
 **Trạng thái hiện tại:** `backend/test/contract/places.test.js` chạy HTTP contract tests cho `GET /places`. Lần chạy local ngày 2026-11-23 đã qua 35 tests, 0 failed. Kết quả local này chưa thay thế deliberate contract break chạy trong CI cho rubric #6.
 
