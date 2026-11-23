@@ -353,3 +353,31 @@ Evidence: [spending status](docs/pa2/PERMISSIONS.md),
 [HTTP contract tests](backend/test/contract/places.test.js),
 [red commit 297d44d](https://github.com/Tienluat123/WebNC/commit/297d44d),
 [fix commit 531967f](https://github.com/Tienluat123/WebNC/commit/531967f).
+
+## 2026-11-23 — Criterion 6 coverage and honest scoring adjustment
+
+Date: 2026-11-23.
+
+Tool: Copilot SDK in VS Code, using Node.js test tools and rubric review.
+
+Used for: strengthening `GET /places` HTTP contract assertions and adjusting
+rubric claims when the rubric requirement cannot be reproduced safely.
+
+Changed: added RFC 9457 problem-detail shape checks for validation, cursor
+expiration and internal errors. Reconfirmed that 400/410/500 problem bodies
+have exact keys, status, type, title and non-empty details.
+
+Adjusted scoring: criterion 2 is provisional 5-8 instead of a 9-10 claim,
+because no paid billing account or configured spending cap exists. The Free-tier
+state is honest evidence but does not satisfy the rubric's specific capped-key
+requirement.
+
+Adjusted criterion 6 to 8-12 provisionally. Existing tests cover success,
+filter combinations, public/authorization independence, private selectors,
+pagination/cursors, all three application error types and schema details. The
+public catalogue has no owned private record, so it cannot demonstrate another
+user's denied owned data. Required PR CI red/green proof is also not yet
+available. The final 13-15 band is therefore not claimed.
+
+Verification: `npm test` and `npm run format:check` must pass after the test
+assertion changes. No implementation or test acceptance rule was weakened.

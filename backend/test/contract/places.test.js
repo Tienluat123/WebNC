@@ -32,6 +32,20 @@ async function readProblem(response) {
   return response.json();
 }
 
+function assertProblemShape(problem, status, type, title) {
+  assert.deepEqual(
+    Object.keys(problem).sort(),
+    type === '/problems/validation'
+      ? ['detail', 'errors', 'status', 'title', 'type'].sort()
+      : ['detail', 'status', 'title', 'type'].sort(),
+  );
+  assert.equal(problem.status, status);
+  assert.equal(problem.type, type);
+  assert.equal(problem.title, title);
+  assert.equal(typeof problem.detail, 'string');
+  assert.ok(problem.detail.length > 0);
+}
+
 function assertPlaceShape(place) {
   assert.deepEqual(
     Object.keys(place).sort(),
@@ -137,9 +151,16 @@ test('HTTP validation reports duplicate parameters and rejects private selectors
       /^application\/problem\+json/,
     );
     const body = await response.json();
-    assert.equal(body.type, '/problems/validation');
-    assert.equal(body.status, 400);
+    assertProblemShape(body, 400, '/problems/validation', 'Invalid request');
     assert.ok(body.errors.length > 0);
+    assert.ok(
+      body.errors.every(
+        (error) =>
+          typeof error.parameter === 'string' &&
+          typeof error.detail === 'string' &&
+          error.detail.length > 0,
+      ),
+    );
   }
 });
 
@@ -150,9 +171,7 @@ test('HTTP validation rejects malformed ordinary values and sorts aggregate erro
   );
   assert.equal(response.status, 400);
   const body = await readProblem(response);
-  assert.equal(body.type, '/problems/validation');
-  assert.equal(body.title, 'Invalid request');
-  assert.equal(body.status, 400);
+  assertProblemShape(body, 400, '/problems/validation', 'Invalid request');
   assert.deepEqual(
     body.errors.map((error) => error.parameter),
     ['limit', 'openNow', 'priceLevel', 'type'],
@@ -208,11 +227,8 @@ test('HTTP cursor expiration returns 410 problem details', async (t) => {
   time += 86400000;
   const response = await request(`/places?limit=1&cursor=${page.nextCursor}`);
   assert.equal(response.status, 410);
-  const body = await response.json();
-  assert.equal(body.type, '/problems/cursor-expired');
-  assert.equal(body.status, 410);
-  assert.equal(body.title, 'Cursor expired');
-  assert.ok(!Object.hasOwn(body, 'errors'));
+  const body = await readProblem(response);
+  assertProblemShape(body, 410, '/problems/cursor-expired', 'Cursor expired');
 });
 
 test('HTTP loader failures are redacted 500 problem details', async (t) => {
@@ -227,7 +243,9 @@ test('HTTP loader failures are redacted 500 problem details', async (t) => {
     response.headers.get('content-type'),
     /^application\/problem\+json/,
   );
-  assert.deepEqual(await response.json(), {
+  const body = await readProblem(response);
+  assertProblemShape(body, 500, '/problems/internal', 'Internal error');
+  assert.deepEqual(body, {
     type: '/problems/internal',
     title: 'Internal error',
     status: 500,

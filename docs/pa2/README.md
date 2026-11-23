@@ -156,11 +156,14 @@ Không chỉ viết “đã đăng nhập”; phải rõ quyền trên dữ li�
 | [backend/src/app.js](../../backend/src/app.js), [places.js](../../backend/src/places.js) | Implementation HTTP/service cho endpoint. | Không thay implementation để ép test qua. Hành vi phải khớp [contract](../../docs/contract/endpoint.md), kể cả paging và problem details.                                                                  |
 | [CI workflow](../../.github/workflows/ci.yml) và [PA2.md](../../PA2.md)                  | Chạy tests và dẫn bằng chứng.             | Đưa tests vào required CI; tạo một commit/PR làm implementation sai contract khiến tests đỏ, rồi sửa code và dẫn link.                                                                                     |
 
-Contract Markdown và HTTP contract tests cùng tồn tại. Phạm vi tối thiểu gồm:
+Contract Markdown và HTTP contract tests cùng tồn tại. Phạm vi rubric cần gồm:
 
 - success path và response shape;
 - mọi error type trong contract, với đúng HTTP status và RFC 9457 problem fields;
-- ownership rule: request tới dữ liệu người khác phải có đúng status mà contract đặt ra;
+- ownership rule: request tới dữ liệu người khác phải có đúng status mà contract đặt ra.
+  Với `GET /places` public hiện tại, tests chỉ chứng minh public/shared data,
+  từ chối user selectors và không lộ private fields; không tự khẳng định đó là
+  một owned-resource denial;
 - paging hoặc idempotency nếu endpoint là list hoặc create/publish;
 - kiểm tra nội dung/schema và ràng buộc field, không chỉ status code.
 
@@ -171,8 +174,9 @@ test hay validator trong commit đỏ để làm nó pass.
 Đã có bằng chứng deliberate contract break trên local:
 `297d44d` trả `201` thay cho `200` ở `GET /places`, làm 3/35 tests đỏ (32 pass);
 `531967f` khôi phục `200` và làm 35/35 tests xanh. Không test hay validator
-nào bị thay đổi. Theo rubric 13-15 điểm, bước còn thiếu là tạo PR và ghi lại
-commit đỏ/sửa dưới dạng required CI run đỏ/xanh thật trên GitHub.
+nào bị thay đổi. Theo rubric, chứng cứ local chưa đủ cho 13-15 điểm. Cần tạo PR và ghi lại
+commit đỏ/sửa dưới dạng required CI run đỏ/xanh thật trên GitHub. Nếu không
+bổ sung owned-resource case, team nên tự chấm criterion 6 trong band 8-12.
 
 <a id="rubric-7"></a>
 

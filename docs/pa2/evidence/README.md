@@ -48,7 +48,7 @@ The green CI run above independently shows successful `npm ci`, lint, format che
 
 ## Still pending for the team submission
 
-- A PR/CI run that catches the contract-break commit (criterion 6). Local proof is complete: red commit `297d44d` failed 3/35 because `GET /places` returned 201 instead of 200; fix commit `531967f` passed 35/35.
+- A PR/CI run that catches the contract-break commit (criterion 6). Local proof is complete: red commit `297d44d` failed 3/35 because `GET /places` returned 201 instead of 200; fix commit `531967f` passed 35/35. The public endpoint has no owned-resource data case, so 13-15 remains unavailable until that requirement is added or the lecturer accepts an equivalent.
 - The CI run for the final submitted `pa2` tag. The local tag now points to evidence commit `96bdb81`; the tag has not been pushed or used by GitHub Actions yet.
 - Review of the remaining criteria and the final team score/ZIP.
 
