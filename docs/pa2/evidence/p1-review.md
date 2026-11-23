@@ -6,27 +6,28 @@ contains the implementation previously prepared on 2026-11-19.
 
 ## Criterion 2 - permissions and secrets
 
-| Requirement                                         | Evidence                                                                                              | State                                                                             |
-| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| Allowed / Ask first / Never                         | [PERMISSIONS.md](../PERMISSIONS.md), referenced from root AGENTS.md                                   | Written                                                                           |
-| Environment variable names without values           | [.env.example](../../../.env.example): PORT, CURSOR_SECRET                                            | Matches current server configuration                                              |
-| Ignore local secrets                                | [.gitignore](../../../.gitignore)                                                                     | Audit confirmed .env is ignored                                                   |
-| No detected credentials in available history        | [Audit](secrets-audit.md), [script](../../../scripts/audit-secrets.py)                                | Rechecked; see scope limitations                                                  |
-| Model API key spending control documented in README | [README](../../../README.md), [redacted account evidence](gemini-free-tier-no-billing-2026-11-21.png) | Free tier with no billing account: USD 0 paid-spend boundary                      |
-| Cost per synthetic itinerary                        | [Benchmark](model-cost-benchmark.md)                                                                  | Actual Free-tier USD 0; paid-tier equivalent USD 0.00162885 for one measured call |
+| Requirement                                        | Evidence                                                                                              | State                                                                               |
+| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Allowed / Ask first / Never                        | [PERMISSIONS.md](../PERMISSIONS.md), referenced from root AGENTS.md                                   | Written                                                                             |
+| Environment variable names without values          | [.env.example](../../../.env.example): PORT, CURSOR_SECRET                                            | Matches current server configuration                                                |
+| Ignore local secrets                               | [.gitignore](../../../.gitignore)                                                                     | Audit confirmed .env is ignored                                                     |
+| No detected credentials in available history       | [Audit](secrets-audit.md), [script](../../../scripts/audit-secrets.py)                                | Rechecked; see scope limitations                                                    |
+| Model API key spending status documented in README | [README](../../../README.md), [redacted account evidence](gemini-free-tier-no-billing-2026-11-21.png) | Free tier with no billing account: no paid billing or spending cap currently exists |
+| Cost per synthetic itinerary                       | [Benchmark](model-cost-benchmark.md)                                                                  | Actual Free-tier USD 0; paid-tier equivalent USD 0.00162885 for one measured call   |
 
 The endpoint does not use a model. PA2 introduces the harness before the PA3 LLM
 feature; a model integration is not needed to implement GET /places. Criterion 2
-asks for a capped model key. For this Free-tier project, the account-side evidence
-shows that no billing account is linked, so paid spend cannot occur. This is recorded
-as a USD 0 paid-spend boundary, not as use of Google's configurable paid-tier cap.
+asks for a capped model key. For this Free-tier project, there is no paid billing
+and no configured spending cap; the tool is free in the current account state.
+This cannot be scored as a configured cap, but it accurately explains why no paid
+charge is possible currently.
 
 The team reports Google Gemini API project `travel-planner`, model
 `gemini-3.5-flash-lite`, Free tier with no billing account linked, and successful API
-connectivity testing by a team member. No explicit spending cap is configured.
-The selected control is the absence of a billing account: paid spend is bounded at
-USD 0 continuously, rather than by the paid-tier configurable monthly cap. This is
-not described as a budget alert or as use of Google's configurable cap feature.
+connectivity testing by a team member. No spending cap is configured and no spending cap is needed for current no-billing
+Free-tier use. This is not a paid-tier budget control or a hard monthly paid
+spending limit. If the account gains billing or paid usage, configure a provider
+spending cap before continuing.
 The dated [redacted account screenshot](gemini-free-tier-no-billing-2026-11-21.png)
 retains the project name, Free-tier badge and no-billing message while excluding
 the browser URL, email and API key.

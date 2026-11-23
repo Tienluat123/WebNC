@@ -144,17 +144,20 @@ The team reports the following model-account configuration:
 - Model: `gemini-3.5-flash-lite`.
 - Billing: Free tier; no billing account is linked to the project.
 - API connectivity: successfully tested by a team member; no key or test output is stored here.
-- Paid-spend ceiling: USD 0, enforced continuously by the absence of a linked billing account.
-- Configurable project spend-cap feature: not applicable while the project remains on the Free tier.
+- Spending cap: no spending cap exists or is needed for the current account state.
+  The Gemini API tool is currently being used through the Free tier with no billing
+  account, so the team cannot incur paid usage with this project.
+- Configurable project spend-cap: not applicable; no paid billing has been enabled.
 - Synthetic full-itinerary benchmark: actual Free-tier cost USD 0; paid-tier
   equivalent USD 0.00162885 for one 84-input/1,293-output-token call. See the
   [measurement and limitations](docs/pa2/evidence/model-cost-benchmark.md).
 
-This is an account-side zero paid-spend boundary, not a budget alert and not a
-claim that the configurable paid-tier spend-cap control was set. Google documents
-the Free-tier billing cap as N/A; API keys inherit the project's billing status.
-If a billing account is linked later, the USD 0 boundary no longer applies and
-the team must configure a project spend cap before using the key. See the
+This is not a configured spending cap. It is the account's current no-billing/
+Free-tier state: because no billing account or paid balance is active, the tool
+does not currently generate paid charges. If billing is later enabled or the model
+is switched to a paid service, the team must configure an enforced provider
+spending cap and record it before using the key. A Free-tier usage limit or budget
+notification alone must not be described as a hard paid-spending cap. See the
 [Gemini API billing documentation](https://ai.google.dev/gemini-api/docs/billing).
 No model key is committed or requested. A redacted account screenshot should
 retain the project name, Free-tier badge and no-billing message while hiding the

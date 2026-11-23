@@ -321,3 +321,35 @@ Evidence: [red commit 297d44d](https://github.com/Tienluat123/WebNC/commit/297d4
 [fix commit 531967f](https://github.com/Tienluat123/WebNC/commit/531967f),
 [HTTP contract tests](backend/test/contract/places.test.js),
 [PA2 evidence index](docs/pa2/evidence/README.md).
+
+## 2026-11-23 — Free-tier spending status and criterion 6 review
+
+Date: 2026-11-23.
+
+Tool: Copilot SDK in VS Code, using workspace file review and rubric PDF extraction.
+
+Used for: replacing misleading paid-spending-cap claims with the actual
+no-billing/Free-tier status and explaining the exact rubric 6 evidence required.
+
+Changed: the repository now states that the Gemini API project is Free tier, has
+no billing account, and has no configured spending cap because the tool is free
+in its current state. It does not describe no-billing as a paid-tier spending cap.
+Updated the rubric map and self-assessment to distinguish local contract-break
+proof from required PR/CI red-green evidence.
+
+Rejected: did not claim criterion 2 is fully satisfied with a nonexistent
+spending cap and did not count a format red/green demo or local-only test run as
+criterion 6 evidence.
+
+Rubric 6 requirements recorded: tests must follow the contract, cover each error
+type, the ownership rule against another user's data, and paging/idempotency where
+applicable; tests must check content/schema rather than status alone; they must run
+in required CI; and a separate commit or PR must deliberately violate the contract
+while CI goes red and then return to green through a fix.
+
+Evidence: [spending status](docs/pa2/PERMISSIONS.md),
+[PA2 rubric PDF](docs/reference/PA2%20Rubric%20Harness%20Quality%20Gate.pdf),
+[contract test guide](docs/pa2/README.md),
+[HTTP contract tests](backend/test/contract/places.test.js),
+[red commit 297d44d](https://github.com/Tienluat123/WebNC/commit/297d44d),
+[fix commit 531967f](https://github.com/Tienluat123/WebNC/commit/531967f).

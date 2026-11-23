@@ -7,7 +7,8 @@
   implementation, but it is not a GitHub Actions run or criterion 6 evidence.
 - [Gemini API Free-tier and no-billing state](gemini-free-tier-no-billing-2026-11-21.png),
   captured 2026-11-21. The crop retains the project name, Free-tier badge and
-  no-billing message while excluding the browser URL, email and API key.
+  no-billing message while excluding the browser URL, email and API key. It shows
+  no paid billing and no configured spending cap; the tool is free in this state.
 - [Synthetic itinerary cost benchmark](model-cost-benchmark.md): one measured
   Free-tier call with paid-tier equivalent calculation and limitations.
 

@@ -5,8 +5,9 @@
 Current status (2026-11-23): the P1 permissions policy, adopted GET /places contract,
 Express implementation and executable HTTP contract tests exist. The latest local
 `npm test` run passed all 35 tests, including the HTTP contract tests. The team reports Google Gemini API
-and `gemini-3.5-flash-lite`; the Free-tier project has no billing account and
-therefore a USD 0 paid-spend boundary. Redacted account evidence is included.
+and `gemini-3.5-flash-lite`; the Free-tier project has no billing account. It has
+no paid spending cap because paid usage is not enabled and the tool is free in the
+current account state. Redacted no-billing evidence is included.
 The detailed guidance below includes the
 original scaffold inventory; use the [current P1 review](evidence/p1-review.md),
 [root README](../../README.md) and actual files for completion status.
@@ -155,12 +156,22 @@ Không chỉ viết “đã đăng nhập”; phải rõ quyền trên dữ li�
 | [backend/src/app.js](../../backend/src/app.js), [places.js](../../backend/src/places.js) | Implementation HTTP/service cho endpoint. | Không thay implementation để ép test qua. Hành vi phải khớp [contract](../../docs/contract/endpoint.md), kể cả paging và problem details.                                                                  |
 | [CI workflow](../../.github/workflows/ci.yml) và [PA2.md](../../PA2.md)                  | Chạy tests và dẫn bằng chứng.             | Đưa tests vào required CI; tạo một commit/PR làm implementation sai contract khiến tests đỏ, rồi sửa code và dẫn link.                                                                                     |
 
-Contract Markdown và HTTP contract tests cùng tồn tại. Coverage tối thiểu gồm success schema, filter AND, unknown/duplicate parameters, private selectors, paging/cursor binding, expiry và 500 redaction.
+Contract Markdown và HTTP contract tests cùng tồn tại. Phạm vi tối thiểu gồm:
+
+- success path và response shape;
+- mọi error type trong contract, với đúng HTTP status và RFC 9457 problem fields;
+- ownership rule: request tới dữ liệu người khác phải có đúng status mà contract đặt ra;
+- paging hoặc idempotency nếu endpoint là list hoặc create/publish;
+- kiểm tra nội dung/schema và ràng buộc field, không chỉ status code.
+
+Tests phải chạy trong required CI. Sau đó giữ một commit/PR riêng cố ý làm
+implementation sai contract để CI đỏ, rồi commit sửa riêng để CI xanh. Không sửa
+test hay validator trong commit đỏ để làm nó pass.
 
 Đã có bằng chứng deliberate contract break trên local:
 `297d44d` trả `201` thay cho `200` ở `GET /places`, làm 3/35 tests đỏ (32 pass);
 `531967f` khôi phục `200` và làm 35/35 tests xanh. Không test hay validator
-nào bị thay đổi. Bước còn thiếu để hoàn thiện rubric #6 là tạo PR và ghi lại
+nào bị thay đổi. Theo rubric 13-15 điểm, bước còn thiếu là tạo PR và ghi lại
 commit đỏ/sửa dưới dạng required CI run đỏ/xanh thật trên GitHub.
 
 <a id="rubric-7"></a>

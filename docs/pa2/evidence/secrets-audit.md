@@ -34,4 +34,6 @@ covered. Zero matches means no detected credentials within this scope, not proof
 that every possible secret is absent. Rerun after commits/fetches before submission.
 
 No credential exposure was detected by these checks, so no rotation is claimed.
-Model/provider selection and actual spending-cap configuration are still pending.
+The team selected Google Gemini API Free tier; no paid billing account or
+configured spending cap exists. This is not a paid-spend-control finding, because
+the current tool has no paid usage to bill.

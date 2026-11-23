@@ -53,18 +53,19 @@ of all credentials. Rerun after new commits or fetched refs before submission.
 cap and measured cost are independent of this endpoint. The team reports Google
 Gemini API project `travel-planner`, model `gemini-3.5-flash-lite`, Free tier with
 no billing account linked, and successful connectivity testing by a team member.
-No key or connectivity output is stored here. With no billing account, the
-account-side ceiling for paid usage is USD 0 and is enforced continuously; the
-paid-tier configurable spend-cap feature is not applicable on the Free tier.
+No key or connectivity output is stored here. No spending cap is configured
+because billing is not enabled and the selected Free-tier tool has no paid usage
+available in this project. It is free in the current account state, not protected
+by a configurable paid-tier spending limit.
 A single synthetic full-itinerary call was measured at 84 prompt tokens and
 1,293 candidate tokens: actual Free-tier cost USD 0 and paid-tier equivalent
 USD 0.00162885 at the price recorded on 2026-11-21. See the
 [benchmark evidence](evidence/model-cost-benchmark.md); it is not a production average.
 
 Before submission, include redacted evidence of the Free-tier and no-billing state;
-never include the API key, email address or project identifier. Do not relabel this
-state as use of Google's configurable spend-cap feature. If the account owner later
-links billing, first configure an enforced project spend cap and record its amount,
-currency, monthly period and enforcement behavior. A budget notification alone
-must not be described as a hard cap. Re-measure cost per plan after the production
+never include the API key, email address or project identifier. State explicitly
+that there is no spending cap rather than relabeling Free-tier/no-billing as a cap.
+If the account owner later links billing or switches to paid usage, configure an
+enforced project spend cap and record its amount, currency, period and enforcement
+behavior before using the key. Re-measure cost per plan after the production
 prompt, tools and agent loop are implemented; label estimates and assumptions explicitly.

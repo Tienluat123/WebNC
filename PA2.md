@@ -4,22 +4,23 @@ Repository: <https://github.com/Tienluat123/WebNC_Proposal>
 
 Status (2026-11-23): P1 permissions and GET /places contract/implementation are
 present. The team has selected Google Gemini API and `gemini-3.5-flash-lite`;
-the Free-tier project has no linked billing account, enforcing a USD 0 paid-spend
-boundary. Redacted account evidence is included.
+the Free-tier project has no linked billing account. No spending cap is configured
+because paid usage is not enabled and the tool is free in the current account state.
+Redacted account evidence is included.
 Checks/required CI, protected-branch evidence and final self-assessment are not
 complete. [File map](docs/pa2/README.md).
 
 ## P1 evidence - criteria 2 and 5
 
-| Item                                      | Evidence                                                                                                                                                                                                                                                               |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Permission tiers and secret policy        | [PERMISSIONS.md](docs/pa2/PERMISSIONS.md)                                                                                                                                                                                                                              |
-| Environment variable names                | [.env.example](.env.example)                                                                                                                                                                                                                                           |
-| Local history/working-file audit          | [Audit evidence](docs/pa2/evidence/secrets-audit.md)                                                                                                                                                                                                                   |
-| Adopted endpoint contract                 | [GET /places](docs/contract/endpoint.md)                                                                                                                                                                                                                               |
-| Endpoint implementation and setup         | [Backend README](backend/README.md)                                                                                                                                                                                                                                    |
-| Rubric review, verification and handoff   | [P1 review](docs/pa2/evidence/p1-review.md)                                                                                                                                                                                                                            |
-| Model spending control and cost benchmark | [README](README.md), [redacted account evidence](docs/pa2/evidence/gemini-free-tier-no-billing-2026-11-21.png), [cost evidence](docs/pa2/evidence/model-cost-benchmark.md): Free tier, no billing account, USD 0 paid-spend boundary; one synthetic itinerary measured |
+| Item                                     | Evidence                                                                                                                                                                                                                                                        |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Permission tiers and secret policy       | [PERMISSIONS.md](docs/pa2/PERMISSIONS.md)                                                                                                                                                                                                                       |
+| Environment variable names               | [.env.example](.env.example)                                                                                                                                                                                                                                    |
+| Local history/working-file audit         | [Audit evidence](docs/pa2/evidence/secrets-audit.md)                                                                                                                                                                                                            |
+| Adopted endpoint contract                | [GET /places](docs/contract/endpoint.md)                                                                                                                                                                                                                        |
+| Endpoint implementation and setup        | [Backend README](backend/README.md)                                                                                                                                                                                                                             |
+| Rubric review, verification and handoff  | [P1 review](docs/pa2/evidence/p1-review.md)                                                                                                                                                                                                                     |
+| Model spending status and cost benchmark | [README](README.md), [redacted account evidence](docs/pa2/evidence/gemini-free-tier-no-billing-2026-11-21.png), [cost evidence](docs/pa2/evidence/model-cost-benchmark.md): Free tier, no billing, no configured spending cap; one synthetic itinerary measured |
 
 These file links are local work evidence, not PR/CI or full-score claims.
 Status: Luật's criteria 3–4 evidence is assembled. The team submission is not final: contract-break evidence, the submitted `pa2` tag/run and assessment of the other criteria remain pending. [File map](docs/pa2/README.md).
