@@ -2,9 +2,9 @@
 
 Đã rà với [rubric gốc](<../reference/PA2 Rubric Harness Quality Gate.pdf>), trang 1–4, và [contract mẫu](../reference/Contract.md). Hạn trong rubric: **22:00 ngày 26/11/2026**.
 
-Current status (2026-11-21): the P1 permissions policy, adopted GET /places contract,
-Express implementation and 31 tests exist. The latest local `npm test` run passed
-all 31 tests, including the four HTTP tests. The team reports Google Gemini API
+Current status (2026-11-23): the P1 permissions policy, adopted GET /places contract,
+Express implementation and executable HTTP contract tests exist. The latest local
+`npm test` run passed all 35 tests, including the HTTP contract tests. The team reports Google Gemini API
 and `gemini-3.5-flash-lite`; the Free-tier project has no billing account and
 therefore a USD 0 paid-spend boundary. Redacted account evidence is included.
 The detailed guidance below includes the
@@ -12,7 +12,11 @@ original scaffold inventory; use the [current P1 review](evidence/p1-review.md),
 [root README](../../README.md) and actual files for completion status.
 Checks/CI and final Rules/submission work remain with their assigned owners.
 
-Repo đã có checks, required CI và bằng chứng PR đỏ → xanh cho phần Luật; ứng dụng và contract tests còn là khung. Có file không đồng nghĩa đã đạt điểm. Ghi chú dưới đây phân biệt yêu cầu của thầy với cách nhóm chọn tổ chức repo.
+Repo đã có checks, required CI và bằng chứng PR đỏ → xanh cho phần Luật. Endpoint
+PA2 hiện là `GET /places`, với implementation, contract Markdown và HTTP contract
+tests; implementation và test data đều dùng synthetic/public catalogue. Có file và
+có test không đồng nghĩa endpoint đã chứng minh mọi ownership scenario. Ghi chú dưới
+đây phân biệt yêu cầu của thầy với cách nhóm chọn tổ chức repo.
 
 ## Quyết định
 
@@ -22,17 +26,17 @@ Repo đã có checks, required CI và bằng chứng PR đỏ → xanh cho phầ
 
 ## Phân công theo rubric
 
-| Người    | Mục rubric phụ trách                                          | Phạm vi                                                                                                      |
-| -------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| Nghi Văn | [#2 Permissions/secrets](#rubric-2), [#5 Contract](#rubric-5) | Contract và code **một endpoint PA#2**; chính sách quyền, env/secrets, audit history và spending cap.        |
-| Luật     | [#3 Commands](#rubric-3), [#4 CI](#rubric-4)                  | Cấu hình checks, hướng dẫn setup, CI/protection và bằng chứng PR đỏ → xanh.                                  |
-| Ninh     | [#1 Rules](#rubric-1), [#6 Contract tests](#rubric-6)         | Tổng hợp AGENTS từ quy ước/lỗi thật của nhóm; viết fixtures/tests; phối hợp P1 tạo lần phá contract rồi sửa. |
-| Cả ba    | [#7 AI-LOG](#rubric-7), [hồ sơ nộp](#submission)              | Mỗi người ghi log, link bằng chứng và tự chấm các mục mình làm; review chung trước khi nộp.                  |
+| Người    | Mục rubric phụ trách                                          | Phạm vi                                                                                                                                             |
+| -------- | ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Nghi Văn | [#2 Permissions/secrets](#rubric-2), [#5 Contract](#rubric-5) | Contract và code **một endpoint PA#2**; chính sách quyền, env/secrets, audit history và spending cap.                                               |
+| Luật     | [#3 Commands](#rubric-3), [#4 CI](#rubric-4)                  | Cấu hình checks, hướng dẫn setup, CI/protection và bằng chứng PR đỏ → xanh.                                                                         |
+| Ninh     | [#1 Rules](#rubric-1), [#6 Contract tests](#rubric-6)         | Duy trì AGENTS theo quy ước/entry thật của nhóm; viết HTTP contract tests cho `GET /places`; tạo fixture và chứng minh lần phá/sửa contract qua CI. |
+| Cả ba    | [#7 AI-LOG](#rubric-7), [hồ sơ nộp](#submission)              | Mỗi người ghi log, link bằng chứng và tự chấm các mục mình làm; review chung trước khi nộp.                                                         |
 
 Commit: gắn tag pa2.
 Nhánh cho phần permissions/secrets và GET /places: `pa2-permissions-places`.
 Commit nộp cuối của cả nhóm: gắn tag pa2; chưa gắn tag cho nhánh đang làm.
-Mỗi task là mội nhánh: /p1
+Mỗi task nên có một nhánh riêng.
 
 <details>
 <summary>Chi tiết rubric và hướng dẫn điền từng file</summary>
@@ -54,19 +58,19 @@ AGENTS.md chứa các quy tắc assistant phải theo khi làm trong repo. Đây
 
 Thầy yêu cầu **ít nhất hai dòng quy tắc truy được về điều đã sai thật**, qua commit hoặc một entry trong AI-LOG. Khi gặp lỗi thật: ghi diễn biến trong AI-LOG; thêm quy tắc rút ra trong AGENTS và dẫn tới entry/commit. Không tự viết hai sự cố giả để điền cho đủ.
 
-**Vì sao từng có AI-LOG ở dòng số 1?** Nó chỉ là nguồn chứng minh cho quy tắc, không phải Rules file thứ hai. File được chấm chính ở mục 1 vẫn là AGENTS.md; AI-LOG được chấm riêng ở mục 7. Khung hiện có đúng bốn mục nhưng còn TODO; nhóm phải review và điền quy tắc thật.
+**Vì sao từng có AI-LOG ở dòng số 1?** Nó chỉ là nguồn chứng minh cho quy tắc, không phải Rules file thứ hai. File được chấm chính ở mục 1 vẫn là AGENTS.md; AI-LOG được chấm riêng ở mục 7. AGENTS phải phản ánh stack, lệnh, convention và cấm thật của repo; chưa có entry/sự cố thật không được biến thành bằng chứng.
 
 <a id="rubric-2"></a>
 
 ## 2. Permissions và secrets — 10 điểm, rubric trang 2
 
-| File / nơi thao tác                | Vai trò                                                                              | Điền hoặc làm gì?                                                                                                                     |
-| ---------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| [PERMISSIONS.md](PERMISSIONS.md)   | Chính sách quyền assistant. Tên/path do repo chọn, thầy không bắt buộc file tên này. | Điền ba dòng Allowed / Ask first / Never bằng hành động cụ thể của nhóm. AGENTS dẫn tới file này để người dùng biết chính sách ở đâu. |
-| [.env.example](../../.env.example) | Danh sách biến môi trường cần có. Tên được rubric nêu rõ.                            | Khi code cần biến nào, thêm tên biến đó với giá trị trống, dạng TEN_BIEN=. Hiện chỉ có comment, chưa phải danh sách biến đầy đủ.      |
-| [.gitignore](../../.gitignore)     | Quy tắc không đưa file local vào Git.                                                | Đã có .env và .env.\* cùng ngoại lệ cho .env.example. Cập nhật nếu có đường dẫn nhạy cảm khác; không thêm khóa vào file này.          |
-| [README.md](../../README.md)       | Hướng dẫn chung và thông tin spending cap.                                           | Điền provider/model nhóm dùng và spending cap đã cấu hình thật; brief còn yêu cầu ghi chi phí một plan.                               |
-| Provider console và lịch sử Git    | Bằng chứng thực tế, không thay bằng một file TODO.                                   | Thiết lập cap ở provider; kiểm tra toàn bộ history. Nếu lộ khóa thì xoay khóa và ghi AI-LOG.                                          |
+| File / nơi thao tác                | Vai trò                                                                              | Điền hoặc làm gì?                                                                                                                          |
+| ---------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| [PERMISSIONS.md](PERMISSIONS.md)   | Chính sách quyền assistant. Tên/path do repo chọn, thầy không bắt buộc file tên này. | Điền ba dòng Allowed / Ask first / Never bằng hành động cụ thể của nhóm. AGENTS dẫn tới file này để người dùng biết chính sách ở đâu.      |
+| [.env.example](../../.env.example) | Danh sách biến môi trường cần có. Tên được rubric nêu rõ.                            | Thêm biến với giá trị trống khi runtime thật sử dụng nó; không commit giá trị. Trạng thái hiện tại xem [.env.example](../../.env.example). |
+| [.gitignore](../../.gitignore)     | Quy tắc không đưa file local vào Git.                                                | Đã có .env và .env.\* cùng ngoại lệ cho .env.example. Cập nhật nếu có đường dẫn nhạy cảm khác; không thêm khóa vào file này.               |
+| [README.md](../../README.md)       | Hướng dẫn chung và thông tin spending cap.                                           | Điền provider/model nhóm dùng và spending cap đã cấu hình thật; brief còn yêu cầu ghi chi phí một plan.                                    |
+| Provider console và lịch sử Git    | Bằng chứng thực tế, không thay bằng một file TODO.                                   | Thiết lập cap ở provider; kiểm tra toàn bộ history. Nếu lộ khóa thì xoay khóa và ghi AI-LOG.                                               |
 
 PERMISSIONS trả lời “assistant được tự làm gì / cần hỏi gì / không được làm gì”. Never trong AGENTS tập trung quy tắc phát triển sản phẩm. Hai phần có thể liên kết nhau; không cần chép nguyên văn một chính sách vào cả hai file. Nhóm cũng có thể gộp quyền vào Rules file nếu muốn ngắn hơn; rubric không bắt buộc tách riêng.
 
@@ -95,7 +99,7 @@ npm run typecheck
 npm test
 ```
 
-**Điểm cần phối hợp:** Node test runner hiện chỉ chạy file contract test chứa comment. Chưa có assertion kiểm tra endpoint; Ninh cần bổ sung tests thật theo contract/implementation của Văn. Kết quả runner xanh hiện chỉ xác nhận công cụ chạy được. Phần Commands trong AGENTS còn TODO, cần Ninh đồng bộ với các lệnh trên khi hoàn thiện Rules.
+**Điểm cần phối hợp:** HTTP contract tests giờ kiểm tra `GET /places` qua server thật; vẫn chưa được chạy trong lượt chỉnh sửa này theo yêu cầu. Ninh cần giữ test cases khớp contract và phối hợp Văn để có deliberate contract-break trong CI. Lệnh tests trong AGENTS, package.json, README và workflow phải đồng nhất.
 
 Không cần điền câu “đã pass” vào config. Kết quả và link bằng chứng ghi trong hồ sơ nộp khi đã thực hiện thật.
 
@@ -134,20 +138,24 @@ Khi cả nhóm chốt commit nộp, push tag `pa2` để workflow chạy trên t
 | 4. Endpoints                   | Method/path, role, ownership: ai được thao tác dữ liệu của ai; success, lỗi, paging nếu là danh sách, idempotency nếu tạo/publish. |
 | 5. Versions and the legacy API | Cách thay đổi contract và tương thích. Nếu chưa có legacy API thì ghi rõ, không cần dựng một API cũ cho giống mẫu.                 |
 
-Không chỉ viết “đã đăng nhập”; phải rõ quyền trên dữ liệu. Đích là người lạ có thể viết client từ contract mà không cần hỏi nhóm. Khung hiện chưa đủ làm điều đó.
+Theo contract hiện có, [GET /places](../../docs/contract/endpoint.md) là endpoint
+dùng cho rubric #5. Chỉ ra chính sách public/shared catalogue, sai không owned
+resource, các filter, paging, cursor, problem details và không có request body.
+
+Không chỉ viết “đã đăng nhập”; phải rõ quyền trên dữ liệu. Đích là người lạ có thể viết client từ contract mà không cần hỏi nhóm. Contract hiện đã nêu public ownership, nhưng mức ownership-test có thể chưa đủ cho yêu cầu riêng về owned data của rubric.
 
 <a id="rubric-6"></a>
 
 ## 6. Contract tests có tác dụng — 15 điểm, rubric trang 3
 
-| File / nơi code                                                         | Vai trò                                                                 | Bạn cần viết                                                                                                                                                                                                               |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [places.test.js](../../backend/test/contract/places.test.js)            | File tests của endpoint, tên/path do repo chọn.                         | Đổi tên theo endpoint; viết tests chạy request thật tới implementation: success, từng error type, ownership và paging/idempotency nếu áp dụng. Kiểm tra nội dung/schema chứ không chỉ status. Hiện toàn bộ chỉ là comment. |
-| [backend/test/fixtures/](../../backend/test/fixtures/README.md)         | Dữ liệu đầu vào và kết quả tham chiếu cho tests; cách tổ chức tùy chọn. | Thêm fixtures khi biết schema. README chỉ hướng dẫn, không phải dataset hay test.                                                                                                                                          |
-| [backend/src/](../../backend/src/)                                      | Nơi sẽ chứa implementation endpoint theo bố trí repo.                   | Hiện chỉ có .gitkeep. Cần code endpoint và phần xử lý liên quan để tests thật sự kiểm tra hành vi; rubric không quy định bắt buộc tên file app.js/router.js.                                                               |
-| [CI workflow](../../.github/workflows/ci.yml) và [PA2.md](../../PA2.md) | Chạy tests và dẫn bằng chứng.                                           | Đưa tests vào required CI; tạo một commit/PR làm implementation sai contract khiến tests đỏ, rồi sửa code và dẫn link.                                                                                                     |
+| File / nơi code                                                                          | Vai trò                                   | Bạn cần viết                                                                                                                                                                                               |
+| ---------------------------------------------------------------------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [places.test.js](../../backend/test/contract/places.test.js)                             | HTTP contract tests cho `GET /places`.    | Viết request thật tới implementation; kiểm tra success schema, public fields, filter AND, validation, cursor binding/expiry, 500 redaction, Authorization independence và rejection của private selectors. |
+| [backend/test/fixtures/](../../backend/test/fixtures/README.md)                          | Dữ liệu synthetic và hướng dẫn fixture.   | Mở rộng fixture khi contract cần case mới; tên/id phải vẫn synthetic và không mô tả real place như đã xác minh.                                                                                            |
+| [backend/src/app.js](../../backend/src/app.js), [places.js](../../backend/src/places.js) | Implementation HTTP/service cho endpoint. | Không thay implementation để ép test qua. Hành vi phải khớp [contract](../../docs/contract/endpoint.md), kể cả paging và problem details.                                                                  |
+| [CI workflow](../../.github/workflows/ci.yml) và [PA2.md](../../PA2.md)                  | Chạy tests và dẫn bằng chứng.             | Đưa tests vào required CI; tạo một commit/PR làm implementation sai contract khiến tests đỏ, rồi sửa code và dẫn link.                                                                                     |
 
-Chỉ có contract Markdown và comment tests là chưa đủ. Cần chọn test runner/dependencies và lệnh chạy. Không dùng việc file còn TODO hay thiếu setup làm bằng chứng “cố tình phá contract”.
+Contract Markdown và HTTP contract tests cùng tồn tại. Coverage tối thiểu gồm success schema, filter AND, unknown/duplicate parameters, private selectors, paging/cursor binding, expiry và 500 redaction. Một lần deliberate break phải được chạy thật trong CI, giữ commit đỏ/sửa trong lịch sử; không sửa test hay validator để làm check xanh.
 
 <a id="rubric-7"></a>
 

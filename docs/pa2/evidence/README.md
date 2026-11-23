@@ -2,6 +2,9 @@
 
 ## Current evidence
 
+- The [HTTP contract test suite](../../../backend/test/contract/places.test.js) was
+  run locally on 2026-11-23: 35 tests passed, 0 failed. This verifies the local
+  implementation, but it is not a GitHub Actions run or criterion 6 evidence.
 - [Gemini API Free-tier and no-billing state](gemini-free-tier-no-billing-2026-11-21.png),
   captured 2026-11-21. The crop retains the project name, Free-tier badge and
   no-billing message while excluding the browser URL, email and API key.
@@ -44,7 +47,7 @@ The green CI run above independently shows successful `npm ci`, lint, format che
 
 ## Still pending for the team submission
 
-- A real implementation/contract-test violation caught by CI (criterion 6). The current test file contains comments only; the format demo does not satisfy this criterion.
+- A real implementation/contract-test violation caught by CI (criterion 6). The HTTP contract tests now cover the adopted `/places` behavior; the format demo only satisfies criterion 4 and must not be reused as contract-break evidence.
 - The CI run for the final submitted `pa2` tag. No final tag has been created for this work.
 - Review of the remaining criteria and the final team score/ZIP.
 

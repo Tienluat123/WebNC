@@ -2,34 +2,26 @@
 
 Repository: <https://github.com/Tienluat123/WebNC_Proposal>.
 
-## PA2 status - 2026-11-21
+## PA2 status - 2026-11-23
 
 GET /places is implemented with Express and explicitly synthetic fixtures.
 The adopted [contract](docs/contract/endpoint.md) defines public access, four
 AND-combined filters, signed cursor pagination and RFC 9457 errors.
 See the [P1 review](docs/pa2/evidence/p1-review.md) for evidence and remaining work.
 
-Repo đã có checks, CI chạy thật trên PR và protection cho `main`. Phần Luật đã có bằng chứng required check đỏ chặn merge rồi xanh sau khi sửa. Ứng dụng và contract tests còn là khung; bằng chứng phá contract và CI của tag nộp vẫn chờ nhóm hoàn thiện.
+Repo đã có checks, CI chạy thật trên PR và protection cho `main`. Phần Luật đã có bằng chứng required check đỏ chặn merge rồi xanh sau khi sửa. Endpoint `GET /places` và HTTP contract tests đã có; bằng chứng deliberate contract break và CI của tag nộp vẫn chờ hoàn thiện.
 
-| Owner    | Scope                                            | Current state                                                              |
-| -------- | ------------------------------------------------ | -------------------------------------------------------------------------- |
-| Nghi Van | #2 Permissions/secrets, #5 contract and endpoint | Implemented; actual model spending-cap evidence pending                    |
-| Luat     | #3 commands, #4 required CI/protection           | Pending; workflow is still a non-active example                            |
-| Ninh     | #1 rules, #6 contract tests                      | Rules still contain TODOs; tests exist, full CI/red-green evidence pending |
-| All      | #7 AI log and submission                         | Log updated; final score, evidence links and submission packaging pending  |
+| Owner    | Scope                                            | Current state                                                                 |
+| -------- | ------------------------------------------------ | ----------------------------------------------------------------------------- |
+| Nghi Van | #2 Permissions/secrets, #5 contract and endpoint | Implemented; actual model spending-cap evidence pending                       |
+| Luat     | #3 commands, #4 required CI/protection           | Verified locally and on PR/branch protection; tag CI pending                  |
+| Ninh     | #1 rules, #6 contract tests                      | Rules and HTTP tests added; deliberate contract red-green CI evidence pending |
+| All      | #7 AI log and submission                         | Log updated; final score, evidence links and submission packaging pending     |
 
 ## Setup and verification
 
-Use Node.js 22.18.x and npm 10.9.3, as documented in
-[backend/README.md](backend/README.md). Run from the repository root:
-
-```sh
-npm ci
-npm run test:service
-npm test
-```
-
-For server setup, copy .env.example to .env, set PORT and a private CURSOR_SECRET
+Use Node.js 22.23.2 and npm 10.9.8, as documented in
+[backend/README.md](backend/README.md). For server setup, copy .env.example to .env, set PORT and a private CURSOR_SECRET
 of at least 32 bytes, then run npm start. Follow the backend instructions to
 generate the secret locally; never commit or share its value.
 
@@ -113,7 +105,7 @@ Chạy toàn bộ: `npm run check`. Tự sửa format: `npm run format`.
 
 ESLint dùng recommended rules cho JS/TS; warning làm check thất bại. Typecheck bật `strict`, `checkJs`, `noEmit`; hiện kiểm tra cấu hình ESLint và file test khung, đồng thời nhận code JS/TS trong backend và TS/TSX trong frontend khi được thêm. Formatter bỏ qua dependencies, file sinh tự động, file môi trường, tài liệu gốc của thầy và hồ sơ PA1.
 
-**Giới hạn hiện tại:** `backend/test/contract/endpoint.test.js` chỉ có comment. Node báo file này pass không có nghĩa là đã kiểm tra contract. Ninh cần bổ sung test cases thật theo endpoint của Văn; CI đã có bước chạy `npm test`. Chưa có ứng dụng để chạy dev/build.
+**Trạng thái hiện tại:** `backend/test/contract/places.test.js` chạy HTTP contract tests cho `GET /places`. Lần chạy local ngày 2026-11-23 đã qua 35 tests, 0 failed. Kết quả local này chưa thay thế deliberate contract break chạy trong CI cho rubric #6.
 
 ## CI và bằng chứng — Luật, rubric #4
 
@@ -133,10 +125,8 @@ Tiếp tục giữ hai commit đỏ/sửa trong lịch sử; không tái dựng/
 
 Bằng chứng cố tình phá **contract** ở mục #6 cần phối hợp Văn/Ninh khi implementation và tests thật đã có; một lỗi lint/format chỉ chứng minh CI ở mục #4.
 
-The 2026-11-21 local rerun passed all 31 service and HTTP tests. This supersedes
-the earlier same-day run where the assistant environment blocked localhost with
-`EACCES`; the restriction did not reproduce in this checkout. This is local
-verification, not a CI pass. Lint, formatting and typecheck commands are not implemented.
+The 2026-11-23 local rerun passed all 35 service and HTTP contract tests.
+This is local verification, not a CI pass. The deliberate contract break remains pending.
 
 ## Permissions, secrets and model budget
 

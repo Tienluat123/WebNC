@@ -6,7 +6,7 @@ Status: adopted by the user on 2026-11-19 for this PA2 implementation. The user
 confirmed the endpoint was already selected by the team, then accepted the public
 access policy, filters, pagination, response schema and errors. This records the
 user's decision, not a claim that every team member separately reviewed this file.
-The user's local run passed all 31 service and HTTP tests.
+The user's local run passed all 35 service and HTTP tests on 2026-11-23.
 See [backend status](../../backend/README.md). Numeric limits and schema choices
 are project decisions, not requirements quoted from the lecturer.
 

@@ -229,3 +229,64 @@ Rejected: Extra CI guide and proposed protection-payload files were dropped; the
 Evidence: [PA2 dossier](PA2.md), [screenshots and CI runs](docs/pa2/evidence/README.md), [red commit 868f505](https://github.com/Tienluat123/WebNC/commit/868f505b763e424efeae7cc7cfb044e4fe47fcf8), [fix commit 2b3c61c](https://github.com/Tienluat123/WebNC/commit/2b3c61ce7116cf8d88e892c0896cdc7f213947eb).
 
 Pending: Real contract tests/contract-break evidence and the final submitted tag run.
+
+## 2026-11-23 — Contract tests and Rules alignment
+
+Date: 2026-11-23.
+
+Tool: Copilot SDK in VS Code, using workspace file inspection and patch editing.
+
+Used for: reviewing the PA2 assignment guidance, comparing it with `AGENTS.md`
+and the adopted `GET /places` contract, expanding the HTTP contract test suite,
+and recording the result of this work.
+
+Changed: updated `docs/pa2/README.md` to remove stale skeleton/comment-test language
+and describe the current public `/places` implementation. Aligned `AGENTS.md` with
+the actual Node 22 setup, package scripts, public-catalogue ownership policy,
+`GET /places` conventions and HTTP contract-test requirements.
+
+Expanded `backend/test/contract/places.test.js` with HTTP assertions for:
+public response shape and field projection, Authorization independence, private
+selector rejection, AND-combined filters, unknown-slug empty results, malformed
+aggregate validation, cursor filter/limit tampering, write rejection, cursor expiry
+and redacted 500 problem details.
+
+Rejected: did not change implementation or validator behavior to make tests pass,
+did not fabricate an owned-resource 403 for the public catalogue endpoint, and did
+not claim a test pass before verification.
+
+Verification: ran `npm.cmd test` on 2026-11-23. The suite passed 35 tests,
+0 failed, including all HTTP contract tests and service tests.
+
+Evidence: [PA2 guidance](docs/pa2/README.md),
+[Rules file](AGENTS.md),
+[adopted endpoint contract](docs/contract/endpoint.md),
+[HTTP contract tests](backend/test/contract/places.test.js),
+[service tests](backend/test/places.test.js).
+
+## 2026-11-23 — Submission dossier reconciliation
+
+Date: 2026-11-23.
+
+Tool: Copilot SDK in VS Code, using workspace file inspection and patch editing.
+
+Used for: cross-checking the PA2 assignment guidance against the project brief and
+removing stale status claims across the repository submission documents.
+
+Changed: reconciled root and backend setup instructions to Node.js 22.23.2 /
+npm 10.9.8, updated test counts to the verified 35-test local run, replaced the
+duplicated [self-assessment](SELF_ASSESSMENT_REPORT.md) draft with one table,
+and clarified that a local passing suite is not criterion 6 evidence by itself.
+Updated the PA2 dossier and evidence index so they do not describe HTTP contract
+tests as comment-only or classify the format red/green demonstration as a
+deliberate contract break.
+
+Rejected: did not assign a final team score or claim that the submitted tag,
+public visibility, contract-break CI, or team approval had been completed.
+
+Evidence: [PA2 dossier](PA2.md),
+[assignment map](docs/pa2/README.md),
+[evidence index](docs/pa2/evidence/README.md),
+[root setup](README.md),
+[backend setup](backend/README.md),
+[self-assessment](SELF_ASSESSMENT_REPORT.md).

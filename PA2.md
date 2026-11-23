@@ -2,7 +2,7 @@
 
 Repository: <https://github.com/Tienluat123/WebNC_Proposal>
 
-Status (2026-11-21): P1 permissions and GET /places contract/implementation are
+Status (2026-11-23): P1 permissions and GET /places contract/implementation are
 present. The team has selected Google Gemini API and `gemini-3.5-flash-lite`;
 the Free-tier project has no linked billing account, enforcing a USD 0 paid-spend
 boundary. Redacted account evidence is included.
@@ -46,7 +46,11 @@ Owner: Nguyễn Tiến Luật — 23127221. Verified on 2026-11-21.
 - Fix commit `2b3c61c` restored only that indentation. CI succeeded and GitHub reported `CLEAN`. Neither tests nor validator rules were changed to make the check pass.
 - The red and fix commits remain separate in PR history. No rebase, squash or force push was used for this demonstration. During verification, remote `main` was still `fd93b682f8aaa4ce0501104f59853edecbfa69f1`, unchanged from before protection was enabled; assistant work was pushed only to the feature branch.
 
-The test runner currently reports a passing comment-only test file. There are no endpoint assertions yet. This evidence validates the commands and merge gate, not criterion 6. See the [evidence index](docs/pa2/evidence/README.md) and [AI usage record](AI-LOG.md#2026-11-21--luật-commands-ci-and-evidence).
+The test runner now also executes the HTTP contract tests for `GET /places`.
+The latest local run passed 35 tests on 2026-11-23; this evidence validates the test
+suite and implementation locally, but not criterion 6 until a deliberate contract
+break is caught by CI. See the [evidence index](docs/pa2/evidence/README.md) and
+[AI usage record](AI-LOG.md).
 
 ## Submission checklist
 
