@@ -155,7 +155,13 @@ Không chỉ viết “đã đăng nhập”; phải rõ quyền trên dữ li�
 | [backend/src/app.js](../../backend/src/app.js), [places.js](../../backend/src/places.js) | Implementation HTTP/service cho endpoint. | Không thay implementation để ép test qua. Hành vi phải khớp [contract](../../docs/contract/endpoint.md), kể cả paging và problem details.                                                                  |
 | [CI workflow](../../.github/workflows/ci.yml) và [PA2.md](../../PA2.md)                  | Chạy tests và dẫn bằng chứng.             | Đưa tests vào required CI; tạo một commit/PR làm implementation sai contract khiến tests đỏ, rồi sửa code và dẫn link.                                                                                     |
 
-Contract Markdown và HTTP contract tests cùng tồn tại. Coverage tối thiểu gồm success schema, filter AND, unknown/duplicate parameters, private selectors, paging/cursor binding, expiry và 500 redaction. Một lần deliberate break phải được chạy thật trong CI, giữ commit đỏ/sửa trong lịch sử; không sửa test hay validator để làm check xanh.
+Contract Markdown và HTTP contract tests cùng tồn tại. Coverage tối thiểu gồm success schema, filter AND, unknown/duplicate parameters, private selectors, paging/cursor binding, expiry và 500 redaction.
+
+Đã có bằng chứng deliberate contract break trên local:
+`297d44d` trả `201` thay cho `200` ở `GET /places`, làm 3/35 tests đỏ (32 pass);
+`531967f` khôi phục `200` và làm 35/35 tests xanh. Không test hay validator
+nào bị thay đổi. Bước còn thiếu để hoàn thiện rubric #6 là tạo PR và ghi lại
+commit đỏ/sửa dưới dạng required CI run đỏ/xanh thật trên GitHub.
 
 <a id="rubric-7"></a>
 

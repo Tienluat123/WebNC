@@ -47,8 +47,8 @@ The green CI run above independently shows successful `npm ci`, lint, format che
 
 ## Still pending for the team submission
 
-- A real implementation/contract-test violation caught by CI (criterion 6). The HTTP contract tests now cover the adopted `/places` behavior; the format demo only satisfies criterion 4 and must not be reused as contract-break evidence.
-- The CI run for the final submitted `pa2` tag. No final tag has been created for this work.
+- A PR/CI run that catches the contract-break commit (criterion 6). Local proof is complete: red commit `297d44d` failed 3/35 because `GET /places` returned 201 instead of 200; fix commit `531967f` passed 35/35.
+- The CI run for the final submitted `pa2` tag. The existing tag points to the earlier PA2 setup commit and must be replaced only when the team approves the final commit.
 - Review of the remaining criteria and the final team score/ZIP.
 
 The root [PA2.md](../../../PA2.md) is the submission link hub.

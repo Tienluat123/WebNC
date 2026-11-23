@@ -290,3 +290,33 @@ Evidence: [PA2 dossier](PA2.md),
 [root setup](README.md),
 [backend setup](backend/README.md),
 [self-assessment](SELF_ASSESSMENT_REPORT.md).
+
+## 2026-11-23 — Deliberate GET /places contract-break proof
+
+Date: 2026-11-23.
+
+Tool: Copilot SDK in VS Code, using Git and Node.js commands.
+
+Used for: creating and verifying separate red/green evidence for rubric 6,
+without changing contract tests or validator rules.
+
+Changed: committed the reconciliation state as `3be11a7`.
+At red commit `297d44d`, changed only `GET /places` success handling from status
+200 to 201. No test, fixture or validator rule was edited for the break.
+
+Verification: `npm.cmd test` at `297d44d` failed 3 of 35 tests and passed 32:
+the public success test, unknown-slug empty-page test and Authorization/public
+access test all expected contract status 200 but received 201.
+
+Restored status 200 in separate fix commit `531967f`, again without changing
+tests or validators. `npm.cmd test` at `531967f` passed 35 tests, 0 failed.
+The existing `pa2` annotated tag remains an earlier PA2 setup tag and has not
+been moved or rewritten.
+
+Rejected: did not alter test assertions to accept 201, relax status checks or
+modify the implementation under test merely to obtain a green result.
+
+Evidence: [red commit 297d44d](https://github.com/Tienluat123/WebNC/commit/297d44d),
+[fix commit 531967f](https://github.com/Tienluat123/WebNC/commit/531967f),
+[HTTP contract tests](backend/test/contract/places.test.js),
+[PA2 evidence index](docs/pa2/evidence/README.md).
