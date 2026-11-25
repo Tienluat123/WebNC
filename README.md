@@ -122,7 +122,7 @@ ESLint dùng recommended rules cho JS/TS; warning làm check thất bại. Typec
 
 Một bản clone mới từ GitHub tại `2b3c61c` cũng đã chạy `npm ci` và `npm run check` thành công với Node/npm ở trên. Hồ sơ [PA2.md](PA2.md) tập hợp ảnh, link và giới hạn của bằng chứng.
 
-Tiếp tục giữ hai commit đỏ/sửa trong lịch sử; không tái dựng/rebase lịch sử bằng chứng và không push thẳng `main` sau khi bật protection. Remote tag `pa2` đã được xác minh tại `39c66e5` với CI xanh. Local tag trong checkout này vẫn ở `b50355d`; cần đồng bộ tag và publish bản rà tài liệu trước khi đóng gói. Xem [đánh giá cuối](docs/pa2/evidence/final-review.md).
+Tiếp tục giữ hai commit đỏ/sửa trong lịch sử; không tái dựng/rebase lịch sử bằng chứng và không push thẳng `main` sau khi bật protection. Remote tag `pa2` đã được xác minh tại `39c66e5` với CI xanh. Local tag trong checkout này vẫn ở `b50355d`; cần đồng bộ tag và publish bản rà tài liệu trước khi đóng gói.
 
 Bằng chứng cố tình phá **contract** ở mục #6 (commit đỏ `297d44d`, commit sửa `531967f`) mới kiểm chứng ở local, chưa chạy trên PR CI; một lỗi lint/format chỉ chứng minh CI ở mục #4.
 

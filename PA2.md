@@ -12,7 +12,7 @@ is recorded locally but has not yet run in CI (see below). Claimed total: **95 /
 The remote `pa2` tag was verified at `39c66e5` with successful
 [tag CI](https://github.com/Tienluat123/WebNC/actions/runs/45651154508).
 The documentation changes from this review still need publication and a matching
-final tag/CI run before packaging. See [final review](docs/pa2/evidence/final-review.md).
+final tag/CI run before packaging.
 
 ## Required links
 
@@ -58,7 +58,7 @@ Verified on 2026-11-21; rechecked on 2026-11-26.
 
 ## Secrets audit
 
-Rerun on 2026-11-26 over all locally reachable refs after fetching origin; 0 findings and complete PDF extraction. Details and scope:
+Recorded audit on 2026-11-25; 0 findings within its documented scope. Details:
 [secrets-audit.md](docs/pa2/evidence/secrets-audit.md).
 
 ## Submission packaging

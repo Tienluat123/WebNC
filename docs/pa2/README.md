@@ -5,7 +5,7 @@
 Current status (2026-11-26): remote tag `pa2` is at `39c66e5` with
 [successful CI](https://github.com/Tienluat123/WebNC/actions/runs/45651154508).
 The documentation review remains local pending publication and a matching final tag.
-See [final review](evidence/final-review.md). Submission links are in [PA2.md](../../PA2.md)
+Submission links are in [PA2.md](../../PA2.md)
 and scores in [SELF_ASSESSMENT_REPORT.md](../../SELF_ASSESSMENT_REPORT.md). The P1 permissions policy, adopted GET /places contract,
 Express implementation and executable HTTP contract tests exist. The latest local
 `npm test` run passed all 35 tests, including the HTTP contract tests. The team reports Google Gemini API

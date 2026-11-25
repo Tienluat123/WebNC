@@ -17,8 +17,7 @@ Repository: <https://github.com/Tienluat123/WebNC>. Total claimed: **95**. ZIP: 
 
 Reviewed against the supplied rubric on 2026-11-26. The total is a self-assessment,
 not a guaranteed grade; the evidence supports the claimed bands, with the ownership
-interpretation below still subject to lecturer judgment. See the
-[criterion-by-criterion review](docs/pa2/evidence/final-review.md).
+interpretation below still subject to lecturer judgment.
 The remote tag/CI above verifies `39c66e5`; this documentation review must be
 published and included in the final tagged commit before submission.
 

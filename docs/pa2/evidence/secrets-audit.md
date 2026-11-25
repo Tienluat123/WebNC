@@ -1,40 +1,6 @@
 # Secrets audit
 
-## Current audit — 2026-11-26
-
-Command: `/private/tmp/webnc-pa2-review-venv/bin/python scripts/audit-secrets.py`
-from the repository root after `git fetch origin --prune`. PyMuPDF was installed
-in an isolated temporary virtual environment; PDF text extraction completed.
-
-| Item                                                      | Observed result                            |
-| --------------------------------------------------------- | ------------------------------------------ |
-| Reviewed HEAD                                             | `39c66e5fdd9478cd52c0057ae064758052773154` |
-| Reachable commits                                         | 41                                         |
-| Unique history blobs                                      | 218                                        |
-| Tracked and non-ignored working files before review edits | 49                                         |
-| Credential-pattern findings                               | 0                                          |
-| Historical env paths other than `.env.example`            | 0                                          |
-| `.env` ignored                                            | Yes                                        |
-| Env-example variable names                                | `PORT`, `CURSOR_SECRET`, both empty        |
-| Incomplete extraction                                     | None                                       |
-
-A second run after the documentation review inspected 50 working files (including
-the new final-review report), with the same history counts and 0 findings, no
-historical env paths and no incomplete extraction.
-
-All locally reachable refs, including the saved-edit stash, and the existing
-tracked/non-ignored working files were inspected. The branch refs were fetched
-from origin. The remote tag was independently checked through GitHub API at
-`39c66e5`; the existing local tag still points to `b50355d`. The remote tag's
-target commit is already included through branch `pa2`.
-
-Zero findings means no matching credentials were detected within this scope.
-The scanner does not cover reflog/unreachable objects, ignored local secrets,
-image OCR, unknown credential patterns or provider-side status. It scans blobs
-and working files, not Git configuration, hooks or tag/commit messages. No
-rotation is claimed. Repeat after final publication and before packaging.
-
-## Earlier audit — 2026-11-25 (superseded)
+## Current audit — 2026-11-25
 
 Command: `python -X utf8 scripts/audit-secrets.py` from the repository root, in a
 fresh clone of <https://github.com/Tienluat123/WebNC> after fetching every remote

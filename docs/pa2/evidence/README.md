@@ -61,10 +61,10 @@ Verified on 2026-11-26 through GitHub API: the remote annotated tag resolves to
 passed `npm ci`, lint, format check, typecheck and 35/35 tests on Node 22.23.2 / npm 10.9.8.
 This review changes documentation after that commit; publication and a matching
 final tag/CI are pending. The local tag still resolves to `b50355d`, so it must be
-synchronized before packaging. See [final review](final-review.md).
+synchronized before packaging.
 
 ## Secrets audit
 
-Rerun on 2026-11-26 over all locally reachable refs after fetching origin: [secrets-audit.md](secrets-audit.md).
+Recorded audit on 2026-11-25, with its scope and limitations: [secrets-audit.md](secrets-audit.md).
 
 The root [PA2.md](../../../PA2.md) is the submission link hub.
