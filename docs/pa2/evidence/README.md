@@ -3,8 +3,9 @@
 ## Current evidence
 
 - The [HTTP contract test suite](../../../backend/test/contract/places.test.js) was
-  run locally on 2026-11-23: 35 tests passed, 0 failed. The CI run for tag `pa2` at
-  `e2834b6` repeated the same 35 passes.
+  run in a fresh local clone on 2026-11-26 at `39c66e5`: all four checks passed,
+  35 tests passed, 0 failed. The [remote tag CI run](https://github.com/Tienluat123/WebNC/actions/runs/45651154508)
+  at the same SHA repeated the checks successfully.
 - [Gemini API Free-tier and no-billing state](gemini-free-tier-no-billing-2026-11-21.png),
   captured 2026-11-21. The crop retains the project name, Free-tier badge and
   no-billing message while excluding the browser URL, email and API key. It shows
@@ -12,9 +13,7 @@
 - [Synthetic itinerary cost benchmark](model-cost-benchmark.md): one measured
   Free-tier call with paid-tier equivalent calculation and limitations.
 
-## Remaining submission evidence
-
-# PA2 evidence — Luật, criteria 3–4
+## PA2 evidence — criteria 3–4
 
 The following screenshots were supplied by Luật on 2026-11-21 and copied unchanged. Original files remain in the user's Screenshots directory. This index links the actual images; it is not a substitute for evidence.
 
@@ -56,10 +55,16 @@ edited. Locally, `297d44d` failed 3 of 35 tests (`201 !== 200`) and `531967f` pa
 
 ## Submitted tag
 
-Not yet final. Tag `pa2` currently points to `e2834b6`, which predates this version of the dossier; it must be moved to the commit containing this file and its CI run recorded here. The run for `e2834b6` passed ([run 45213634429](https://github.com/Tienluat123/WebNC/actions/runs/45213634429): `npm ci`, lint, format check, typecheck and 35/35 tests on Node 22.23.2 / npm 10.9.8).
+Verified on 2026-11-26 through GitHub API: the remote annotated tag resolves to
+`39c66e5fdd9478cd52c0057ae064758052773154`.
+[Run 45651154508](https://github.com/Tienluat123/WebNC/actions/runs/45651154508)
+passed `npm ci`, lint, format check, typecheck and 35/35 tests on Node 22.23.2 / npm 10.9.8.
+This review changes documentation after that commit; publication and a matching
+final tag/CI are pending. The local tag still resolves to `b50355d`, so it must be
+synchronized before packaging. See [final review](final-review.md).
 
 ## Secrets audit
 
-Rerun on 2026-11-25 over every fetched branch and tag: [secrets-audit.md](secrets-audit.md).
+Rerun on 2026-11-26 over all locally reachable refs after fetching origin: [secrets-audit.md](secrets-audit.md).
 
 The root [PA2.md](../../../PA2.md) is the submission link hub.

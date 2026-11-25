@@ -2,7 +2,10 @@
 
 Đã rà với [rubric gốc](<../reference/PA2 Rubric Harness Quality Gate.pdf>), trang 1–4, và [contract mẫu](../reference/Contract.md). Hạn trong rubric: **22:00 ngày 26/11/2026**.
 
-Current status (2026-11-25): dossier updated, not yet tagged. Submission links are in [PA2.md](../../PA2.md)
+Current status (2026-11-26): remote tag `pa2` is at `39c66e5` with
+[successful CI](https://github.com/Tienluat123/WebNC/actions/runs/45651154508).
+The documentation review remains local pending publication and a matching final tag.
+See [final review](evidence/final-review.md). Submission links are in [PA2.md](../../PA2.md)
 and scores in [SELF_ASSESSMENT_REPORT.md](../../SELF_ASSESSMENT_REPORT.md). The P1 permissions policy, adopted GET /places contract,
 Express implementation and executable HTTP contract tests exist. The latest local
 `npm test` run passed all 35 tests, including the HTTP contract tests. The team reports Google Gemini API
@@ -35,7 +38,7 @@ có test không đồng nghĩa endpoint đã chứng minh mọi ownership scenar
 
 Commit: gắn tag pa2.
 Nhánh cho phần permissions/secrets và GET /places: `pa2-permissions-places`.
-Commit nộp cuối của cả nhóm: gắn tag pa2; chưa gắn tag cho nhánh đang làm.
+Commit nộp cuối của cả nhóm: gắn tag pa2; remote tag đã ở `39c66e5`, bản rà mới chưa publish.
 Mỗi task nên có một nhánh riêng.
 
 <details>
@@ -99,7 +102,7 @@ npm run typecheck
 npm test
 ```
 
-**Điểm cần phối hợp:** HTTP contract tests giờ kiểm tra `GET /places` qua server thật; vẫn chưa được chạy trong lượt chỉnh sửa này theo yêu cầu. Ninh cần giữ test cases khớp contract và phối hợp Văn để có deliberate contract-break trong CI. Lệnh tests trong AGENTS, package.json, README và workflow phải đồng nhất.
+**Điểm cần phối hợp:** HTTP contract tests kiểm tra `GET /places` qua server thật; clone sạch tại `39c66e5` đã qua đủ bốn checks và 35 tests ngày 2026-11-26. Ninh cần giữ test cases khớp contract và phối hợp Văn để có deliberate contract-break trong CI. Lệnh tests trong AGENTS, package.json, README và workflow phải đồng nhất.
 
 Không cần điền câu “đã pass” vào config. Kết quả và link bằng chứng ghi trong hồ sơ nộp khi đã thực hiện thật.
 
@@ -139,7 +142,7 @@ Tag `pa2` đang ở `e2834b6`; phải dời sang commit cuối rồi ghi link ru
 | 5. Versions and the legacy API | Cách thay đổi contract và tương thích. Nếu chưa có legacy API thì ghi rõ, không cần dựng một API cũ cho giống mẫu.                 |
 
 Theo contract hiện có, [GET /places](../../docs/contract/endpoint.md) là endpoint
-dùng cho rubric #5. Chỉ ra chính sách public/shared catalogue, sai không owned
+dùng cho rubric #5. Chỉ ra chính sách public/shared catalogue, không có owned
 resource, các filter, paging, cursor, problem details và không có request body.
 
 Không chỉ viết “đã đăng nhập”; phải rõ quyền trên dữ liệu. Đích là người lạ có thể viết client từ contract mà không cần hỏi nhóm. Contract hiện đã nêu public ownership, nhưng mức ownership-test có thể chưa đủ cho yêu cầu riêng về owned data của rubric.
@@ -194,7 +197,7 @@ Mỗi entry điền vào mẫu có sẵn:
 | Rejected | Nhóm từ chối đề xuất nào, vì sao. Không ghi chung chung “không phù hợp”.                      |
 | Evidence | File/commit/CI run liên quan khi có, nhất là nếu entry được dùng để chứng minh quy tắc mục 1. |
 
-Thầy chấm tool/phần việc và Changed / Rejected có thật. Date và Evidence là cách khung này giúp truy vết; không phải tên trường bắt buộc của rubric. Không chép ví dụ thành sự cố của nhóm. Root AI-LOG đã có entry của Luật cho Commands/CI và bằng chứng; các thành viên còn lại cần bổ sung entry thật. Log trong docs/pa1/ là của lần nộp cũ.
+Thầy chấm tool/phần việc và Changed / Rejected có thật. Date và Evidence là cách khung này giúp truy vết; không phải tên trường bắt buộc của rubric. Không chép ví dụ thành sự cố của nhóm. Root AI-LOG đã có entry cho Commands/CI, permissions, endpoint và contract tests; lượt rà cuối được ghi thêm theo kết quả thực tế. Log trong docs/pa1/ là của lần nộp cũ.
 
 <a id="submission"></a>
 
@@ -209,6 +212,6 @@ Thầy chấm tool/phần việc và Changed / Rejected có thật. Date và Evi
 
 PA2.md, AI-LOG.md và SELF_ASSESSMENT_REPORT.md viết tiếng Anh. docs/pa2/README.md hiện tại là hướng dẫn tiếng Việt, không thay ba file đó.
 
-Repo phải public; tag commit nộp là pa2 và push tag; ZIP gồm repo và .git (kèm tag `pa2`), không gồm `node_modules` và `.env`, tên `23127221-23127281-23127446_<final-total>.zip`; bản nộp hiện tại là `23127221-23127281-23127446_95.zip`. Tổng khớp SELF_ASSESSMENT_REPORT.md. Trước khi nộp: giải nén, `git checkout pa2`, `npm ci`, `npm run check`. Một người nộp qua Google sinh viên; xem bảng honesty adjustment trong rubric trước khi chấm.
+Repo phải public; tag commit nộp là pa2 và push tag; ZIP gồm repo và .git (kèm tag `pa2`), không gồm `node_modules` và `.env`, tên `23127221-23127281-23127446_<final-total>.zip`; bản nộp hiện tại là `23127221-23127281-23127446_95.zip`. Tổng khớp SELF_ASSESSMENT_REPORT.md. Trước khi nộp: giải nén, `git checkout --detach refs/tags/pa2`, `npm ci`, `npm run check`. Một người nộp qua Google sinh viên; xem bảng honesty adjustment trong rubric trước khi chấm.
 
 </details>

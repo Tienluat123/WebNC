@@ -2,7 +2,7 @@
 
 Repository: <https://github.com/Tienluat123/WebNC>.
 
-## PA2 status - 2026-11-25
+## PA2 status - 2026-11-26
 
 GET /places is implemented with Express and explicitly synthetic fixtures.
 The adopted [contract](docs/contract/endpoint.md) defines public access, four
@@ -10,14 +10,14 @@ AND-combined filters, signed cursor pagination and RFC 9457 errors.
 Submission links are in [PA2.md](PA2.md); scores and gaps are in
 [SELF_ASSESSMENT_REPORT.md](SELF_ASSESSMENT_REPORT.md).
 
-Repo đã có checks, CI chạy thật trên PR và protection cho `main`. Phần Luật đã có bằng chứng required check đỏ chặn merge rồi xanh sau khi sửa. Endpoint `GET /places` và HTTP contract tests đã có; deliberate contract break mới được chứng minh ở local (chưa có PR/CI chạy trên commit đỏ). Tag `pa2` phải dời sang commit chứa bản hồ sơ này rồi mới đóng ZIP (xem [PA2.md](PA2.md)).
+Repo đã có checks, CI chạy thật trên PR và protection cho `main`. Phần Luật đã có bằng chứng required check đỏ chặn merge rồi xanh sau khi sửa. Endpoint `GET /places` và HTTP contract tests đã có; deliberate contract break mới được chứng minh ở local (chưa có PR/CI chạy trên commit đỏ). Remote tag `pa2` đã ở `39c66e5`, [CI xanh](https://github.com/Tienluat123/WebNC/actions/runs/45651154508). Bản rà tài liệu ngày 26/11 cần được publish, gắn tag và kiểm tra CI trước khi đóng ZIP (xem [PA2.md](PA2.md)).
 
 | Owner    | Scope                                            | Current state                                                           |
 | -------- | ------------------------------------------------ | ----------------------------------------------------------------------- |
 | Nghi Van | #2 Permissions/secrets, #5 contract and endpoint | Done; Free tier with no billing, no spending cap configured (disclosed) |
-| Luat     | #3 commands, #4 required CI/protection           | Done; PR #1 red/green, branch protection; tag must move                 |
+| Luat     | #3 commands, #4 required CI/protection           | Done; PR #1 red/green, branch protection; remote tag CI green           |
 | Ninh     | #1 rules, #6 contract tests                      | Tests done; contract break shown locally, CI demo not done              |
-| All      | #7 AI log and submission                         | Total 95, ZIP `23127221-23127281-23127446_95.zip`; tag not final        |
+| All      | #7 AI log and submission                         | Total 95; documentation review pending publication and final ZIP        |
 
 ## Setup and verification
 
@@ -43,10 +43,10 @@ Run `npm run check` to execute all four checks in one command.
 ```text
 WebNC/
 ├── README.md                       # Điểm bắt đầu đọc repo
-├── AGENTS.md                       # Khung quy tắc cho assistant
-├── PA2.md                          # Hồ sơ bằng chứng PA#2, phần Luật đã điền
+├── AGENTS.md                       # Quy tắc hiện hành cho assistant
+├── PA2.md                          # Hồ sơ bằng chứng PA#2 của nhóm
 ├── AI-LOG.md                       # Nhật ký AI PA#2
-├── SELF_ASSESSMENT_REPORT.md        # Tự chấm phần Luật, chờ tổng của nhóm
+├── SELF_ASSESSMENT_REPORT.md        # Tự chấm đủ bảy tiêu chí, tổng 95
 ├── package.json                    # Lệnh checks và dependencies công cụ
 ├── package-lock.json               # Phiên bản dependencies để npm ci tái lập
 ├── .nvmrc                          # Node.js 22.23.2
@@ -61,7 +61,7 @@ WebNC/
 ├── backend/
 │   ├── src/
 │   └── test/
-│       ├── contract/               # Khung tests nhóm sẽ viết
+│       ├── contract/               # HTTP contract tests GET /places
 │       └── fixtures/               # Chỗ thêm dữ liệu test
 ├── frontend/src/
 └── docs/
@@ -75,7 +75,7 @@ WebNC/
     │   └── endpoint.md             # Contract nhóm tự viết
     ├── pa2/                        # Tài liệu nhóm chuẩn bị cho PA#2
     │   ├── README.md               # Map yêu cầu → file
-    │   ├── PERMISSIONS.md          # Khung chính sách quyền
+    │   ├── PERMISSIONS.md          # Chính sách quyền ba tầng
     │   └── evidence/               # Ảnh protection, PR đỏ / xanh và chỉ mục
     ├── pa1/                        # Hồ sơ cũ, một bản proposal duy nhất
     └── project-analysis.md         # Phân tích hướng đồ án đã có
@@ -85,7 +85,7 @@ Các file cấu hình ở root phục vụ công cụ nhóm chọn, không phả
 
 ## Setup và checks — Luật, rubric #3
 
-Dùng **Node.js 22.23.2** (theo `.nvmrc`) và **npm 10.9.8**. Với fresh clone, clone URL repository ở trên, vào thư mục `WebNC` và checkout nhánh/tag chứa setup trước khi cài dependencies. Khi review phần Luật trước khi merge vào `main`, dùng nhánh `luat/p1-checks-ci`. Từ thư mục repo đã checkout đúng commit/nhánh cần kiểm tra:
+Dùng **Node.js 22.23.2** (theo `.nvmrc`) và **npm 10.9.8**. Với fresh clone, clone URL repository ở trên, vào thư mục `WebNC` và checkout nhánh/tag chứa setup trước khi cài dependencies. Với bản nộp, dùng `git checkout --detach refs/tags/pa2` và xác minh SHA của tag; nhánh và tag cùng tên `pa2` có thể trỏ tới hai commit khác nhau. Từ thư mục repo đã checkout đúng commit/nhánh cần kiểm tra:
 
 ```sh
 nvm install
@@ -106,7 +106,7 @@ Chạy toàn bộ: `npm run check`. Tự sửa format: `npm run format`.
 
 ESLint dùng recommended rules cho JS/TS; warning làm check thất bại. Typecheck bật `allowJs`, `checkJs`, `noEmit` và kiểm tra syntax/types khi JSDoc/type inference cung cấp thông tin; strictness không được bật để tránh biến JavaScript được nối nối sang TypeScript thành yêu cầu migration không cần thiết. Formatter bỏ qua dependencies, file sinh tự động, file môi trường, tài liệu gốc của thầy và hồ sơ PA1.
 
-**Trạng thái hiện tại:** `backend/test/contract/places.test.js` chạy HTTP contract tests cho `GET /places`. Lần chạy local ngày 2026-11-23 và run CI của tag `pa2` tại `e2834b6` đều qua 35 tests, 0 failed. Deliberate contract break cho rubric #6 mới chạy ở local, chưa có run CI (xem [PA2.md](PA2.md)).
+**Trạng thái hiện tại:** `backend/test/contract/places.test.js` chạy HTTP contract tests cho `GET /places`. Bản clone sạch tại `39c66e5` ngày 2026-11-26 đã qua `npm ci` và cả bốn checks, 35 tests, 0 failed. [Run CI của remote tag](https://github.com/Tienluat123/WebNC/actions/runs/45651154508) tại cùng commit cũng xanh. Deliberate contract break cho rubric #6 mới chạy ở local, chưa có run CI (xem [PA2.md](PA2.md)).
 
 ## CI và bằng chứng — Luật, rubric #4
 
@@ -122,7 +122,7 @@ ESLint dùng recommended rules cho JS/TS; warning làm check thất bại. Typec
 
 Một bản clone mới từ GitHub tại `2b3c61c` cũng đã chạy `npm ci` và `npm run check` thành công với Node/npm ở trên. Hồ sơ [PA2.md](PA2.md) tập hợp ảnh, link và giới hạn của bằng chứng.
 
-Tiếp tục giữ hai commit đỏ/sửa trong lịch sử; không tái dựng/rebase lịch sử bằng chứng và không push thẳng `main` sau khi bật protection. Tag `pa2` hiện ở `e2834b6`; sau khi commit bản hồ sơ cuối phải dời tag và ghi link CI run của tag vào [PA2.md](PA2.md).
+Tiếp tục giữ hai commit đỏ/sửa trong lịch sử; không tái dựng/rebase lịch sử bằng chứng và không push thẳng `main` sau khi bật protection. Remote tag `pa2` đã được xác minh tại `39c66e5` với CI xanh. Local tag trong checkout này vẫn ở `b50355d`; cần đồng bộ tag và publish bản rà tài liệu trước khi đóng gói. Xem [đánh giá cuối](docs/pa2/evidence/final-review.md).
 
 Bằng chứng cố tình phá **contract** ở mục #6 (commit đỏ `297d44d`, commit sửa `531967f`) mới kiểm chứng ở local, chưa chạy trên PR CI; một lỗi lint/format chỉ chứng minh CI ở mục #4.
 
