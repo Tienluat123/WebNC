@@ -1,22 +1,23 @@
 # AI Travel Planner
 
-Repository: <https://github.com/Tienluat123/WebNC_Proposal>.
+Repository: <https://github.com/Tienluat123/WebNC>.
 
-## PA2 status - 2026-11-23
+## PA2 status - 2026-11-25
 
 GET /places is implemented with Express and explicitly synthetic fixtures.
 The adopted [contract](docs/contract/endpoint.md) defines public access, four
 AND-combined filters, signed cursor pagination and RFC 9457 errors.
-See the [P1 review](docs/pa2/evidence/p1-review.md) for evidence and remaining work.
+Submission links are in [PA2.md](PA2.md); scores and gaps are in
+[SELF_ASSESSMENT_REPORT.md](SELF_ASSESSMENT_REPORT.md).
 
-Repo đã có checks, CI chạy thật trên PR và protection cho `main`. Phần Luật đã có bằng chứng required check đỏ chặn merge rồi xanh sau khi sửa. Endpoint `GET /places` và HTTP contract tests đã có; bằng chứng deliberate contract break và CI của tag nộp vẫn chờ hoàn thiện.
+Repo đã có checks, CI chạy thật trên PR và protection cho `main`. Phần Luật đã có bằng chứng required check đỏ chặn merge rồi xanh sau khi sửa. Endpoint `GET /places` và HTTP contract tests đã có; deliberate contract break mới được chứng minh ở local (chưa có PR/CI chạy trên commit đỏ). Tag `pa2` phải dời sang commit chứa bản hồ sơ này rồi mới đóng ZIP (xem [PA2.md](PA2.md)).
 
-| Owner    | Scope                                            | Current state                                                                 |
-| -------- | ------------------------------------------------ | ----------------------------------------------------------------------------- |
-| Nghi Van | #2 Permissions/secrets, #5 contract and endpoint | Implemented; actual model spending-cap evidence pending                       |
-| Luat     | #3 commands, #4 required CI/protection           | Verified locally and on PR/branch protection; tag CI pending                  |
-| Ninh     | #1 rules, #6 contract tests                      | Rules and HTTP tests added; deliberate contract red-green CI evidence pending |
-| All      | #7 AI log and submission                         | Log updated; final score, evidence links and submission packaging pending     |
+| Owner    | Scope                                            | Current state                                                           |
+| -------- | ------------------------------------------------ | ----------------------------------------------------------------------- |
+| Nghi Van | #2 Permissions/secrets, #5 contract and endpoint | Done; Free tier with no billing, no spending cap configured (disclosed) |
+| Luat     | #3 commands, #4 required CI/protection           | Done; PR #1 red/green, branch protection; tag must move                 |
+| Ninh     | #1 rules, #6 contract tests                      | Tests done; contract break shown locally, CI demo not done              |
+| All      | #7 AI log and submission                         | Total 95, ZIP `23127221-23127281-23127446_95.zip`; tag not final        |
 
 ## Setup and verification
 
@@ -105,7 +106,7 @@ Chạy toàn bộ: `npm run check`. Tự sửa format: `npm run format`.
 
 ESLint dùng recommended rules cho JS/TS; warning làm check thất bại. Typecheck bật `allowJs`, `checkJs`, `noEmit` và kiểm tra syntax/types khi JSDoc/type inference cung cấp thông tin; strictness không được bật để tránh biến JavaScript được nối nối sang TypeScript thành yêu cầu migration không cần thiết. Formatter bỏ qua dependencies, file sinh tự động, file môi trường, tài liệu gốc của thầy và hồ sơ PA1.
 
-**Trạng thái hiện tại:** `backend/test/contract/places.test.js` chạy HTTP contract tests cho `GET /places`. Lần chạy local ngày 2026-11-23 đã qua 35 tests, 0 failed. Kết quả local này chưa thay thế deliberate contract break chạy trong CI cho rubric #6.
+**Trạng thái hiện tại:** `backend/test/contract/places.test.js` chạy HTTP contract tests cho `GET /places`. Lần chạy local ngày 2026-11-23 và run CI của tag `pa2` tại `e2834b6` đều qua 35 tests, 0 failed. Deliberate contract break cho rubric #6 mới chạy ở local, chưa có run CI (xem [PA2.md](PA2.md)).
 
 ## CI và bằng chứng — Luật, rubric #4
 
@@ -121,12 +122,9 @@ ESLint dùng recommended rules cho JS/TS; warning làm check thất bại. Typec
 
 Một bản clone mới từ GitHub tại `2b3c61c` cũng đã chạy `npm ci` và `npm run check` thành công với Node/npm ở trên. Hồ sơ [PA2.md](PA2.md) tập hợp ảnh, link và giới hạn của bằng chứng.
 
-Tiếp tục giữ hai commit đỏ/sửa trong lịch sử; không tái dựng/rebase lịch sử bằng chứng và không push thẳng `main` sau khi bật protection. Khi cả nhóm chốt bài mới tạo/push tag `pa2` rồi bổ sung link CI run của tag vào `PA2.md`.
+Tiếp tục giữ hai commit đỏ/sửa trong lịch sử; không tái dựng/rebase lịch sử bằng chứng và không push thẳng `main` sau khi bật protection. Tag `pa2` hiện ở `e2834b6`; sau khi commit bản hồ sơ cuối phải dời tag và ghi link CI run của tag vào [PA2.md](PA2.md).
 
-Bằng chứng cố tình phá **contract** ở mục #6 cần phối hợp Văn/Ninh khi implementation và tests thật đã có; một lỗi lint/format chỉ chứng minh CI ở mục #4.
-
-The 2026-11-23 local rerun passed all 35 service and HTTP contract tests.
-This is local verification, not a CI pass. The deliberate contract break remains pending.
+Bằng chứng cố tình phá **contract** ở mục #6 (commit đỏ `297d44d`, commit sửa `531967f`) mới kiểm chứng ở local, chưa chạy trên PR CI; một lỗi lint/format chỉ chứng minh CI ở mục #4.
 
 ## Permissions, secrets and model budget
 
@@ -144,10 +142,10 @@ The team reports the following model-account configuration:
 - Model: `gemini-3.5-flash-lite`.
 - Billing: Free tier; no billing account is linked to the project.
 - API connectivity: successfully tested by a team member; no key or test output is stored here.
-- Spending cap: no spending cap exists or is needed for the current account state.
-  The Gemini API tool is currently being used through the Free tier with no billing
-  account, so the team cannot incur paid usage with this project.
-- Configurable project spend-cap: not applicable; no paid billing has been enabled.
+- Spending cap: none is configured. This is a separate fact from billing: the
+  project is on the Free tier with no billing account, so it cannot currently incur
+  charges, but the rubric's capped-key requirement is not met and the
+  self-assessment discloses it.
 - Synthetic full-itinerary benchmark: actual Free-tier cost USD 0; paid-tier
   equivalent USD 0.00162885 for one 84-input/1,293-output-token call. See the
   [measurement and limitations](docs/pa2/evidence/model-cost-benchmark.md).

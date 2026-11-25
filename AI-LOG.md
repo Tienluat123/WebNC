@@ -406,3 +406,37 @@ Evidence: [Rules file](AGENTS.md),
 
 Verification: `npm test` and `npm run format:check` must pass after the test
 assertion changes. No implementation or test acceptance rule was weakened.
+
+## 2026-11-25 — Final verification pass after external review
+
+Date: 2026-11-25.
+
+Tool: Claude Code (cloud session), using Git, Node.js, Python and the GitHub API.
+Requested by Đặng Nghi Văn after an external review of the PA2 dossier.
+
+Used for: closing the evidence gaps the review listed, without rewriting any
+earlier entry or any evidence commit.
+
+Changed:
+
+- Criterion 6: tried to open a PR from `pa2-contract-break-demonstration` (red commit
+  `297d44d`) so CI would run on it, but the assistant's GitHub integration had no write
+  access (403). The CI demonstration is not done; the self-assessment claims 12, not 13.
+- Replaced stale local-tag (`cf2a5d7`) wording in PA2.md, README, the evidence
+  index and SELF_ASSESSMENT_REPORT.md with the actual remote tag state (`e2834b6`),
+  and stated that the tag must move after these changes are committed.
+  Fixed the old `WebNC_Proposal` repository URL.
+- Reran `scripts/audit-secrets.py` in a fresh clone after fetching every remote
+  branch and tag: 38 commits, 207 blobs, 49 working files, 0 findings.
+- AGENTS.md: the format red run now backs the rule "run `npm run check` before
+  every push", not "never edit tests", because the format incident never involved
+  editing a test.
+- Explained in the contract why `GET /places` has no other-user owned resource.
+- Set the self-assessment to 95 with a "what we did not manage" section.
+
+Rejected: inventing a private place resource only to produce a 403 ownership test,
+and describing Free-tier/no-billing as a spending cap. Both were suggested as
+options during review and both would have misrepresented the product.
+
+Evidence: [PA2.md](PA2.md), [secrets audit](docs/pa2/evidence/secrets-audit.md),
+[self-assessment](SELF_ASSESSMENT_REPORT.md).

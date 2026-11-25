@@ -173,12 +173,15 @@ There are no 401 or 403 responses in this operation's application contract.
 A `userId`, `ownerId` or `groupId` query is an unknown parameter and returns
 400 validation; it can never select another person's data.
 
-**Team review checkpoint:** the rubric explicitly asks for an ownership test involving
-another user's data. For this public endpoint, tests can prove user-independent
-catalogue access, rejection of user selectors and absence of private fields, but
-these do not demonstrate denial of access to an owned resource. Review whether
-this meets the lecturer's expectation before claiming full ownership-test marks;
-do not invent a private-place feature merely to manufacture a 403 response.
+**How the ownership rule applies here:** the PA2 rubric lists `GET /places` as a
+valid endpoint choice. Its ownership rule is that the catalogue is shared and
+public, so "another user's data" has no meaning for this operation: there is no
+owned record a caller could be denied. The contract tests therefore enforce the
+public rule instead: the same result for anonymous and authorized requests, 400
+validation for `userId`, `ownerId` and `groupId`, and no private fields in any
+`PlaceSummary`. Endpoints that read owned data (want-to-go lists, saved plans,
+group budgets) will define and test their own 403/404 rule in their own contracts.
+No private-place feature was added just to produce a 403 for this endpoint.
 
 There is no request body. Clients must not send one; it does not supply search
 parameters and the handler must not parse it as JSON or use it for filtering.

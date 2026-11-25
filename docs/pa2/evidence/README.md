@@ -3,12 +3,12 @@
 ## Current evidence
 
 - The [HTTP contract test suite](../../../backend/test/contract/places.test.js) was
-  run locally on 2026-11-23: 35 tests passed, 0 failed. This verifies the local
-  implementation, but it is not a GitHub Actions run or criterion 6 evidence.
+  run locally on 2026-11-23: 35 tests passed, 0 failed. The CI run for tag `pa2` at
+  `e2834b6` repeated the same 35 passes.
 - [Gemini API Free-tier and no-billing state](gemini-free-tier-no-billing-2026-11-21.png),
   captured 2026-11-21. The crop retains the project name, Free-tier badge and
   no-billing message while excluding the browser URL, email and API key. It shows
-  no paid billing and no configured spending cap; the tool is free in this state.
+  the project has no billing account. Separately, no spending cap is configured.
 - [Synthetic itinerary cost benchmark](model-cost-benchmark.md): one measured
   Free-tier call with paid-tier equivalent calculation and limitations.
 
@@ -46,10 +46,20 @@ On 2026-11-21, a separate clone from GitHub at `2b3c61c` was checked with Node.j
 
 The green CI run above independently shows successful `npm ci`, lint, format check, typecheck and tests on GitHub's runner.
 
-## Still pending for the team submission
+## Criterion 6: deliberate contract break
 
-- A PR/CI run that catches the contract-break commit (criterion 6). Local proof is complete: red commit `297d44d` failed 3/35 because `GET /places` returned 201 instead of 200; fix commit `531967f` passed 35/35. The public endpoint has no owned-resource data case, so 13-15 remains unavailable until that requirement is added or the lecturer accepts an equivalent.
-- The CI run for the final submitted `pa2` tag. The local tag points to evidence commit `cf2a5d7`; it has not been pushed or used by GitHub Actions yet.
-- Review the final team score and submission packaging.
+Not yet run in CI: no PR or Actions run exists for red commit `297d44d` or
+restoration `531967f`. The local result is below.
+
+Both commits change one line of `backend/src/app.js`; tests and the contract were not
+edited. Locally, `297d44d` failed 3 of 35 tests (`201 !== 200`) and `531967f` passed 35/35.
+
+## Submitted tag
+
+Not yet final. Tag `pa2` currently points to `e2834b6`, which predates this version of the dossier; it must be moved to the commit containing this file and its CI run recorded here. The run for `e2834b6` passed ([run 45213634429](https://github.com/Tienluat123/WebNC/actions/runs/45213634429): `npm ci`, lint, format check, typecheck and 35/35 tests on Node 22.23.2 / npm 10.9.8).
+
+## Secrets audit
+
+Rerun on 2026-11-25 over every fetched branch and tag: [secrets-audit.md](secrets-audit.md).
 
 The root [PA2.md](../../../PA2.md) is the submission link hub.

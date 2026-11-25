@@ -2,16 +2,15 @@
 
 Đã rà với [rubric gốc](<../reference/PA2 Rubric Harness Quality Gate.pdf>), trang 1–4, và [contract mẫu](../reference/Contract.md). Hạn trong rubric: **22:00 ngày 26/11/2026**.
 
-Current status (2026-11-23): the P1 permissions policy, adopted GET /places contract,
+Current status (2026-11-25): dossier updated, not yet tagged. Submission links are in [PA2.md](../../PA2.md)
+and scores in [SELF_ASSESSMENT_REPORT.md](../../SELF_ASSESSMENT_REPORT.md). The P1 permissions policy, adopted GET /places contract,
 Express implementation and executable HTTP contract tests exist. The latest local
 `npm test` run passed all 35 tests, including the HTTP contract tests. The team reports Google Gemini API
 and `gemini-3.5-flash-lite`; the Free-tier project has no billing account. It has
-no paid spending cap because paid usage is not enabled and the tool is free in the
-current account state. Redacted no-billing evidence is included.
+no configured spending cap; these are separate facts and the missing cap is
+disclosed in the self-assessment. Redacted no-billing evidence is included.
 The detailed guidance below includes the
-original scaffold inventory; use the [current P1 review](evidence/p1-review.md),
-[root README](../../README.md) and actual files for completion status.
-Checks/CI and final Rules/submission work remain with their assigned owners.
+original scaffold inventory, kept as the team's working notes.
 
 Repo đã có checks, required CI và bằng chứng PR đỏ → xanh cho phần Luật. Endpoint
 PA2 hiện là `GET /places`, với implementation, contract Markdown và HTTP contract
@@ -117,11 +116,11 @@ Không cần điền câu “đã pass” vào config. Kết quả và link bằ
 | [Ảnh protection](evidence/main-protection-01.png), [required checks/admin](evidence/main-protection-02.png), [force push/deletion](evidence/main-protection-03.png) | Ảnh người dùng cung cấp, lưu nguyên bản.                                                                                                                                                                                                                                  |
 | [PR #1](https://github.com/Tienluat123/WebNC/pull/1)                                                                                                                | [Commit đỏ 868f505](https://github.com/Tienluat123/WebNC/commit/868f505b763e424efeae7cc7cfb044e4fe47fcf8) làm format check lỗi và merge bị chặn; [ảnh đỏ](evidence/pr-1-required-check-red.png), [run đỏ](https://github.com/Tienluat123/WebNC/actions/runs/44906808477). |
 | Commit sửa / CI xanh                                                                                                                                                | [2b3c61c](https://github.com/Tienluat123/WebNC/commit/2b3c61ce7116cf8d88e892c0896cdc7f213947eb) khôi phục format; [run xanh](https://github.com/Tienluat123/WebNC/actions/runs/44907080432), [ảnh merge được bật lại](evidence/pr-1-required-check-green.png).            |
-| [PA2.md](../../PA2.md)                                                                                                                                              | Đã điền link bằng chứng phần Luật; CI run của tag nộp và deliberate contract break còn pending.                                                                                                                                                                           |
+| [PA2.md](../../PA2.md)                                                                                                                                              | Đã có link phần Luật. Tag nộp cần dời sang commit cuối; deliberate contract break chưa chạy trên PR CI.                                                                                                                                                                   |
 
 Hai commit demo chỉ thay đổi thụt dòng trong `package.json`, không sửa tests hay validator rules. Giữ lịch sử đỏ → xanh; không squash/rebase để dựng lại bằng chứng sau khi hoàn thành. Không push thẳng `main` kể từ lúc bật protection.
 
-Khi cả nhóm chốt commit nộp, push tag `pa2` để workflow chạy trên tag và dẫn link run vào PA2.md. **Deliberate contract break** ở mục #6 vẫn cần phối hợp Văn/Ninh khi endpoint và test thật đã tồn tại; lỗi format của mục #4 không thay cho bằng chứng này.
+Tag `pa2` đang ở `e2834b6`; phải dời sang commit cuối rồi ghi link run vào PA2.md. **Deliberate contract break** ở mục #6 (`297d44d` đỏ, `531967f` xanh) mới kiểm chứng ở local, chưa có run CI trên PR; lỗi format của mục #4 không thay cho bằng chứng này.
 
 <a id="rubric-5"></a>
 
@@ -210,6 +209,6 @@ Thầy chấm tool/phần việc và Changed / Rejected có thật. Date và Evi
 
 PA2.md, AI-LOG.md và SELF_ASSESSMENT_REPORT.md viết tiếng Anh. docs/pa2/README.md hiện tại là hướng dẫn tiếng Việt, không thay ba file đó.
 
-Repo phải public; tag commit nộp là pa2 và push tag; ZIP gồm repo và .git, tên `23127221-23127281-23127446_<total>.zip`. Tổng khớp tự chấm. Một người nộp qua Google sinh viên; xem bảng honesty adjustment trong rubric trước khi chấm.
+Repo phải public; tag commit nộp là pa2 và push tag; ZIP gồm repo và .git (kèm tag `pa2`), không gồm `node_modules` và `.env`, tên `23127221-23127281-23127446_<final-total>.zip`; bản nộp hiện tại là `23127221-23127281-23127446_95.zip`. Tổng khớp SELF_ASSESSMENT_REPORT.md. Trước khi nộp: giải nén, `git checkout pa2`, `npm ci`, `npm run check`. Một người nộp qua Google sinh viên; xem bảng honesty adjustment trong rubric trước khi chấm.
 
 </details>

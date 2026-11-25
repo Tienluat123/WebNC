@@ -1,7 +1,7 @@
 # Repository rules — AI Travel Planner
 
-This is the working draft for PA#2 criterion 1. Keep current decisions here; record
-assistant usage and incidents in [AI-LOG.md](AI-LOG.md).
+Rules for every assistant working in this repository. Record assistant usage and
+incidents in [AI-LOG.md](AI-LOG.md).
 
 ## Stack
 
@@ -11,7 +11,7 @@ assistant usage and incidents in [AI-LOG.md](AI-LOG.md).
   `package-lock.json` as the setup source of truth; use the same runtime locally and in CI.
 - Checks: ESLint, Prettier, TypeScript (`tsc`) and Node's `node:test`.
 - No database is selected. The model provider/model for the project is Google Gemini
-  `gemini-3.5-flash-lite` for this draft, but no model key or real model call belongs
+  `gemini-3.5-flash-lite`, but no model key or real model call belongs
   in browser code or unit/contract tests.
 - The current PA2 endpoint is `GET /places`. It uses synthetic public catalogue data;
   it is not evidence that real places are checked or owned. Contract behavior is
@@ -27,8 +27,10 @@ assistant usage and incidents in [AI-LOG.md](AI-LOG.md).
 - All checks: `npm run check`
 - Start the server: `npm start`
 
-Keep these commands identical in `package.json`, the root README and CI. Do not
-change tests, fixtures or validators solely to make a failing check pass.
+Keep these commands identical in `package.json`, the root README and CI. Run
+`npm run check` (it includes `npm run format:check`) before every commit you push;
+CI runs the same four checks and a format failure blocks the merge. Do not change
+tests, fixtures or validators solely to make a failing check pass.
 
 ## Conventions
 
@@ -61,25 +63,24 @@ change tests, fixtures or validators solely to make a failing check pass.
 - Document endpoint changes in `docs/contract/`, including errors, ownership,
   paging or idempotency where applicable, and update contract tests in the same
   change.
-- Do not claim incident-backed rules until a real incident is recorded in
-  [AI-LOG.md](AI-LOG.md) or a commit.
+  Permission policy: [docs/pa2/PERMISSIONS.md](docs/pa2/PERMISSIONS.md), in three
+  tiers: Allowed, Ask first, Never. Assistants must follow those tiers within the
+  user's authorized task.
 
-Permission policy: [docs/pa2/PERMISSIONS.md](docs/pa2/PERMISSIONS.md). Complete
-its Allowed / Ask first / Never tiers before using this as final policy. Assistants
-must follow those tiers within the user's authorized task.
+Rules that trace to something that actually went wrong:
 
-The lecturer requires at least two rules to trace to something that actually went
-wrong through a commit or AI-LOG entry:
-
-- Never edit tests or validators to make a check pass. The format red/green
-  evidence preserves the real test/validator state in commits
-  [`868f505`](https://github.com/Tienluat123/WebNC/commit/868f505) and
-  [`2b3c61c`](https://github.com/Tienluat123/WebNC/commit/2b3c61c).
-- Never change implementation behavior without preserving the contract. The
-  `/places` deliberate break and restoration are recorded in commits
-  [`297d44d`](https://github.com/Tienluat123/WebNC/commit/297d44d) and
-  [`531967f`](https://github.com/Tienluat123/WebNC/commit/531967f), with the
-  full evidence in [AI-LOG.md](AI-LOG.md).
+- "Run `npm run check` before every commit you push" (Commands). Commit
+  [`868f505`](https://github.com/Tienluat123/WebNC/commit/868f505) was pushed with a
+  formatting error in `package.json`; the required `format:check` step failed
+  ([run](https://github.com/Tienluat123/WebNC/actions/runs/44906808477)) and blocked
+  PR #1 until [`2b3c61c`](https://github.com/Tienluat123/WebNC/commit/2b3c61c)
+  restored the formatting.
+- "Run `npm test` after changing `GET /places`" and "Document endpoint changes in
+  `docs/contract/` ... and update contract tests in the same change" (Conventions).
+  Commit [`297d44d`](https://github.com/Tienluat123/WebNC/commit/297d44d) changed the
+  success status from 200 to 201 without touching the contract, and the contract
+  tests failed; [`531967f`](https://github.com/Tienluat123/WebNC/commit/531967f)
+  restored the contracted status. Full record in [AI-LOG.md](AI-LOG.md).
 
 ## Never
 

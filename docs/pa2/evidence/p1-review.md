@@ -24,8 +24,8 @@ charge is possible currently.
 
 The team reports Google Gemini API project `travel-planner`, model
 `gemini-3.5-flash-lite`, Free tier with no billing account linked, and successful API
-connectivity testing by a team member. No spending cap is configured and no spending cap is needed for current no-billing
-Free-tier use. This is not a paid-tier budget control or a hard monthly paid
+connectivity testing by a team member. No spending cap is configured. Separately, the project has no billing account, so
+current Free-tier use cannot incur charges. This is not a paid-tier budget control or a hard monthly paid
 spending limit. If the account gains billing or paid usage, configure a provider
 spending cap before continuing.
 The dated [redacted account screenshot](gemini-free-tier-no-billing-2026-11-21.png)
@@ -74,7 +74,6 @@ Handoff to Luat (#3/#4): use the existing package test commands when wiring chec
 and required CI; preserve genuine red/green evidence and protect main. These
 items were not implemented or marked complete by this P1 review.
 
-The source repo's configured remote is
-<https://github.com/Tienluat123/WebNC_Proposal>. Older submission templates linked
-to WebNC instead; the README and PA2 entry now use the configured remote.
-Public visibility, remote branch state and PR/CI evidence have not been verified.
+Update 2026-11-25: the repository is <https://github.com/Tienluat123/WebNC>
+(public). This review was written on 2026-11-21 against an earlier local remote
+name; current PR/CI evidence is linked from [PA2.md](../../../PA2.md).
