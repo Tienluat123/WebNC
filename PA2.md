@@ -7,7 +7,8 @@ Team: Nguyễn Tiến Luật — 23127221; Đặng Nghi Văn — 23127281; Phạ
 Status (2026-11-26): repository reviewed against the supplied rubric. Endpoint `GET /places`, its
 contract, HTTP contract tests, required CI and branch protection are in place.
 The format red/green demonstration ran on PR #1. The contract-break demonstration
-is recorded locally but has not yet run in CI (see below). Claimed total: **95 / 100**, explained in
+ran on [PR #2](https://github.com/Tienluat123/WebNC/pull/2): required CI failed on the incorrect 201 response
+and passed after the implementation returned 200 again. Claimed total: **95 / 100**, explained in
 [SELF_ASSESSMENT_REPORT.md](SELF_ASSESSMENT_REPORT.md). [File map](docs/pa2/README.md).
 The remote `pa2` tag was verified at `39c66e5` with successful
 [tag CI](https://github.com/Tienluat123/WebNC/actions/runs/45651154508).
@@ -16,15 +17,15 @@ final tag/CI run before packaging.
 
 ## Required links
 
-| Lecturer's requirement                          | Evidence                                                                                                                                                                                                                                                                                                                                                |
-| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Public repository                               | [Tienluat123/WebNC](https://github.com/Tienluat123/WebNC), public visibility verified through the GitHub API.                                                                                                                                                                                                                                           |
-| Protected-branch settings (screenshot accepted) | [Settings](https://github.com/Tienluat123/WebNC/settings/branches); screenshots: [main / PR requirement](docs/pa2/evidence/main-protection-01.png), [required checks / admin enforcement](docs/pa2/evidence/main-protection-02.png), [force pushes / deletion disabled](docs/pa2/evidence/main-protection-03.png).                                      |
-| PR blocked by a red required check              | [PR #1](https://github.com/Tienluat123/WebNC/pull/1); [red commit 868f505](https://github.com/Tienluat123/WebNC/commit/868f505b763e424efeae7cc7cfb044e4fe47fcf8); [failed run](https://github.com/Tienluat123/WebNC/actions/runs/44906808477); [screenshot showing Required failure and disabled merge](docs/pa2/evidence/pr-1-required-check-red.png). |
-| PR / commit that turned the check green         | Same PR, [fix commit 2b3c61c](https://github.com/Tienluat123/WebNC/commit/2b3c61ce7116cf8d88e892c0896cdc7f213947eb); [successful run](https://github.com/Tienluat123/WebNC/actions/runs/44907080432); [screenshot showing Required success and enabled merge](docs/pa2/evidence/pr-1-required-check-green.png).                                         |
-| CI run for the remote `pa2` tag                 | Verified on 2026-11-26: tag resolves to `39c66e5fdd9478cd52c0057ae064758052773154`; [run 45651154508](https://github.com/Tienluat123/WebNC/actions/runs/45651154508) passed `npm ci`, lint, format check, typecheck and 35/35 tests. This run predates the documentation review in this file.                                                           |
-| Deliberate contract break caught by CI (red)    | Not yet run in CI. Red commit [297d44d](https://github.com/Tienluat123/WebNC/commit/297d44df80cf1050460e126ed0017c84c3e0f457) changes `GET /places` success from 200 to 201; it failed 3 of 35 tests locally (`201 !== 200`). No PR or CI run exists for it yet.                                                                                        |
-| Contract restored, CI green                     | Not yet run in CI. Restoration commit [531967f](https://github.com/Tienluat123/WebNC/commit/531967f) passed 35/35 locally.                                                                                                                                                                                                                              |
+| Lecturer's requirement                          | Evidence                                                                                                                                                                                                                                                                                                                                                   |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Public repository                               | [Tienluat123/WebNC](https://github.com/Tienluat123/WebNC), public visibility verified through the GitHub API.                                                                                                                                                                                                                                              |
+| Protected-branch settings (screenshot accepted) | [Settings](https://github.com/Tienluat123/WebNC/settings/branches); screenshots: [main / PR requirement](docs/pa2/evidence/main-protection-01.png), [required checks / admin enforcement](docs/pa2/evidence/main-protection-02.png), [force pushes / deletion disabled](docs/pa2/evidence/main-protection-03.png).                                         |
+| PR blocked by a red required check              | [PR #1](https://github.com/Tienluat123/WebNC/pull/1); [red commit 868f505](https://github.com/Tienluat123/WebNC/commit/868f505b763e424efeae7cc7cfb044e4fe47fcf8); [failed run](https://github.com/Tienluat123/WebNC/actions/runs/44906808477); [screenshot showing Required failure and disabled merge](docs/pa2/evidence/pr-1-required-check-red.png).    |
+| PR / commit that turned the check green         | Same PR, [fix commit 2b3c61c](https://github.com/Tienluat123/WebNC/commit/2b3c61ce7116cf8d88e892c0896cdc7f213947eb); [successful run](https://github.com/Tienluat123/WebNC/actions/runs/44907080432); [screenshot showing Required success and enabled merge](docs/pa2/evidence/pr-1-required-check-green.png).                                            |
+| CI run for the remote `pa2` tag                 | Verified on 2026-11-26: tag resolves to `39c66e5fdd9478cd52c0057ae064758052773154`; [run 45651154508](https://github.com/Tienluat123/WebNC/actions/runs/45651154508) passed `npm ci`, lint, format check, typecheck and 35/35 tests. This run predates the documentation review in this file.                                                              |
+| Deliberate contract break caught by CI (red)    | [PR #2](https://github.com/Tienluat123/WebNC/pull/2), [commit 0662e90](https://github.com/Tienluat123/WebNC/commit/0662e9042b45de6814a22954ec21119cd054b779), [run 45742980185](https://github.com/Tienluat123/WebNC/actions/runs/45742980185): lint, format and typecheck passed; tests failed 3/35 with `201 !== 200`. GitHub reported the PR `BLOCKED`. |
+| Contract restored, CI green                     | Same PR, [commit 0688637](https://github.com/Tienluat123/WebNC/commit/068863787ba73b147d11fc3f8e010cabee5800e1), [run 45743114867](https://github.com/Tienluat123/WebNC/actions/runs/45743114867): all checks passed and 35/35 tests passed. GitHub reported `CLEAN`.                                                                                      |
 
 ## Criteria 3–4: commands and gate behavior
 
@@ -53,11 +54,17 @@ Verified on 2026-11-21; rechecked on 2026-11-26.
 - Tests: [backend/test/contract/places.test.js](backend/test/contract/places.test.js)
   and [backend/test/places.test.js](backend/test/places.test.js), 35 tests run by
   `npm test` in the required `checks` job.
-- Deliberate break: commit `297d44d` changed only `backend/src/app.js` so the
-  success status became 201 instead of the contracted 200. Tests and contract were
-  not touched. Locally it failed 3 of 35 tests with `201 !== 200`. A PR/CI run on this
-  commit has not been made yet, so criterion 6 is claimed in the 8–12 band.
-  Restoration commit `531967f` changed only the same line back to 200.
+- Deliberate CI break: commit `0662e90` changes only `backend/src/app.js` to return
+  201 instead of the contracted 200. [PR #2](https://github.com/Tienluat123/WebNC/pull/2)
+  [failed in CI](https://github.com/Tienluat123/WebNC/actions/runs/45742980185) with 32 passed and 3 failed tests;
+  all earlier checks passed. Tests, fixtures and the contract were unchanged.
+- Restoration commit `0688637` changes only the implementation back to 200.
+  [The same PR's green run](https://github.com/Tienluat123/WebNC/actions/runs/45743114867) passed all four checks and
+  35/35 tests. Both commits are retained in the submission history without rebase.
+- Ownership is public/shared catalogue access. The tests verify that rule, including
+  private metadata projection and rejection of other-user selectors, rather than
+  inventing a private-place resource. Criterion 6 remains conservatively claimed
+  at 12/15; the CI demonstration is now complete.
 
 ## Secrets audit
 

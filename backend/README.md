@@ -46,8 +46,11 @@ The latest direct rerun in this checkout on 2026-11-23 passed 35 tests, 0 failed
 and 0 skipped. This is local verification, not required-CI or blocked-merge evidence.
 
 Lint, format check, typecheck and CI are configured by the checks/CI task.
-The public-catalogue access policy is adopted. The contract identifies the
-rubric's owned-resource test as a grading question, not verified evidence.
+The public-catalogue access policy is adopted. HTTP tests check anonymous and
+synthetic caller A/B contexts, reject other-user selectors with 400, and verify
+that private source metadata is not projected into public responses. No private
+place or authentication system is implied. The real contract CI red/green proof
+is linked in [PA2.md](../PA2.md).
 
 ## Code map
 

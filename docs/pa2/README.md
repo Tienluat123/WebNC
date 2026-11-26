@@ -7,7 +7,8 @@ Current status (2026-11-26): remote tag `pa2` is at `39c66e5` with
 The documentation review remains local pending publication and a matching final tag.
 Submission links are in [PA2.md](../../PA2.md)
 and scores in [SELF_ASSESSMENT_REPORT.md](../../SELF_ASSESSMENT_REPORT.md). The P1 permissions policy, adopted GET /places contract,
-Express implementation and executable HTTP contract tests exist. The latest local
+Express implementation and executable HTTP contract tests exist.
+[PR #2](https://github.com/Tienluat123/WebNC/pull/2) now proves real required CI red/green for the contract. The latest local
 `npm test` run passed all 35 tests, including the HTTP contract tests. The team reports Google Gemini API
 and `gemini-3.5-flash-lite`; the Free-tier project has no billing account. It has
 no configured spending cap; these are separate facts and the missing cap is
@@ -119,11 +120,11 @@ Không cần điền câu “đã pass” vào config. Kết quả và link bằ
 | [Ảnh protection](evidence/main-protection-01.png), [required checks/admin](evidence/main-protection-02.png), [force push/deletion](evidence/main-protection-03.png) | Ảnh người dùng cung cấp, lưu nguyên bản.                                                                                                                                                                                                                                  |
 | [PR #1](https://github.com/Tienluat123/WebNC/pull/1)                                                                                                                | [Commit đỏ 868f505](https://github.com/Tienluat123/WebNC/commit/868f505b763e424efeae7cc7cfb044e4fe47fcf8) làm format check lỗi và merge bị chặn; [ảnh đỏ](evidence/pr-1-required-check-red.png), [run đỏ](https://github.com/Tienluat123/WebNC/actions/runs/44906808477). |
 | Commit sửa / CI xanh                                                                                                                                                | [2b3c61c](https://github.com/Tienluat123/WebNC/commit/2b3c61ce7116cf8d88e892c0896cdc7f213947eb) khôi phục format; [run xanh](https://github.com/Tienluat123/WebNC/actions/runs/44907080432), [ảnh merge được bật lại](evidence/pr-1-required-check-green.png).            |
-| [PA2.md](../../PA2.md)                                                                                                                                              | Đã có link phần Luật. Tag nộp cần dời sang commit cuối; deliberate contract break chưa chạy trên PR CI.                                                                                                                                                                   |
+| [PA2.md](../../PA2.md)                                                                                                                                              | Đã có link phần Luật. Tag nộp cần dời sang commit cuối; deliberate contract break đã có PR #2 và CI đỏ/xanh.                                                                                                                                                              |
 
 Hai commit demo chỉ thay đổi thụt dòng trong `package.json`, không sửa tests hay validator rules. Giữ lịch sử đỏ → xanh; không squash/rebase để dựng lại bằng chứng sau khi hoàn thành. Không push thẳng `main` kể từ lúc bật protection.
 
-Tag `pa2` đang ở `e2834b6`; phải dời sang commit cuối rồi ghi link run vào PA2.md. **Deliberate contract break** ở mục #6 (`297d44d` đỏ, `531967f` xanh) mới kiểm chứng ở local, chưa có run CI trên PR; lỗi format của mục #4 không thay cho bằng chứng này.
+Remote tag `pa2` được xác minh tại `39c66e5`; bản nộp mới cần tag và CI khớp commit cuối. **Deliberate contract break** ở mục #6 đã có [PR #2](https://github.com/Tienluat123/WebNC/pull/2): `0662e90` làm [CI đỏ](https://github.com/Tienluat123/WebNC/actions/runs/45742980185), `0688637` khôi phục [CI xanh](https://github.com/Tienluat123/WebNC/actions/runs/45743114867). Lỗi format ở mục #4 là bằng chứng riêng.
 
 <a id="rubric-5"></a>
 
@@ -145,7 +146,7 @@ Theo contract hiện có, [GET /places](../../docs/contract/endpoint.md) là end
 dùng cho rubric #5. Chỉ ra chính sách public/shared catalogue, không có owned
 resource, các filter, paging, cursor, problem details và không có request body.
 
-Không chỉ viết “đã đăng nhập”; phải rõ quyền trên dữ liệu. Đích là người lạ có thể viết client từ contract mà không cần hỏi nhóm. Contract hiện đã nêu public ownership, nhưng mức ownership-test có thể chưa đủ cho yêu cầu riêng về owned data của rubric.
+Không chỉ viết “đã đăng nhập”; phải rõ quyền trên dữ liệu. Đích là người lạ có thể viết client từ contract mà không cần hỏi nhóm. Nhóm chốt ownership của endpoint này là public/shared catalogue: mọi caller nhận cùng dữ liệu công khai; user/owner/group selectors bị từ chối 400 và metadata riêng tư không được trả ra. Không thêm private-place resource chỉ để tạo một test 403.
 
 <a id="rubric-6"></a>
 
@@ -173,12 +174,12 @@ Tests phải chạy trong required CI. Sau đó giữ một commit/PR riêng c�
 implementation sai contract để CI đỏ, rồi commit sửa riêng để CI xanh. Không sửa
 test hay validator trong commit đỏ để làm nó pass.
 
-Đã có bằng chứng deliberate contract break trên local:
-`297d44d` trả `201` thay cho `200` ở `GET /places`, làm 3/35 tests đỏ (32 pass);
-`531967f` khôi phục `200` và làm 35/35 tests xanh. Không test hay validator
-nào bị thay đổi. Theo rubric, chứng cứ local chưa đủ cho 13-15 điểm. Cần tạo PR và ghi lại
-commit đỏ/sửa dưới dạng required CI run đỏ/xanh thật trên GitHub. Nếu không
-bổ sung owned-resource case, team nên tự chấm criterion 6 trong band 8-12.
+Đã có deliberate contract break trên required CI thật ở [PR #2](https://github.com/Tienluat123/WebNC/pull/2):
+`0662e90` trả `201` thay cho `200`, làm 3/35 tests đỏ; `0688637` khôi phục `200`
+và làm 35/35 tests xanh. Lint, format và typecheck đều xanh trong run đỏ, nên lỗi
+bị bắt đúng ở contract tests. Tests, fixtures và contract không đổi trong hai commit.
+Hai commit còn nguyên trong lịch sử. Nhóm giữ claim 12/15 thận trọng vì catalogue
+public không có owned-resource denial case; không còn thiếu CI demonstration.
 
 <a id="rubric-7"></a>
 

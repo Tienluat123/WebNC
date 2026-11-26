@@ -47,11 +47,18 @@ The green CI run above independently shows successful `npm ci`, lint, format che
 
 ## Criterion 6: deliberate contract break
 
-Not yet run in CI: no PR or Actions run exists for red commit `297d44d` or
-restoration `531967f`. The local result is below.
+[PR #2](https://github.com/Tienluat123/WebNC/pull/2) ran on 2026-11-26 against protected `main`:
 
-Both commits change one line of `backend/src/app.js`; tests and the contract were not
-edited. Locally, `297d44d` failed 3 of 35 tests (`201 !== 200`) and `531967f` passed 35/35.
+| Stage             | Commit                                                                                          | Required CI                                                                  | Observed result                                                                                           |
+| ----------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Contract violated | [0662e90](https://github.com/Tienluat123/WebNC/commit/0662e9042b45de6814a22954ec21119cd054b779) | [45742980185](https://github.com/Tienluat123/WebNC/actions/runs/45742980185) | Installation, lint, format and typecheck passed; `npm test` failed 3/35 with `201 !== 200`; PR `BLOCKED`. |
+| Contract restored | [0688637](https://github.com/Tienluat123/WebNC/commit/068863787ba73b147d11fc3f8e010cabee5800e1) | [45743114867](https://github.com/Tienluat123/WebNC/actions/runs/45743114867) | All four checks and 35/35 tests passed; PR `CLEAN`.                                                       |
+
+Both commits change only `backend/src/app.js`. Tests, fixtures and contract are
+unchanged. The demo preserves the earlier local-only `297d44d` / `531967f` history;
+no commit was rebased or rebuilt. The successful demo commits have also been merged
+into the local submission history. No demo commit was pushed directly to `main`.
+The PR and CI links are direct evidence; an additional screenshot is optional.
 
 ## Submitted tag
 

@@ -10,13 +10,13 @@ AND-combined filters, signed cursor pagination and RFC 9457 errors.
 Submission links are in [PA2.md](PA2.md); scores and gaps are in
 [SELF_ASSESSMENT_REPORT.md](SELF_ASSESSMENT_REPORT.md).
 
-Repo đã có checks, CI chạy thật trên PR và protection cho `main`. Phần Luật đã có bằng chứng required check đỏ chặn merge rồi xanh sau khi sửa. Endpoint `GET /places` và HTTP contract tests đã có; deliberate contract break mới được chứng minh ở local (chưa có PR/CI chạy trên commit đỏ). Remote tag `pa2` đã ở `39c66e5`, [CI xanh](https://github.com/Tienluat123/WebNC/actions/runs/45651154508). Bản rà tài liệu ngày 26/11 cần được publish, gắn tag và kiểm tra CI trước khi đóng ZIP (xem [PA2.md](PA2.md)).
+Repo đã có checks, CI chạy thật trên PR và protection cho `main`. Phần Luật đã có bằng chứng required check đỏ chặn merge rồi xanh sau khi sửa. Endpoint `GET /places` và HTTP contract tests đã có; deliberate contract break đã có [PR #2](https://github.com/Tienluat123/WebNC/pull/2) với CI đỏ khi trả 201 và xanh sau khi khôi phục 200. Remote tag `pa2` đã ở `39c66e5`, [CI xanh](https://github.com/Tienluat123/WebNC/actions/runs/45651154508). Bản rà tài liệu ngày 26/11 cần được publish, gắn tag và kiểm tra CI trước khi đóng ZIP (xem [PA2.md](PA2.md)).
 
 | Owner    | Scope                                            | Current state                                                           |
 | -------- | ------------------------------------------------ | ----------------------------------------------------------------------- |
 | Nghi Van | #2 Permissions/secrets, #5 contract and endpoint | Done; Free tier with no billing, no spending cap configured (disclosed) |
 | Luat     | #3 commands, #4 required CI/protection           | Done; PR #1 red/green, branch protection; remote tag CI green           |
-| Ninh     | #1 rules, #6 contract tests                      | Tests done; contract break shown locally, CI demo not done              |
+| Ninh     | #1 rules, #6 contract tests                      | Tests done; PR #2 has real contract CI red/green evidence               |
 | All      | #7 AI log and submission                         | Total 95; documentation review pending publication and final ZIP        |
 
 ## Setup and verification
@@ -106,7 +106,7 @@ Chạy toàn bộ: `npm run check`. Tự sửa format: `npm run format`.
 
 ESLint dùng recommended rules cho JS/TS; warning làm check thất bại. Typecheck bật `allowJs`, `checkJs`, `noEmit` và kiểm tra syntax/types khi JSDoc/type inference cung cấp thông tin; strictness không được bật để tránh biến JavaScript được nối nối sang TypeScript thành yêu cầu migration không cần thiết. Formatter bỏ qua dependencies, file sinh tự động, file môi trường, tài liệu gốc của thầy và hồ sơ PA1.
 
-**Trạng thái hiện tại:** `backend/test/contract/places.test.js` chạy HTTP contract tests cho `GET /places`. Bản clone sạch tại `39c66e5` ngày 2026-11-26 đã qua `npm ci` và cả bốn checks, 35 tests, 0 failed. [Run CI của remote tag](https://github.com/Tienluat123/WebNC/actions/runs/45651154508) tại cùng commit cũng xanh. Deliberate contract break cho rubric #6 mới chạy ở local, chưa có run CI (xem [PA2.md](PA2.md)).
+**Trạng thái hiện tại:** `backend/test/contract/places.test.js` chạy HTTP contract tests cho `GET /places`. Bản clone sạch tại `39c66e5` ngày 2026-11-26 đã qua `npm ci` và cả bốn checks, 35 tests, 0 failed. [Run CI của remote tag](https://github.com/Tienluat123/WebNC/actions/runs/45651154508) tại cùng commit cũng xanh. Deliberate contract break cho rubric #6 đã có CI đỏ/xanh trên PR #2 (xem [PA2.md](PA2.md)).
 
 ## CI và bằng chứng — Luật, rubric #4
 
@@ -124,7 +124,7 @@ Một bản clone mới từ GitHub tại `2b3c61c` cũng đã chạy `npm ci` v
 
 Tiếp tục giữ hai commit đỏ/sửa trong lịch sử; không tái dựng/rebase lịch sử bằng chứng và không push thẳng `main` sau khi bật protection. Remote tag `pa2` đã được xác minh tại `39c66e5` với CI xanh. Local tag trong checkout này vẫn ở `b50355d`; cần đồng bộ tag và publish bản rà tài liệu trước khi đóng gói.
 
-Bằng chứng cố tình phá **contract** ở mục #6 (commit đỏ `297d44d`, commit sửa `531967f`) mới kiểm chứng ở local, chưa chạy trên PR CI; một lỗi lint/format chỉ chứng minh CI ở mục #4.
+Bằng chứng cố tình phá **contract** ở mục #6: [PR #2](https://github.com/Tienluat123/WebNC/pull/2), commit đỏ `0662e90` ([run đỏ](https://github.com/Tienluat123/WebNC/actions/runs/45742980185)) và commit sửa `0688637` ([run xanh](https://github.com/Tienluat123/WebNC/actions/runs/45743114867)). Tests và contract không đổi trong hai commit; PR bị BLOCKED khi đỏ và CLEAN khi xanh. Bằng chứng format của PR #1 là phần riêng cho mục #4.
 
 ## Permissions, secrets and model budget
 
