@@ -45,7 +45,10 @@ Verified on 2026-11-21; rechecked on 2026-11-26.
   catalogue is public and shared: anonymous and signed-in callers receive the same
   result, and `userId` / `ownerId` / `groupId` selectors are rejected with 400.
   The endpoint has no owned resource, so there is no "another user's data" case to
-  deny; the tests prove the public ownership rule instead. See
+  deny; the tests prove the public ownership rule instead. The HTTP test injects
+  private source metadata, verifies that it is excluded for anonymous and synthetic
+  caller A/B requests, and verifies 400 for other-user selectors from both callers.
+  The headers are test contexts, not evidence of an authentication system. See
   [the ownership note in the contract](docs/contract/endpoint.md#get-places---search-the-shared-checked-catalogue).
 - Tests: [backend/test/contract/places.test.js](backend/test/contract/places.test.js)
   and [backend/test/places.test.js](backend/test/places.test.js), 35 tests run by

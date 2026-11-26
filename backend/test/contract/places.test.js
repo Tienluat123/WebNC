@@ -196,25 +196,47 @@ test('HTTP cursor rejects a changed limit and changed filters', async (t) => {
   }
 });
 
-test('HTTP does not accept writes or authorization-dependent private access', async (t) => {
-  const request = await serve(t);
-  const publicPage = await request('/places?limit=1');
+test('HTTP public access ignores caller identity and rejects other-user selectors', async (t) => {
+  const request = await serve(t, {
+    loadCatalogue: () =>
+      createFixtureCatalogue().map((place) => ({
+        ...place,
+        ownerId: 'synthetic-user-a',
+        ownerEmail: 'private@example.invalid',
+        groupId: 'synthetic-group-a',
+        privateNote: 'synthetic-private-note',
+      })),
+  });
+  const publicPage = await request('/places?limit=100');
   assert.equal(publicPage.status, 200);
   const publicBody = await publicPage.json();
+  assert.equal(publicBody.items.length, createFixtureCatalogue().length);
+  publicBody.items.forEach(assertPlaceShape);
 
-  const authorizedPage = await request('/places?limit=1', {
-    headers: { Authorization: 'Bearer synthetic-user-b' },
-  });
-  assert.equal(authorizedPage.status, 200);
-  assert.deepEqual(await authorizedPage.json(), publicBody);
-  assert.ok(
-    publicBody.items.every(
-      (place) =>
-        !Object.hasOwn(place, 'ownerId') &&
-        !Object.hasOwn(place, 'ownerEmail') &&
-        !Object.hasOwn(place, 'groupId'),
-    ),
-  );
+  // These headers are synthetic caller contexts, not an authentication system.
+  for (const caller of ['synthetic-user-a', 'synthetic-user-b']) {
+    const headers = { Authorization: `Bearer ${caller}` };
+    const callerPage = await request('/places?limit=100', { headers });
+    assert.equal(callerPage.status, 200);
+    assert.deepEqual(await callerPage.json(), publicBody);
+
+    for (const [parameter, value] of [
+      ['userId', 'synthetic-user-a'],
+      ['ownerId', 'synthetic-user-a'],
+      ['groupId', 'synthetic-group-a'],
+    ]) {
+      const response = await request(`/places?${parameter}=${value}`, {
+        headers,
+      });
+      assert.equal(response.status, 400);
+      const body = await readProblem(response);
+      assertProblemShape(body, 400, '/problems/validation', 'Invalid request');
+      assert.deepEqual(
+        body.errors.map((error) => error.parameter),
+        [parameter],
+      );
+    }
+  }
 
   const writeResponse = await request('/places', { method: 'POST' });
   assert.equal(writeResponse.status, 404);

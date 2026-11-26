@@ -32,9 +32,10 @@ published and included in the final tagged commit before submission.
   on the red commit. Without it the rubric places criterion 6 in the 8–12 band, so we
   claim 12.
 - **Ownership test against another user's data (criterion 6).** `GET /places`
-  is a public shared catalogue with no owned records. Our tests prove the public rule
-  (same result anonymous or signed in, user selectors rejected with 400, no private
-  fields), but they cannot show a 403/404 for another user's resource because none
+  is a public shared catalogue with no owned records. Our HTTP tests prove the public rule
+  (same result without Authorization and with synthetic caller A/B headers,
+  private source metadata excluded, and other-user selectors rejected with 400
+  for both callers), but they cannot show a 403/404 for another user's resource because none
   exists. We did not invent a private resource to manufacture that case. Full marks
   here depend on the lecturer accepting this interpretation.
 - **Production scale.** The cursor revision store is in-memory and process-local,
