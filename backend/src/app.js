@@ -10,10 +10,7 @@ export function createApp(options) {
   app.get('/places', async (req, res) => {
     // URLSearchParams preserves duplicate names and does not interpret bracket notation.
     const params = new URL(req.originalUrl, 'http://localhost').searchParams;
-    res
-      .set('Cache-Control', 'no-store')
-      .status(201)
-      .json(await listPlaces(params));
+    res.set('Cache-Control', 'no-store').json(await listPlaces(params));
   });
   app.use((err, req, res, next) => {
     if (res.headersSent) return next(err);
