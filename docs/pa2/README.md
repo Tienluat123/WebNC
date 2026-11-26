@@ -2,9 +2,8 @@
 
 Đã rà với [rubric gốc](<../reference/PA2 Rubric Harness Quality Gate.pdf>), trang 1–4, và [contract mẫu](../reference/Contract.md). Hạn trong rubric: **22:00 ngày 26/11/2026**.
 
-Current status (2026-11-26): remote tag `pa2` is at `39c66e5` with
-[successful CI](https://github.com/Tienluat123/WebNC/actions/runs/45651154508).
-The documentation review remains local pending publication and a matching final tag.
+Current status (2026-11-26): the submission is identified by tag `pa2`.
+[Tag CI runs](https://github.com/Tienluat123/WebNC/actions/workflows/ci.yml?query=event%3Apush+branch%3Apa2) must show success at that tag's exact commit before ZIP creation.
 Submission links are in [PA2.md](../../PA2.md)
 and scores in [SELF_ASSESSMENT_REPORT.md](../../SELF_ASSESSMENT_REPORT.md). The P1 permissions policy, adopted GET /places contract,
 Express implementation and executable HTTP contract tests exist.
@@ -39,7 +38,7 @@ có test không đồng nghĩa endpoint đã chứng minh mọi ownership scenar
 
 Commit: gắn tag pa2.
 Nhánh cho phần permissions/secrets và GET /places: `pa2-permissions-places`.
-Commit nộp cuối của cả nhóm: gắn tag pa2; remote tag đã ở `39c66e5`, bản rà mới chưa publish.
+Commit nộp cuối của cả nhóm: tag `pa2`; branch, tag, CI và ZIP phải khớp cùng SHA.
 Mỗi task nên có một nhánh riêng.
 
 <details>
@@ -103,7 +102,7 @@ npm run typecheck
 npm test
 ```
 
-**Điểm cần phối hợp:** HTTP contract tests kiểm tra `GET /places` qua server thật; clone sạch tại `39c66e5` đã qua đủ bốn checks và 35 tests ngày 2026-11-26. Ninh cần giữ test cases khớp contract và phối hợp Văn để có deliberate contract-break trong CI. Lệnh tests trong AGENTS, package.json, README và workflow phải đồng nhất.
+**Điểm cần phối hợp:** HTTP contract tests kiểm tra `GET /places` qua server thật; clone sạch tại `39c66e5` đã qua đủ bốn checks và 35 tests ngày 2026-11-26. Test cases phải tiếp tục khớp contract; deliberate contract-break đã có PR #2 đỏ/xanh thật. Lệnh tests trong AGENTS, package.json, README và workflow phải đồng nhất.
 
 Không cần điền câu “đã pass” vào config. Kết quả và link bằng chứng ghi trong hồ sơ nộp khi đã thực hiện thật.
 
@@ -124,7 +123,7 @@ Không cần điền câu “đã pass” vào config. Kết quả và link bằ
 
 Hai commit demo chỉ thay đổi thụt dòng trong `package.json`, không sửa tests hay validator rules. Giữ lịch sử đỏ → xanh; không squash/rebase để dựng lại bằng chứng sau khi hoàn thành. Không push thẳng `main` kể từ lúc bật protection.
 
-Remote tag `pa2` được xác minh tại `39c66e5`; bản nộp mới cần tag và CI khớp commit cuối. **Deliberate contract break** ở mục #6 đã có [PR #2](https://github.com/Tienluat123/WebNC/pull/2): `0662e90` làm [CI đỏ](https://github.com/Tienluat123/WebNC/actions/runs/45742980185), `0688637` khôi phục [CI xanh](https://github.com/Tienluat123/WebNC/actions/runs/45743114867). Lỗi format ở mục #4 là bằng chứng riêng.
+Bản nộp dùng tag `pa2` và CI khớp commit cuối. **Deliberate contract break** ở mục #6 đã có [PR #2](https://github.com/Tienluat123/WebNC/pull/2): `0662e90` làm [CI đỏ](https://github.com/Tienluat123/WebNC/actions/runs/45742980185), `0688637` khôi phục [CI xanh](https://github.com/Tienluat123/WebNC/actions/runs/45743114867). Lỗi format ở mục #4 là bằng chứng riêng.
 
 <a id="rubric-5"></a>
 

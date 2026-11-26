@@ -10,22 +10,22 @@ The format red/green demonstration ran on PR #1. The contract-break demonstratio
 ran on [PR #2](https://github.com/Tienluat123/WebNC/pull/2): required CI failed on the incorrect 201 response
 and passed after the implementation returned 200 again. Claimed total: **95 / 100**, explained in
 [SELF_ASSESSMENT_REPORT.md](SELF_ASSESSMENT_REPORT.md). [File map](docs/pa2/README.md).
-The remote `pa2` tag was verified at `39c66e5` with successful
-[tag CI](https://github.com/Tienluat123/WebNC/actions/runs/45651154508).
-The documentation changes from this review still need publication and a matching
-final tag/CI run before packaging.
+The submitted revision is identified by `refs/tags/pa2`. Its
+[tag CI run history](https://github.com/Tienluat123/WebNC/actions/workflows/ci.yml?query=event%3Apush+branch%3Apa2) links to the push run for that tag;
+verify that the successful run's commit matches `git rev-parse refs/tags/pa2^{commit}`.
+This stable link remains valid without changing the tested source after tagging.
 
 ## Required links
 
-| Lecturer's requirement                          | Evidence                                                                                                                                                                                                                                                                                                                                                   |
-| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Public repository                               | [Tienluat123/WebNC](https://github.com/Tienluat123/WebNC), public visibility verified through the GitHub API.                                                                                                                                                                                                                                              |
-| Protected-branch settings (screenshot accepted) | [Settings](https://github.com/Tienluat123/WebNC/settings/branches); screenshots: [main / PR requirement](docs/pa2/evidence/main-protection-01.png), [required checks / admin enforcement](docs/pa2/evidence/main-protection-02.png), [force pushes / deletion disabled](docs/pa2/evidence/main-protection-03.png).                                         |
-| PR blocked by a red required check              | [PR #1](https://github.com/Tienluat123/WebNC/pull/1); [red commit 868f505](https://github.com/Tienluat123/WebNC/commit/868f505b763e424efeae7cc7cfb044e4fe47fcf8); [failed run](https://github.com/Tienluat123/WebNC/actions/runs/44906808477); [screenshot showing Required failure and disabled merge](docs/pa2/evidence/pr-1-required-check-red.png).    |
-| PR / commit that turned the check green         | Same PR, [fix commit 2b3c61c](https://github.com/Tienluat123/WebNC/commit/2b3c61ce7116cf8d88e892c0896cdc7f213947eb); [successful run](https://github.com/Tienluat123/WebNC/actions/runs/44907080432); [screenshot showing Required success and enabled merge](docs/pa2/evidence/pr-1-required-check-green.png).                                            |
-| CI run for the remote `pa2` tag                 | Verified on 2026-11-26: tag resolves to `39c66e5fdd9478cd52c0057ae064758052773154`; [run 45651154508](https://github.com/Tienluat123/WebNC/actions/runs/45651154508) passed `npm ci`, lint, format check, typecheck and 35/35 tests. This run predates the documentation review in this file.                                                              |
-| Deliberate contract break caught by CI (red)    | [PR #2](https://github.com/Tienluat123/WebNC/pull/2), [commit 0662e90](https://github.com/Tienluat123/WebNC/commit/0662e9042b45de6814a22954ec21119cd054b779), [run 45742980185](https://github.com/Tienluat123/WebNC/actions/runs/45742980185): lint, format and typecheck passed; tests failed 3/35 with `201 !== 200`. GitHub reported the PR `BLOCKED`. |
-| Contract restored, CI green                     | Same PR, [commit 0688637](https://github.com/Tienluat123/WebNC/commit/068863787ba73b147d11fc3f8e010cabee5800e1), [run 45743114867](https://github.com/Tienluat123/WebNC/actions/runs/45743114867): all checks passed and 35/35 tests passed. GitHub reported `CLEAN`.                                                                                      |
+| Lecturer's requirement                          | Evidence                                                                                                                                                                                                                                                                                                                                                                                         |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Public repository                               | [Tienluat123/WebNC](https://github.com/Tienluat123/WebNC), public visibility verified through the GitHub API.                                                                                                                                                                                                                                                                                    |
+| Protected-branch settings (screenshot accepted) | [Settings](https://github.com/Tienluat123/WebNC/settings/branches); screenshots: [main / PR requirement](docs/pa2/evidence/main-protection-01.png), [required checks / admin enforcement](docs/pa2/evidence/main-protection-02.png), [force pushes / deletion disabled](docs/pa2/evidence/main-protection-03.png).                                                                               |
+| PR blocked by a red required check              | [PR #1](https://github.com/Tienluat123/WebNC/pull/1); [red commit 868f505](https://github.com/Tienluat123/WebNC/commit/868f505b763e424efeae7cc7cfb044e4fe47fcf8); [failed run](https://github.com/Tienluat123/WebNC/actions/runs/44906808477); [screenshot showing Required failure and disabled merge](docs/pa2/evidence/pr-1-required-check-red.png).                                          |
+| PR / commit that turned the check green         | Same PR, [fix commit 2b3c61c](https://github.com/Tienluat123/WebNC/commit/2b3c61ce7116cf8d88e892c0896cdc7f213947eb); [successful run](https://github.com/Tienluat123/WebNC/actions/runs/44907080432); [screenshot showing Required success and enabled merge](docs/pa2/evidence/pr-1-required-check-green.png).                                                                                  |
+| CI run for the submitted `pa2` tag              | [Tag CI runs](https://github.com/Tienluat123/WebNC/actions/workflows/ci.yml?query=event%3Apush+branch%3Apa2): select the latest successful push run for `pa2` and match its head SHA to `refs/tags/pa2`. The final run is verified before ZIP creation. Earlier run [45651154508](https://github.com/Tienluat123/WebNC/actions/runs/45651154508) belongs to the superseded `39c66e5` tag target. |
+| Deliberate contract break caught by CI (red)    | [PR #2](https://github.com/Tienluat123/WebNC/pull/2), [commit 0662e90](https://github.com/Tienluat123/WebNC/commit/0662e9042b45de6814a22954ec21119cd054b779), [run 45742980185](https://github.com/Tienluat123/WebNC/actions/runs/45742980185): lint, format and typecheck passed; tests failed 3/35 with `201 !== 200`. GitHub reported the PR `BLOCKED`.                                       |
+| Contract restored, CI green                     | Same PR, [commit 0688637](https://github.com/Tienluat123/WebNC/commit/068863787ba73b147d11fc3f8e010cabee5800e1), [run 45743114867](https://github.com/Tienluat123/WebNC/actions/runs/45743114867): all checks passed and 35/35 tests passed. GitHub reported `CLEAN`.                                                                                                                            |
 
 ## Criteria 3–4: commands and gate behavior
 
@@ -73,12 +73,11 @@ Recorded audit on 2026-11-25; 0 findings within its documented scope. Details:
 
 ## Submission packaging
 
-- Before packaging this review: publish the reviewed commit, update the remote and
-  local `refs/tags/pa2` to that commit, and confirm its tag CI run is green on the
-  exact SHA. These publication steps are pending authorization.
-- A local branch and tag are both named `pa2`. Use the explicit tag ref for
-  verification; the local tag was still at `b50355d` during this review and must
-  be synchronized before creating the ZIP. A clean branch alone is insufficient.
+- Submission branch and tag: `pa2`. The remote branch, annotated tag and ZIP
+  must identify the same final commit. Confirm successful tag CI on that exact SHA.
+- Both a branch and a tag are named `pa2`; always use explicit `refs/tags/pa2`
+  when verifying the submission. The ZIP is built from a fresh full clone checked
+  out at that tag, so it contains the tagged tree and actual Git history.
 - ZIP name: `23127221-23127281-23127446_95.zip` (total matches the self-assessment).
 - The ZIP contains the repository including `.git` (with tag `pa2` and full history),
   `PA2.md`, `AI-LOG.md` and `SELF_ASSESSMENT_REPORT.md` at the root. It excludes

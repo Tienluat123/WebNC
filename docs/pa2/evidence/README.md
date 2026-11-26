@@ -62,13 +62,16 @@ The PR and CI links are direct evidence; an additional screenshot is optional.
 
 ## Submitted tag
 
-Verified on 2026-11-26 through GitHub API: the remote annotated tag resolves to
-`39c66e5fdd9478cd52c0057ae064758052773154`.
-[Run 45651154508](https://github.com/Tienluat123/WebNC/actions/runs/45651154508)
-passed `npm ci`, lint, format check, typecheck and 35/35 tests on Node 22.23.2 / npm 10.9.8.
-This review changes documentation after that commit; publication and a matching
-final tag/CI are pending. The local tag still resolves to `b50355d`, so it must be
-synchronized before packaging.
+Submission ref: `refs/tags/pa2`. The [tag CI run history](https://github.com/Tienluat123/WebNC/actions/workflows/ci.yml?query=event%3Apush+branch%3Apa2)
+links to push runs for this tag. The latest successful run must have the same
+head SHA as the final tag and the ZIP checkout. Verify this before packaging.
+The stable link avoids changing the already-tested source merely to add the
+new run's numeric URL. The direct final run URL is also supplied with the ZIP.
+
+The earlier tag at `39c66e5` passed
+[run 45651154508](https://github.com/Tienluat123/WebNC/actions/runs/45651154508);
+that run documents the prior revision and does not replace verification of the
+final submission SHA.
 
 ## Secrets audit
 

@@ -10,14 +10,14 @@ AND-combined filters, signed cursor pagination and RFC 9457 errors.
 Submission links are in [PA2.md](PA2.md); scores and gaps are in
 [SELF_ASSESSMENT_REPORT.md](SELF_ASSESSMENT_REPORT.md).
 
-Repo đã có checks, CI chạy thật trên PR và protection cho `main`. Phần Luật đã có bằng chứng required check đỏ chặn merge rồi xanh sau khi sửa. Endpoint `GET /places` và HTTP contract tests đã có; deliberate contract break đã có [PR #2](https://github.com/Tienluat123/WebNC/pull/2) với CI đỏ khi trả 201 và xanh sau khi khôi phục 200. Remote tag `pa2` đã ở `39c66e5`, [CI xanh](https://github.com/Tienluat123/WebNC/actions/runs/45651154508). Bản rà tài liệu ngày 26/11 cần được publish, gắn tag và kiểm tra CI trước khi đóng ZIP (xem [PA2.md](PA2.md)).
+Repo đã có checks, CI chạy thật trên PR và protection cho `main`. Phần Luật đã có bằng chứng required check đỏ chặn merge rồi xanh sau khi sửa. Endpoint `GET /places` và HTTP contract tests đã có; deliberate contract break đã có [PR #2](https://github.com/Tienluat123/WebNC/pull/2) với CI đỏ khi trả 201 và xanh sau khi khôi phục 200. Bản nộp được định danh bằng tag `pa2`; [CI của tag](https://github.com/Tienluat123/WebNC/actions/workflows/ci.yml?query=event%3Apush+branch%3Apa2) phải xanh trên đúng commit trước khi đóng ZIP (xem [PA2.md](PA2.md)).
 
 | Owner    | Scope                                            | Current state                                                           |
 | -------- | ------------------------------------------------ | ----------------------------------------------------------------------- |
 | Nghi Van | #2 Permissions/secrets, #5 contract and endpoint | Done; Free tier with no billing, no spending cap configured (disclosed) |
 | Luat     | #3 commands, #4 required CI/protection           | Done; PR #1 red/green, branch protection; remote tag CI green           |
 | Ninh     | #1 rules, #6 contract tests                      | Tests done; PR #2 has real contract CI red/green evidence               |
-| All      | #7 AI log and submission                         | Total 95; documentation review pending publication and final ZIP        |
+| All      | #7 AI log and submission                         | Total 95; tag pa2; ZIP 23127221-23127281-23127446_95.zip                |
 
 ## Setup and verification
 
@@ -122,7 +122,7 @@ ESLint dùng recommended rules cho JS/TS; warning làm check thất bại. Typec
 
 Một bản clone mới từ GitHub tại `2b3c61c` cũng đã chạy `npm ci` và `npm run check` thành công với Node/npm ở trên. Hồ sơ [PA2.md](PA2.md) tập hợp ảnh, link và giới hạn của bằng chứng.
 
-Tiếp tục giữ hai commit đỏ/sửa trong lịch sử; không tái dựng/rebase lịch sử bằng chứng và không push thẳng `main` sau khi bật protection. Remote tag `pa2` đã được xác minh tại `39c66e5` với CI xanh. Local tag trong checkout này vẫn ở `b50355d`; cần đồng bộ tag và publish bản rà tài liệu trước khi đóng gói.
+Tiếp tục giữ hai commit đỏ/sửa trong lịch sử; không tái dựng/rebase lịch sử bằng chứng và không push thẳng `main` sau khi bật protection. Bản nộp dùng `refs/tags/pa2`; xác minh SHA của tag trùng SHA [CI xanh](https://github.com/Tienluat123/WebNC/actions/workflows/ci.yml?query=event%3Apush+branch%3Apa2) trước khi đóng gói. ZIP được tạo từ clone đầy đủ, checkout đúng tag.
 
 Bằng chứng cố tình phá **contract** ở mục #6: [PR #2](https://github.com/Tienluat123/WebNC/pull/2), commit đỏ `0662e90` ([run đỏ](https://github.com/Tienluat123/WebNC/actions/runs/45742980185)) và commit sửa `0688637` ([run xanh](https://github.com/Tienluat123/WebNC/actions/runs/45743114867)). Tests và contract không đổi trong hai commit; PR bị BLOCKED khi đỏ và CLEAN khi xanh. Bằng chứng format của PR #1 là phần riêng cho mục #4.
 
